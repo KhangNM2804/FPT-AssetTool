@@ -28,7 +28,8 @@
     <!--Data Table-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
-
+    <!--Toastr-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
 
 </head>
 
@@ -211,22 +212,11 @@
                 <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
                     <div class="os-resize-observer"></div>
                 </div>
-                <div class="os-content-glue" style="margin: 0px -8px; width: 249px; height: 214px;"></div>
+                
                 <div class="os-padding">
                     <div class="os-viewport os-viewport-native-scrollbars-invisible os-viewport-native-scrollbars-overlaid"
                         style="overflow-y: scroll;">
-                        <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
-                            <!-- Sidebar user panel (optional) -->
-                            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                                <div class="image">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2"
-                                        alt="User Image">
-                                </div>
-                                <div class="info">
-                                    <a href="#" class="d-block">Alexander Pierce</a>
-                                </div>
-                            </div>
-
+                        <div class="os-content" style="padding: 10px 8px; height: 100%; width: 100%;">
                             <!-- SidebarSearch Form -->
                             <div class="form-inline">
                                 <div class="input-group" data-widget="sidebar-search">
@@ -309,22 +299,21 @@
                                         <a href="#" class="nav-link">
                                             <i class="nav-icon fas fa-copy"></i>
                                             <p>
-                                                Layout Options
+                                                Vị trí
                                                 <i class="fas fa-angle-left right"></i>
-                                                <span class="badge badge-info right">6</span>
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                                <a href="{{route('staff.categoryrooms.index')}}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Top Navigation</p>
+                                                    <p>Danh mục phòng</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Top Navigation + Sidebar</p>
+                                                    <p>Phòng</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
@@ -963,32 +952,26 @@
         </footer>
         <div id="sidebar-overlay"></div>
     </div>
+    
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!--Toastr-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <!-- Bootstrap -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- overlayScrollbars -->
-    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.0/dist/js/jquery.overlayScrollbars.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <!-- Data Table-->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <!-- PAGE PLUGINS -->
-    <!-- jQuery Mapael -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-mousewheel@3.1.13/jquery.mousewheel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/raphael@2.3.0/raphael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-mapael@2.2.0/dist/jquery.mapael.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-mapael@2.2.0/dist/maps/usa_states.min.js"></script>
-
-    <!-- ChartJS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    @yield('js')
 </body>
 
 </html>

@@ -10,12 +10,16 @@ use Yajra\DataTables\DataTables;
 
 class RoomRepository
 {
+    protected $room;
+
+    public function __construct(Room $room)
+    {
+        $this->room = $room;
+    }
 
     public function getRooms()
     {
-        $rooms = Room::with(['user', 'location' => function ($query) {
-            $query->where('id', Session::get('locationSession'));
-        }])->where('status', Room::STATUS_ACTIVE)->orderBy('index', 'asc');
+        $rooms = Room::with(['user', 'manager'])->where('status', Room::STATUS_ACTIVE)->orderBy('index', 'asc');
         return DataTables::of($rooms)
             ->addColumn('created_at', function ($room) {
                 return $room->created_at->format('Y-m-d H:i:s');
@@ -32,25 +36,22 @@ class RoomRepository
             ->make(true);
     }
 
-    public function storeRoom($data)
+    public function store($data)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        return $location->rooms()->create($data);
+        return $this->room->create($data);
     }
-    public function findRoom($id)
+    public function find($id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        $room = $location->rooms()->findOrFail($id);
-        return $room;
+        return $this->room->findOrFail($id);
     }
-    public function updateRoom($data, $id)
+    public function update($data, $id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        return $location->rooms()->where('id', $id)->update(['name' => $data['name'], 'index' => $data['index']]);
+        $room = $this->room->findOrFail($id);
+        return $room->update($data);
     }
     public function deleteRoom($id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        return $location->rooms()->where('id', $id)->update(['status' => Room::STATUS_INACTIVE]);
+        $room = $this->room->findOrFail($id);
+        return $room->update(['status' => Room::STATUS_INACTIVE]);
     }
 }
