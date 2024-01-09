@@ -11,9 +11,9 @@ class CategoryRoomService
     {
         $this->categoryRoomRepository = $categoryRoomRepository;
     }
-    public function datatables()
+    public function getAllRoomCategoryService()
     {
-        return $this->categoryRoomRepository->datatables();
+        return $this->categoryRoomRepository->getAll();
     }
     public function createCategoryRoom($data)
     {

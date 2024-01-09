@@ -28,7 +28,7 @@ class CategoryRoomController extends Controller
 
     public function datatables()
     {
-        return $this->category_room_service->datatables();
+        return $this->category_room_service->getAllRoomCategoryService();
     }
 
     /**

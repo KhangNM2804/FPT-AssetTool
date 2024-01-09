@@ -28,5 +28,6 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::resource('rooms', RoomController::class);
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
+        Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
     });
 });

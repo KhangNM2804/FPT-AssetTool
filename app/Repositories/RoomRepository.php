@@ -17,9 +17,13 @@ class RoomRepository
         $this->room = $room;
     }
 
-    public function getRooms()
+    public function getAll()
     {
-        $rooms = Room::with(['user', 'manager'])->where('status', Room::STATUS_ACTIVE)->orderBy('index', 'asc');
+        $rooms = $this->room->with(['manager:id,name', 'category_room:id,name'])
+            ->select('rooms.id', 'rooms.name', 'rooms.status', 'rooms.index')
+            ->where('rooms.status', Room::STATUS_ACTIVE)
+            ->orderBy('rooms.index', 'asc');
+
         return DataTables::of($rooms)
             ->addColumn('created_at', function ($room) {
                 return $room->created_at->format('Y-m-d H:i:s');
@@ -49,7 +53,7 @@ class RoomRepository
         $room = $this->room->findOrFail($id);
         return $room->update($data);
     }
-    public function deleteRoom($id)
+    public function delete($id)
     {
         $room = $this->room->findOrFail($id);
         return $room->update(['status' => Room::STATUS_INACTIVE]);

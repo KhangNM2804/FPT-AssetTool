@@ -12,27 +12,27 @@ class RoomService
         $this->roomRepository = $roomRepository;
     }
 
-    public function getRoomsService()
+    public function getAllRoomsService()
     {
-        return $this->roomRepository->getRooms();
+        return $this->roomRepository->getAll();
     }
 
     public function storeRoomService($data)
     {
-        return $this->roomRepository->storeRoom($data);
+        return $this->roomRepository->store($data);
     }
 
     public function findRoomService($id)
     {
-        return $this->roomRepository->findRoom($id);
+        return $this->roomRepository->find($id);
     }
 
     public function updateRoomService($data, $id)
     {
-        return $this->roomRepository->updateRoom($data, $id);
+        return $this->roomRepository->update($data, $id);
     }
     public function deleteRoomService($id)
     {
-        return $this->roomRepository->deleteRoom($id);
+        return $this->roomRepository->delete($id);
     }
 }

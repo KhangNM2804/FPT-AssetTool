@@ -13,7 +13,7 @@ class CategoryRoomRepository
     {
         $this->category_room = $category_room;
     }
-    public function datatables()
+    public function getAll()
     {
         $category_room = $this->category_room->query();
         return DataTables::of($category_room)

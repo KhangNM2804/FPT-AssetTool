@@ -13,6 +13,7 @@ class Room extends Model
 
     protected $fillable = [
         'manager',
+        'category_room_id',
         'name',
         'index',
         'status',
@@ -24,6 +25,9 @@ class Room extends Model
         'created_at',
         'updated_at',
     ];
+    public function category_room(){
+        return $this->belongsTo(CategoryRoom::class,'category_room_id');
+    }
     public function manager()
     {
         return $this->belongsTo(User::class, 'manager');
