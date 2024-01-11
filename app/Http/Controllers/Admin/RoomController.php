@@ -38,6 +38,7 @@ class RoomController extends Controller
     public function create()
     {
         $room = new Room();
+        
         return view('admin.rooms.store', compact('room'));
     }
 
@@ -55,7 +56,7 @@ class RoomController extends Controller
         try {
             $this->room_service->storeRoomService($data);
             toastr('Thêm phòng thành công', 'success', 'Thành công');
-            return redirect(route('staff.rooms.index'));
+            return redirect(route('staff.locate.rooms.index'));
         } catch (\Throwable $th) {
             toastr('Thêm thất bại', 'error', 'Thất bại');
             return redirect()->back();
@@ -99,7 +100,7 @@ class RoomController extends Controller
             $data = $request->all();
             $this->room_service->updateRoomService($data, $id);
             toastr('Cập nhật thành công', 'success', 'Thành công');
-            return redirect(route('staff.rooms.index'));
+            return redirect(route('staff.locate.rooms.index'));
         } catch (\Throwable $th) {
             toastr('Cập nhật thất bại', 'error', 'Thất bại');
             return redirect()->back();

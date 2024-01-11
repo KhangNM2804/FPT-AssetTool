@@ -22,10 +22,10 @@ class CategoryRoomRepository
         $category_room = $this->category_room->query();
         return DataTables::of($category_room)
             ->addColumn('edit_url', function ($category) {
-                return route('staff.categoryrooms.edit', ['categoryroom' => $category]);
+                return route('staff.locate.categoryrooms.edit', ['categoryroom' => $category]);
             })
             ->addColumn('delete_url', function ($category) {
-                return route('staff.categoryrooms.destroy', ['categoryroom' => $category]);
+                return route('staff.locate.categoryrooms.destroy', ['categoryroom' => $category]);
             })
             ->addColumn('created_at', function ($category) {
                 return $category->created_at->format('Y-m-d H:i:s');

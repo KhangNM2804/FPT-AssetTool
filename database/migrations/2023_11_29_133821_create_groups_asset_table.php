@@ -17,6 +17,7 @@ class CreateGroupsAssetTable extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('count_asset')->default(0);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

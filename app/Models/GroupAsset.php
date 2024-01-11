@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class GroupAsset extends Model
+{
+    use HasFactory;
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
+    protected $fillable = [
+        'name',
+        'count_asset',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+}

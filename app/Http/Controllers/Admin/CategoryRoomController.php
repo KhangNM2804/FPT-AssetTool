@@ -63,7 +63,7 @@ class CategoryRoomController extends Controller
             toastr('Thêm danh mục phòng thất bại', 'error', 'Thất bại');
         }
 
-        return redirect(route('staff.categoryrooms.index'));
+        return redirect(route('staff.locate.categoryrooms.index'));
     }
 
     /**
@@ -102,7 +102,7 @@ class CategoryRoomController extends Controller
             $data = $request->all();
             $this->category_room_service->updateCategoryRoom($data, $id);
             toastr('Cập nhật danh mục phòng thành công', 'success', 'Thành công');
-            return redirect(route('staff.categoryrooms.index'));
+            return redirect(route('staff.locate.categoryrooms.index'));
         } catch (\Throwable $th) {
             toastr('Cập nhật danh mục phòng thất bại', 'error', 'Thất bại');
             return redirect()->back();
@@ -120,10 +120,10 @@ class CategoryRoomController extends Controller
         try {
             $this->category_room_service->deleteCategoryCategoryRoom($id);
             toastr('Danh mục phòng đã ngừng hoạt động', 'success', 'Thành công');
-            return redirect(route('staff.categoryrooms.index'));
+            return redirect(route('staff.locate.categoryrooms.index'));
         } catch (\Throwable $th) {
             toastr('Có lỗi xảy ra', 'error', 'Thất bại');
-            return redirect(route('staff.categoryrooms.index'));
+            return redirect(route('staff.locate.categoryrooms.index'));
         }
     }
 }

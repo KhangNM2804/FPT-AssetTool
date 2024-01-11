@@ -16,9 +16,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  <!--Select2-->
+    <!--Select2-->
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css">
 
@@ -32,10 +32,34 @@
 
     <!--Toastr-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
-  
-   
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css">
+
+    <!-- iCheck -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqvmap/1.5.1/jqvmap.min.css">
+
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.13.0/css/OverlayScrollbars.min.css">
+
+    <!-- Daterange picker -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css">
+
+    <!-- Summernote -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css">
 
 </head>
+
 
 <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
     <div class="wrapper">
@@ -114,7 +138,8 @@
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                        <span class="float-right text-sm text-muted"><i
+                                                class="fas fa-star"></i></span>
                                     </h3>
                                     <p class="text-sm">I got your message bro</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -259,10 +284,8 @@
                             <nav class="mt-2">
                                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                                     role="menu" data-accordion="false">
-                                    <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
-                                    <li class="nav-item menu-open">
-                                        <a href="#" class="nav-link active">
+                                    <li class="nav-item ">
+                                        <a href="#" class="nav-link">
                                             <i class="nav-icon fas fa-tachometer-alt"></i>
                                             <p>
                                                 Dashboard
@@ -277,7 +300,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="./index2.html" class="nav-link active">
+                                                <a href="./index2.html" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Dashboard v2</p>
                                                 </a>
@@ -299,8 +322,9 @@
                                             </p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                    <li class="nav-item menu-{{ request()->is('staff/locate*') ? 'open' : '' }}">
+                                        <a href="#"
+                                            class="nav-link {{ request()->is('staff/locate*') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-copy"></i>
                                             <p>
                                                 Vị trí
@@ -309,51 +333,16 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="{{ route('staff.categoryrooms.index') }}" class="nav-link">
+                                                <a href="{{ route('staff.locate.categoryrooms.index') }}"
+                                                    class="nav-link {{ request()->is('staff/locate/categoryrooms*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Danh mục phòng</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('staff.rooms.index') }}" class="nav-link">
+                                                <a href="{{ route('staff.locate.rooms.index') }}" class="nav-link {{ request()->is('staff/locate/rooms*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Phòng</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/boxed.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Boxed</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Fixed Sidebar</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Fixed Navbar</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Fixed Footer</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Collapsed Sidebar</p>
                                                 </a>
                                             </li>
                                         </ul>
@@ -975,7 +964,7 @@
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <!-- Data Table-->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-    
+
     <!-- PAGE PLUGINS -->
 
     @yield('js')

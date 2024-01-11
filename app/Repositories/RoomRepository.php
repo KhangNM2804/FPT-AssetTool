@@ -32,10 +32,10 @@ class RoomRepository
                 return $room->updated_at->format('Y-m-d H:i:s');
             })
             ->addColumn('edit_url', function ($room) {
-                return route('staff.rooms.edit', ['room' => $room]);
+                return route('staff.locate.rooms.edit', ['room' => $room]);
             })
             ->addColumn('delete_url', function ($room) {
-                return route('staff.rooms.destroy', ['room' => $room]);
+                return route('staff.locate.rooms.destroy', ['room' => $room]);
             })
             ->make(true);
     }

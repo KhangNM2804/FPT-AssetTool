@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    public $category;
+    public $manager;
     use HasFactory;
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;

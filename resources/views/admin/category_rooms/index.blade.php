@@ -2,7 +2,7 @@
 @section('content')
     <div class="d-flex justify-content-end">
         <div class="form-group ">
-            <a href="{{ route('staff.categoryrooms.create') }}" class="btn btn-primary">Thêm danh mục phòng</a>
+            <a href="{{ route('staff.locate.categoryrooms.create') }}" class="btn btn-primary">Thêm danh mục phòng</a>
         </div>
     </div>
 

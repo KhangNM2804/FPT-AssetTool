@@ -5,8 +5,8 @@
         <select id="select2-example" name="category_room_id"
             class="form-control select2 {{ $errors->has('category_room_id') ? 'is-invalid' : '' }}" style="width: 100%;">
             <!-- Option mặc định (nếu cần) -->
-            <option value="{{ $room ? $room->category_room->id : '' }}" selected>
-                {{ $room ? $room->category_room->name : 'Select an option' }}</option>
+            <option value="{{ $room ? $room->category_room_id : '' }}" selected>
+                {{ $room->category_room ? $room->category_room->name : 'Select an option' }}</option>
         </select>
         @if ($errors->has('category_room_id'))
             <div class="invalid-feedback">
@@ -21,7 +21,7 @@
             class="form-control select2 {{ $errors->has('manager_id') ? 'is-invalid' : '' }}" style="width: 100%;">
             <!-- Option mặc định (nếu cần) -->
             <option value="{{ $room ? $room->manager_id : '' }}" selected>
-                {{ $room ? $room->manager->name : 'Select an option' }}</option>
+                {{ $room->manager? $room->manager->name : 'Select an option' }}</option>
         </select>
         @if ($errors->has('category_room_id'))
             <div class="invalid-feedback">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryRoomController;
+use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
-    Route::resource('categoryrooms', CategoryRoomController::class);
-    Route::resource('rooms', RoomController::class);
+    Route::group(['prefix' => 'locate', 'as' => 'locate.'], function () {
+        Route::resource('categoryrooms', CategoryRoomController::class);
+        Route::resource('rooms', RoomController::class);
+    });
+   
+    Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
+        Route::resource('groupsAsset',GroupAssetController::class);
+    });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
