@@ -12,7 +12,7 @@ class Room extends Model
     const STATUS_INACTIVE = 0;
 
     protected $fillable = [
-        'manager',
+        'manager_id',
         'category_room_id',
         'name',
         'index',
@@ -30,10 +30,10 @@ class Room extends Model
     }
     public function manager()
     {
-        return $this->belongsTo(User::class, 'manager');
+        return $this->belongsTo(User::class, 'manager_id','id');
     }
     public function createdBy()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->belongsTo(User::class,'created_by','id');
     }
 }

@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRoomRequest;
+use App\Models\Room;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
     protected $room_service;
-    public function __construct(RoomService $room_service) {
+
+    public function __construct(RoomService $room_service)
+    {
         $this->room_service = $room_service;
     }
     /**
@@ -32,7 +37,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $room = new Room();
+        return view('admin.rooms.store', compact('room'));
     }
 
     /**
@@ -41,9 +47,19 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRoomRequest $request)
     {
-        //
+
+        $data = $request->all();
+        $data['created_by'] = Auth::user()->id;
+        try {
+            $this->room_service->storeRoomService($data);
+            toastr('Thêm phòng thành công', 'success', 'Thành công');
+            return redirect(route('staff.rooms.index'));
+        } catch (\Throwable $th) {
+            toastr('Thêm thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -65,7 +81,8 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $room = $this->room_service->findRoomService($id);
+        return view('admin.rooms.edit', compact('room'));
     }
 
     /**
@@ -75,9 +92,18 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRoomRequest $request, $id)
     {
-        //
+
+        try {
+            $data = $request->all();
+            $this->room_service->updateRoomService($data, $id);
+            toastr('Cập nhật thành công', 'success', 'Thành công');
+            return redirect(route('staff.rooms.index'));
+        } catch (\Throwable $th) {
+            toastr('Cập nhật thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -88,6 +114,13 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->room_service->deleteRoomService($id);
+            toastr('Xóa phòng thành công','success','Thành công');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toastr('Xóa thất bại','error','Thất bại');
+            return redirect()->back();
+        }
     }
 }

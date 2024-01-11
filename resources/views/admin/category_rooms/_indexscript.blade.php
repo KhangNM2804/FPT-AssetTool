@@ -7,7 +7,7 @@
                 dom: 'lifrtp',
                 searching: true,
                 processing: true,
-                serverSide: true,
+                // serverSide: true,
                 ajax: {
                     url: route,
                 },

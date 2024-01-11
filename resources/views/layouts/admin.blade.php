@@ -16,7 +16,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <!--Select2-->
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css">
 
@@ -30,6 +32,8 @@
 
     <!--Toastr-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet">
+  
+   
 
 </head>
 
@@ -212,7 +216,7 @@
                 <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
                     <div class="os-resize-observer"></div>
                 </div>
-                
+
                 <div class="os-padding">
                     <div class="os-viewport os-viewport-native-scrollbars-invisible os-viewport-native-scrollbars-overlaid"
                         style="overflow-y: scroll;">
@@ -305,13 +309,13 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="{{route('staff.categoryrooms.index')}}" class="nav-link">
+                                                <a href="{{ route('staff.categoryrooms.index') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Danh mục phòng</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{route('staff.rooms.index')}}" class="nav-link">
+                                                <a href="{{ route('staff.rooms.index') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Phòng</p>
                                                 </a>
@@ -952,13 +956,14 @@
         </footer>
         <div id="sidebar-overlay"></div>
     </div>
-    
+
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <!--Toastr-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
@@ -970,8 +975,11 @@
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <!-- Data Table-->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    
     <!-- PAGE PLUGINS -->
+
     @yield('js')
+
 </body>
 
 </html>

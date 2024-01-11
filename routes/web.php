@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
+    });
+    Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
+        Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');
+        Route::get('users', [UserController::class, 'search'])->name('users');
     });
 });

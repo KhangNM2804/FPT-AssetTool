@@ -19,9 +19,9 @@ class RoomRepository
 
     public function getAll()
     {
-        $rooms = $this->room->with(['manager:id,name', 'category_room:id,name'])
-            ->select('rooms.id', 'rooms.name', 'rooms.status', 'rooms.index')
-            ->where('rooms.status', Room::STATUS_ACTIVE)
+        $rooms = $this->room->select('rooms.id', 'rooms.name', 'rooms.status', 'rooms.category_room_id', 'rooms.manager_id', 'rooms.index', 'rooms.created_at', 'rooms.updated_at')
+            ->with(['manager:id,name', 'category_room:id,name'])
+            // ->where('rooms.status', Room::STATUS_ACTIVE)
             ->orderBy('rooms.index', 'asc');
 
         return DataTables::of($rooms)
@@ -46,7 +46,7 @@ class RoomRepository
     }
     public function find($id)
     {
-        return $this->room->findOrFail($id);
+        return $this->room->with(['manager:id,name', 'category_room:id,name'])->findOrFail($id);
     }
     public function update($data, $id)
     {

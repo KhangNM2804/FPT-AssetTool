@@ -7,29 +7,33 @@
                 dom: 'lifrtp',
                 searching: true,
                 processing: true,
-                serverSide: true,
+               
                 ajax: {
                     url: route,
                 },
                 columns: [{
                         data: 'category_room.name',
-                        name: 'category_room.name'
+                        name: 'category_room.name',
+                        orderable: true
                     },
                     {
-                        data: 'rooms.name',
-                        name: 'rooms.name'
+                        data: 'name',
+                        name: 'name',
+                        orderable: true
                     },
                     {
                         data: 'manager.name',
-                        name: 'manager.name'
+                        name: 'manager.name',
+                        orderable: true
                     },
                     {
-                        data: 'rooms.index',
-                        name: 'rooms.index'
+                        data: 'index',
+                        name: 'index',
+                        orderable: true
                     },
                     {
                         render: function(data, type, row) {
-                            if (row.rooms.status == 1) {
+                            if (row.status == 1) {
                                 return '<span class="badge badge-success">Hoạt động</span>'
                             } else {
                                 return '<span class="badge badge-danger">Ngừng hoạt động</span>'
@@ -60,5 +64,6 @@
                 ]
             })
         })
+        
     </script>
 @endsection

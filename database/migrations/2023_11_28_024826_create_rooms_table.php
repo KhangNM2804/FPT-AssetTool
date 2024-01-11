@@ -17,8 +17,8 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_room_id');
             $table->foreign('category_room_id')->references('id')->on('category_rooms');
-            $table->unsignedBigInteger('manager')->nullable();
-            $table->foreign('manager')->references('id')->on('users');
+            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->foreign('manager_id')->references('id')->on('users');
             $table->string('name');
             $table->integer('index');
             $table->integer('status')->default(1);

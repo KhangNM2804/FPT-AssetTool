@@ -13,6 +13,10 @@ class CategoryRoomRepository
     {
         $this->category_room = $category_room;
     }
+    public function search()
+    {
+        return $this->category_room->where('status',CategoryRoom::STATUS_ACTIVE)->get(['id', 'name']);
+    }
     public function getAll()
     {
         $category_room = $this->category_room->query();

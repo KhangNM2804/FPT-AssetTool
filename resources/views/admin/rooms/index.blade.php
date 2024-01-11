@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+    <div class="d-flex justify-content-end">
+        <div class="form-group">
+            <a class="btn btn-primary" href="{{ route('staff.rooms.create') }}">Thêm phòng</a>
+        </div>
+    </div>
     <table id="rooms" class="display" style="width:100%">
         <thead>
             <tr>
