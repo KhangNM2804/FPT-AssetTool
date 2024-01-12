@@ -30,13 +30,14 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
     });
-   
+
     Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
-        Route::resource('groupsAsset',GroupAssetController::class);
+        Route::resource('group-assets', GroupAssetController::class);
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
+        Route::get('group-assets', [GroupAssetController::class, 'datatables'])->name('group-assets');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');

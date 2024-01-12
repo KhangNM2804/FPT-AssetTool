@@ -13,7 +13,7 @@ class CreateGroupsAssetTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups_assets', function (Blueprint $table) {
+        Schema::create('group_assets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->bigInteger('count_asset')->default(0);

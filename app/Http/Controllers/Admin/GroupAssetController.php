@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreGroupAssetsRequest;
+use App\Models\GroupAsset;
+use App\Services\GroupAssetService;
 use Illuminate\Http\Request;
 
 class GroupAssetController extends Controller
@@ -12,11 +15,20 @@ class GroupAssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected $groupAssetService;
+    public function __construct(GroupAssetService $groupAssetService)
     {
-        //
+        $this->groupAssetService = $groupAssetService;
     }
 
+    public function index()
+    {
+        return view('admin.group-asset.index');
+    }
+    public function datatables()
+    {
+        return $this->groupAssetService->datatables();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +36,9 @@ class GroupAssetController extends Controller
      */
     public function create()
     {
-        //
+        $group = new GroupAsset();
+        $group->status = 1;
+        return view('admin.group-asset.store', compact('group'));
     }
 
     /**
@@ -33,9 +47,17 @@ class GroupAssetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGroupAssetsRequest $request)
     {
-        //
+        $data = $request->all();
+        try {
+            $this->groupAssetService->storeGroupAsset($data);
+            toastr('Thêm nhóm tài sản thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.group-assets.index'));
+        } catch (\Throwable $th) {
+            toastr('Thêm nhóm tài sản thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -57,7 +79,8 @@ class GroupAssetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = $this->groupAssetService->findGroupAsset($id);
+        return view('admin.group-asset.edit', compact('group'));
     }
 
     /**
@@ -67,9 +90,17 @@ class GroupAssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreGroupAssetsRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        try {
+            $this->groupAssetService->updateGroupAsset($data, $id);
+            toastr('Cập nhật nhóm tài sản thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.group-assets.index'));
+        } catch (\Throwable $th) {
+            toastr('Cập nhật thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -80,6 +111,13 @@ class GroupAssetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->groupAssetService->deleteGroupAsset($id);
+            toastr('Xóa nhóm tài sản thành công', 'success', 'Thành công');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toastr('Xóa nhóm tài sản thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 }

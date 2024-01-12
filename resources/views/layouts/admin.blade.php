@@ -340,26 +340,29 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('staff.locate.rooms.index') }}" class="nav-link {{ request()->is('staff/locate/rooms*') ? 'active' : '' }}">
+                                                <a href="{{ route('staff.locate.rooms.index') }}"
+                                                    class="nav-link {{ request()->is('staff/locate/rooms*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Phòng</p>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                    <li class="nav-item menu-{{ request()->is('staff/asset/*') ? 'open' : 'close' }}">
+                                        <a href="#"
+                                            class="nav-link {{ request()->is('staff/asset/*') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-chart-pie"></i>
                                             <p>
-                                                Charts
+                                                Tài sản
                                                 <i class="right fas fa-angle-left"></i>
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                            <li class="nav-item ">
+                                                <a href="{{ route('staff.asset.group-assets.index') }}"
+                                                    class="nav-link {{ request()->is('staff/asset/group-assets*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>ChartJS</p>
+                                                    <p>Nhóm tài sản</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
