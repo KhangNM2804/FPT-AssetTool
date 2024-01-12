@@ -43,7 +43,7 @@ class GroupAssetRepository
     public function delete($id)
     {
         $groupAsset = $this->groupAsset->findOrFail($id);
-        $groupAsset->update(['status' => 2]);
+        $groupAsset->update(['status' => GroupAsset::STATUS_INACTIVE]);
         return $groupAsset;
     }
 }

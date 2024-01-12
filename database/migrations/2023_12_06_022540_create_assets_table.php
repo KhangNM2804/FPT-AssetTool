@@ -20,8 +20,10 @@ class CreateAssetsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('quantity');
-            $table->unsignedBigInteger('category_asset_id');
+            $table->unsignedBigInteger('category_asset_id')->nullable();
             $table->foreign('category_asset_id')->references('id')->on('category_assets');
+            $table->unsignedBigInteger('group_assets_id')->nullable();
+            $table->foreign('group_assets_id')->references('id')->on('group_assets');
             $table->double('price');
             $table->double('total_price');
             $table->string('document_number')->nullable();

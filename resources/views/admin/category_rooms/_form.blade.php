@@ -18,8 +18,8 @@
             <label class="form-check-label" for="inlineRadio1">Hoạt động</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="2"
-            @if(old('status', $category_rooms->status) == 2) checked @endif>
+            <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="0"
+            @if(old('status', $category_rooms->status) == 0) checked @endif>
             <label class="form-check-label" for="inlineRadio2">Ngừng hoạt động</label>
         </div>
         @if ($errors->has('status'))

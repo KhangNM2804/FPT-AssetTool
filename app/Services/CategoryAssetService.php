@@ -11,20 +11,20 @@ class CategoryAssetService
     {
         $this->categoryAssetRepository = $categoryAssetRepository;
     }
-    public function getCategoryAssetService()
+    public function datatables()
     {
-        return $this->categoryAssetRepository->getCategoryAsset();
+        return $this->categoryAssetRepository->datatables();
     }
-    public function storeCategoryAssetService($data){
-        return $this->categoryAssetRepository->storeCategory($data);
+    public function storeCategoryAsset($data){
+        return $this->categoryAssetRepository->create($data);
     }
-    public function findCategoryAssetService($id){
-        return $this->categoryAssetRepository->findCategory($id);
+    public function findCategoryAsset($id){
+        return $this->categoryAssetRepository->find($id);
     }
-    public function updateCategoryAssetService($data,$id){
-        return $this->categoryAssetRepository->updateCategory($data,$id);
+    public function updateCategoryAsset($data,$id){
+        return $this->categoryAssetRepository->update($data,$id);
     }
-    public function deleteCategoryAssetService($id){
-        return $this->categoryAssetRepository->deleteCategory($id);
+    public function deleteCategoryAsset($id){
+        return $this->categoryAssetRepository->delete($id);
     }
 }

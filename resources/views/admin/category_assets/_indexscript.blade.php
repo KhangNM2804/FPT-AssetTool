@@ -1,14 +1,14 @@
 @section('js')
     <script>
-        const route = @json(route('staff.datatables.group-assets'));
+        const route = @json(route('staff.datatables.category-assets'));
         var j = jQuery.noConflict(true);
         j(document).ready(function() {
-            j('#group-asset').dataTable({
+            j('#category_asset').DataTable({
                 dom: 'lifrtp',
-                search: true,
                 processing: true,
+                search: true,
                 ajax: {
-                    url: route
+                    url: route,
                 },
                 columns: [{
                         data: 'name',
@@ -21,7 +21,7 @@
                     {
                         render: function(data, type, row) {
                             if (row.status == 1) {
-                                return '<span class="badge badge-success">Hoạt động</span>'
+                                return '<span class="badge badge-success">Đang hoạt động</span>'
                             } else {
                                 return '<span class="badge badge-danger">Ngừng hoạt động</span>'
                             }
@@ -31,21 +31,17 @@
                         render: function(data, type, row) {
                             var edit = row.edit_url;
                             var del = row.delete_url;
-                            var btnEdit =
-                                '<a class="btn btn-primary" href="' + edit +
-                                '"><i class="fa fa-edit"></i></a>'
-                            var btnDelete = '<form action="' + del +
-                                '" method="post" style="display: inline;">' + '@csrf' +
+                            var buttonEdit = '<a href="' + edit +
+                                '" class="btn btn-primary"><i class="fa fa-edit"></i></a>';
+                            var buttonDelete = '<form action="' + del +
+                                '" method="POST" style="display:inline;">' +
+                                '@CSRF' +
                                 '@method('DELETE')' +
-                                '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn muốn ngừng hoạt động không ?\')">' +
-                                '<i class="fa fa-trash"></i>' +
-                                '</button>' +
-                                '</form>'
-
-                            return btnEdit + ' ' + btnDelete
+                                '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
+                                '<i class="fa fa-trash"></i></button></form>';
+                            return buttonEdit + ' ' + buttonDelete
                         }
                     }
-
                 ]
             })
         })

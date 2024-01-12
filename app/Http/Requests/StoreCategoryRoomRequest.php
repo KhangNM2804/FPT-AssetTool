@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CategoryRoom;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -26,7 +27,7 @@ class StoreCategoryRoomRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'status' => ['required',Rule::in([1, 2])]
+            'status' => ['required', Rule::in([CategoryRoom::STATUS_ACTIVE, CategoryRoom::STATUS_INACTIVE])]
         ];
     }
 }

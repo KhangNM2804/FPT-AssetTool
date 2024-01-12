@@ -3,23 +3,29 @@
 namespace App\Repositories;
 
 use App\Models\CategoryAsset;
+use App\Models\CategoryRoom;
 use App\Models\Location;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
 
 class CategoryAssetRepository
 {
-    public function getCategoryAsset()
+    protected $categoryAsset;
+    public function __construct(CategoryAsset $categoryAsset)
     {
-        $category = CategoryAsset::with(['user', 'location' => function ($query) {
-            $query->where('id', Session::get('locationSession'));
-        }])->where('status', CategoryAsset::STATUS_ACTIVE);
+        $this->categoryAsset = $categoryAsset;
+    }
+
+
+    public function datatables()
+    {
+        $category = $this->categoryAsset->query();
         return DataTables::of($category)
             ->addColumn('edit_url', function ($category) {
-                return route('staff.category_asset.edit', ['category_asset' => $category]);
+                return route('staff.asset.category-assets.edit', ['category_asset' => $category]);
             })
             ->addColumn('delete_url', function ($category) {
-                return route('staff.category_asset.destroy', ['category_asset' => $category]);
+                return route('staff.asset.category-assets.destroy', ['category_asset' => $category]);
             })
             ->addColumn('created_at', function ($category) {
                 return $category->created_at->format('Y-m-d H:i:s');
@@ -30,27 +36,23 @@ class CategoryAssetRepository
             ->make(true);
     }
 
-    public function storeCategory($data)
+    public function create($data)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        $location->categoryAsset()->create($data);
-        return $location;
+        return $this->categoryAsset->create($data);
     }
-    public function findCategory($id)
+    public function find($id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        $category = $location->categoryAsset()->findOrFail($id);
-        return $category;
+        return $this->categoryAsset->findOrFail($id);
     }
-    public function updateCategory($data, $id)
+    public function update($data, $id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        return $category = $location->categoryAsset()->where('id', $id)->update(['name' => $data['name']]);
+        $categoryAsset = $this->categoryAsset->findOrFail($id);
+        return $categoryAsset->update($data);
     }
 
-    public function deleteCategory($id)
+    public function delete($id)
     {
-        $location = Location::findOrFail(Session::get('locationSession'));
-        return $category = $location->categoryAsset()->where('id', $id)->update(['status' => 0]);
+        $categoryAsset = $this->categoryAsset->findOrFail($id);
+        return $categoryAsset->update(['status' => CategoryRoom::STATUS_INACTIVE]);
     }
 }

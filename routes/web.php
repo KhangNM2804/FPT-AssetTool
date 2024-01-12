@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryAssetController;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +35,13 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
 
     Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
         Route::resource('group-assets', GroupAssetController::class);
+        Route::resource('category-assets', CategoryAssetController::class);
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
         Route::get('group-assets', [GroupAssetController::class, 'datatables'])->name('group-assets');
+        Route::get('category-assets', [CategoryAssetController::class, 'datatables'])->name('category-assets');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');

@@ -16,8 +16,7 @@ class CreateCategoryAssetTable extends Migration
         Schema::create('category_assets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('groups_assets_id');
-            $table->foreign('groups_assets_id')->references('id')->on('groups_assets');
+            
             $table->integer('status')->default(1);
             $table->bigInteger('count_asset')->default(0);
             $table->timestamps();

@@ -13,7 +13,6 @@ class CategoryAsset extends Model
     const STATUS_INACTIVE = 0;
 
     protected $fillable = [
-        'user_id',
         'name',
         'status',
         'count_asset',
@@ -23,9 +22,6 @@ class CategoryAsset extends Model
         'created_at',
         'updated_at',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
    
 }

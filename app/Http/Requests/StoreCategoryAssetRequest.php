@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\GroupAsset;
+use App\Models\CategoryAsset;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreGroupAssetsRequest extends FormRequest
+class StoreCategoryAssetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class StoreGroupAssetsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'status' => ['required', Rule::in([GroupAsset::STATUS_ACTIVE, GroupAsset::STATUS_INACTIVE])]
+            'status' => ['required', Rule::in([CategoryAsset::STATUS_ACTIVE, CategoryAsset::STATUS_INACTIVE])]
         ];
     }
 }
