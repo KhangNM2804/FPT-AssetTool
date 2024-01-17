@@ -16,7 +16,8 @@ class AssetDetail extends Model
         'asset_id',
         'room_id',
         'quantity',
-        'receiver'
+        'receiver_id',
+        'status'
     ];
 
     protected $hidden = [
@@ -28,8 +29,14 @@ class AssetDetail extends Model
     {
         return $this->belongsTo(Asset::class);
     }
+    
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function reciver()
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 }

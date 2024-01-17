@@ -27,11 +27,14 @@ class CreateAssetsTable extends Migration
             $table->double('price');
             $table->double('total_price');
             $table->string('document_number')->nullable();
-            $table->string('envoice_number');
+            $table->string('denominator')->nullable();
+            $table->string('symbol')->nullable();
+            $table->string('invoice_number')->nullable();
             $table->string('image')->nullable();
             $table->string('material_code')->nullable();
             $table->date('date_of_use')->nullable();
             $table->integer('status')->default(1);
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

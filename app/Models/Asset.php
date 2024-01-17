@@ -18,8 +18,14 @@ class Asset extends Model
         'user_id',
         'quantity',
         'category_asset_id',
+        'group_assets_id',
         'price',
+        'total_price',
         'document_number',
+        'denominator',
+        'symbol',
+        'invoice_number',
+        'image',
         'material_code',
         'date_of_use',
         'status'
@@ -33,9 +39,17 @@ class Asset extends Model
     {
         return $this->belongsTo(User::class);
     }
-  
     public function category()
     {
-        return $this->belongsTo(CategoryAsset::class);
+        return $this->belongsTo(CategoryAsset::class, 'category_asset_id');
     }
+    public function group()
+    {
+        return $this->belongsTo(GroupAsset::class, 'group_assets_id');
+    }
+    public function getInvoiceAttribute()
+    {
+        return $this->denominator . $this->symbol . $this->invoice_number;
+    }
+    
 }

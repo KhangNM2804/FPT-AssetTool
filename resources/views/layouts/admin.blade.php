@@ -373,9 +373,10 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/charts/inline.html" class="nav-link">
+                                                <a href="{{ route('staff.asset.asset.index') }}"
+                                                    class="nav-link {{ request()->is('staff/asset/asset*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Inline</p>
+                                                    <p>Tài sản</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
