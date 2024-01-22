@@ -21,6 +21,12 @@ class GroupAssetController extends Controller
         $this->groupAssetService = $groupAssetService;
     }
 
+    public function search(Request $request)
+    {
+        $data = $request->all();
+        return $this->groupAssetService->search($data);
+    }
+
     public function index()
     {
         return view('admin.group-asset.index');

@@ -50,6 +50,8 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');
         Route::get('users', [UserController::class, 'search'])->name('users');
+        Route::get('group-assets',[GroupAssetController::class,'search'])->name('group-assets');
+        Route::get('category-assets',[CategoryAssetController::class,'search'])->name('category-assets');
      
     });
 });

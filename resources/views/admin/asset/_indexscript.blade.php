@@ -14,8 +14,10 @@
                         data: 'image', // Đặt tên cột chứa đường dẫn ảnh
                         render: function(data, type, row) {
                             const avatarHtml =
-                                `<div href="#" class="avatar rounded-circle mr-3">
-                                    <img alt="No image" src="{{ asset('storage/uploads')}}/${data}">
+                                `<div class="d-flex justify-content-center"">
+                                    <div class="bg-white d-flex justify-content-center rounded-circle p-1">
+                                    <img class="rounded-circle" alt="No image" src="{{ asset('storage/uploads') }}/${data}" width="40px" heigth="40px">
+                                    </div>
                                 </div>`;
                             return avatarHtml;
                         }
@@ -37,11 +39,16 @@
                     },
                     {
                         data: 'price',
-                        name: 'price'
-                    },
-                    {
+                        name: 'price',
+                        render: function(data, type, row) {
+                            return numeral(data).format('0,0');
+                        }
+                    }, {
                         data: 'total_price',
-                        name: 'total_price'
+                        name: 'total_price',
+                        render: function(data, type, row) {
+                            return numeral(data).format('0,0');
+                        }
                     },
 
                     {

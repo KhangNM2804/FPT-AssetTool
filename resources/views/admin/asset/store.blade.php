@@ -6,4 +6,6 @@
         </form>
     </div>
 @endsection
-@include('admin.asset._storescript')
+@include('admin.asset._formscript')
+
+

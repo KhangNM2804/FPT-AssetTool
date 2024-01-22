@@ -11,6 +11,9 @@ class GroupAssetService
     {
         $this->groupAssetRepsitory = $groupAssetRepsitory;
     }
+    public function search($data){
+        return $this->groupAssetRepsitory->search($data);
+    }
     public function datatables()
     {
         return $this->groupAssetRepsitory->datatables();

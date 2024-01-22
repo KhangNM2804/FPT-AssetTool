@@ -11,8 +11,8 @@ class CategoryRoomService
     {
         $this->categoryRoomRepository = $categoryRoomRepository;
     }
-    public function searchCategoryRoom(){
-        return $this->categoryRoomRepository->search();
+    public function searchCategoryRoom($data){
+        return $this->categoryRoomRepository->search($data);
     }
     public function getAllRoomCategoryService()
     {

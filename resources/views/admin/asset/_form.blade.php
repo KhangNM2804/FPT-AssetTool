@@ -1,12 +1,36 @@
 @csrf
 <div class="row">
-    <div class="form-group col-md-4">
-        <label for="dinominator">Mẫu số</label>
-        <input id="dinominator" class="form-control {{ $errors->has('dinominator') ? 'is-invalid' : '' }}" type="text"
-            name="dinominator" value="{{ old('dinominator', $asset->dinominator) }}">
-        @if ($errors->has('dinominator'))
+    <div class="form-group col-md-6">
+        <label for="select-category">Danh mục tài sản</label>
+        <select id="select-category" name="category_asset_id"
+            class="form-control select2 {{ $errors->has('category_asset_id') ? 'is-invalid' : '' }}" style="width: 100%;">
+            <option value="{{ $asset && $asset->category_asset_id ? $asset->category_asset_id : '' }}" selected>
+                {{ $asset && $asset->category ? $asset->category->name : 'Select an option' }}
+            </option>
+        </select>
+        @if ($errors->has('category_asset_id'))
             <div class="invalid-feedback">
-                <strong>{{ $errors->first('dinominator') }}</strong>
+                <strong>{{ $errors->first('category_asset_id') }}</strong>
+            </div>
+        @endif
+    </div>
+    <div class="form-group col-md-6">
+        <label for="select-group">Loại tài sản</label>
+        <select id="select-group" class="form-control {{ $errors->has('group_assets_id') ? 'is-invalid' : '' }}"
+            name="group_assets_id">
+            <option value={{ $asset->group_assets_id ? $asset->group_assets_id : '' }}>
+                {{ $asset->group_assets_id ? $asset->group->name : 'Select an option' }}</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <label for="denominator">Mẫu số</label>
+        <input id="denominator" class="form-control {{ $errors->has('denominator') ? 'is-invalid' : '' }}"
+            type="text" name="denominator" value="{{ old('denominator', $asset->denominator) }}">
+        @if ($errors->has('denominator'))
+            <div class="invalid-feedback">
+                <strong>{{ $errors->first('denominator') }}</strong>
             </div>
         @endif
     </div>
@@ -55,7 +79,7 @@
     <div class="form-group col-md-6">
         <label for="quantity">Số lượng</label>
         <input id="quantity" class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text"
-            name="quantity" value="{{ old('quantity', $asset->quantity) }}">
+            name="quantity" value="{{ old('quantity', $asset->quantity) }}" {{$asset->id? 'disabled':''}} >
         @if ($errors->has('quantity'))
             <div class="invalid-feedback">
                 <strong>{{ $errors->first('quantity') }}</strong>
@@ -108,7 +132,7 @@
             @endif
         </div>
         <label for="note">Ghi chú</label>
-        <textarea class="form-control" id="note" name='note' rows="5">{{old('note',$asset->note)}}</textarea>
+        <textarea class="form-control" id="note" name='note' rows="5">{{ old('note', $asset->note) }}</textarea>
         <div class="d-flex justify-content-center mt-3">
             <button class="btn btn-primary" style="width: 100px;">{{ $buttonText }}</button>
         </div>
@@ -118,7 +142,7 @@
             <div class="form-group">
                 <label for="image">Hình ảnh</label>
                 <input id="image" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}"
-                    type="file" name="image" value="{{ old('image', $asset->image) }}">
+                    type="file" name="image">
                 @if ($errors->has('image'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('image') }}</strong>
@@ -127,8 +151,8 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center">
-                <img id="previewImage" class="img-thumbnail" style="display: block; width: 300px; height: 300px;"
-                    alt="Preview Image">
+            <img id="previewImage" class="img-thumbnail" style="display: block; width: 300px; height: 300px;"
+                alt="Preview Image" src="{{ $asset->image ? asset('storage/uploads/' . $asset->image) : '' }}">
         </div>
 
     </div>

@@ -22,6 +22,11 @@ class CategoryAssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request)
+    {
+        $data = $request->all();
+        return $this->categoryAssetService->search($data);
+    }
     public function datatables()
     {
         return $this->categoryAssetService->datatables();

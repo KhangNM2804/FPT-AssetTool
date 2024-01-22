@@ -28,7 +28,8 @@ class Asset extends Model
         'image',
         'material_code',
         'date_of_use',
-        'status'
+        'status',
+        'note'
     ];
 
     protected $hidden = [

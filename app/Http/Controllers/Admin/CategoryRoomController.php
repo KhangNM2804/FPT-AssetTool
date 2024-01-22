@@ -21,9 +21,10 @@ class CategoryRoomController extends Controller
     {
         $this->category_room_service = $category_room_service;
     }
-    public function search()
+    public function search(Request $request)
     {
-        return $this->category_room_service->searchCategoryRoom();
+        $data = $request->all();
+        return $this->category_room_service->searchCategoryRoom($data);
     }
     public function index()
     {

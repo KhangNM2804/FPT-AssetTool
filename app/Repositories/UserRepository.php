@@ -11,8 +11,11 @@ class UserRepository
     {
         $this->user = $user;
     }
-    public function search()
+    public function search($data)
     {
-        return $this->user->get(['id', 'name']);
+        if(isset($data['term'])){
+            return $this->user->where('name','like','%'.$data['term'].'%')->get(['id', 'name']);
+        }
+        return $this->user->limit(3)->get(['id', 'name']);
     }
 }

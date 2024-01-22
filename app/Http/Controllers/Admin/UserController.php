@@ -18,9 +18,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(Request $request)
     {
-        return $this->userService->search();
+        $data = $request->all();
+        return $this->userService->search($data);
     }
     public function index()
     {

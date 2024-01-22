@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Asset;
 use App\Services\AssetService;
 use Illuminate\Http\Request;
@@ -49,9 +50,15 @@ class AssetController extends Controller
      */
     public function store(StoreAssetRequest $request)
     {
-        $data = $request->all();
-        $this->assetService->createAssetService($data);
-        return redirect('staff.asset.asset.index');
+        try {
+            $data = $request->all();
+            $this->assetService->createAssetService($data);
+            toastr('Thêm tài sản thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.asset.index'));
+        } catch (\Throwable $th) {
+            toastr('Thêm tài sản thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -73,7 +80,8 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asset = $this->assetService->findAssetService($id);
+        return view('admin.asset.edit', compact('asset'));
     }
 
     /**
@@ -83,9 +91,17 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAssetRequest $request, $id)
     {
-        //
+        // try {
+            $data = $request->all();
+            $this->assetService->updateAssetService($data, $id);
+            toastr('Cập nhật tài sản thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.asset.index'));
+        // } catch (\Throwable $th) {
+        //     toastr('Cập nhật tài sản thất bại', 'error', 'Thất bại');
+        //     return redirect()->back();
+        // }
     }
 
     /**

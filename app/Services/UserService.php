@@ -13,8 +13,8 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function search()
+    public function search($data)
     {
-        return $this->userRepository->search();
+        return $this->userRepository->search($data);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Asset;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class AssetRepository
@@ -40,6 +41,10 @@ class AssetRepository
     public function update($data, $id)
     {
         $asset = $this->asset->findOrFail($id);
+        $data['total_price'] = $asset->quantity *$data['price'] ;
+        if (isset($data['image'])) { //kiểm tra có cập nhật ảnh mới hay không. Nếu có thì xóa ảnh cũ khỏi web
+            Storage::delete('public/uploads/' . $asset->image);
+        }
         return $asset->update($data);
     }
     public function delete($id)
