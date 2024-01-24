@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AssetController;
+use App\Http\Controllers\Admin\AssetDetailController;
 use App\Http\Controllers\Admin\CategoryAssetController;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\GroupAssetController;
@@ -38,6 +39,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('group-assets', GroupAssetController::class);
         Route::resource('category-assets', CategoryAssetController::class);
         Route::resource('asset',AssetController::class);
+        Route::resource('asset-detail',AssetDetailController::class);
+        Route::post('asset-detail/merge',[AssetDetailController::class,'merge'])->name('asset-detail.merge');
+        Route::post('asset-detail/{detail}/split',[AssetDetailController::class,'split'])->name('asset-detail.split');
 
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {

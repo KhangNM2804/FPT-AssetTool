@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAssetRequest;
-use App\Http\Requests\UpdateAssetRequest;
-use App\Models\Asset;
+use App\Http\Requests\MergeAssetDetailRequest;
+use App\Http\Requests\StoreAssetDetailRequest;
+use App\Models\AssetDetail;
+use App\Services\AssetDetailService;
 use App\Services\AssetService;
 use Illuminate\Http\Request;
 
-class AssetController extends Controller
+class AssetDetailController extends Controller
 {
+    protected $assetDetailService;
     protected $assetService;
-    public function __construct(AssetService $assetService)
+    public function __construct(AssetDetailService $assetDetailService, AssetService $assetService)
     {
+        $this->assetDetailService = $assetDetailService;
         $this->assetService = $assetService;
     }
     /**
@@ -21,14 +24,9 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function datatables()
-    {
-        return $this->assetService->datatablesService();
-    }
     public function index()
     {
-        return view('admin.asset.index');
+        //
     }
 
     /**
@@ -38,8 +36,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        $asset = new Asset();
-        return view('admin.asset.store', compact('asset'));
+        //
     }
 
     /**
@@ -48,16 +45,26 @@ class AssetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAssetRequest $request)
+    public function store(StoreAssetDetailRequest $request)
     {
         try {
             $data = $request->all();
-            $this->assetService->createAssetService($data);
-            toastr('Thêm tài sản thành công', 'success', 'Thành công');
-            return redirect(route('staff.asset.asset.index'));
+            $this->assetService->addQuantity($data);
+            $result = $this->assetDetailService->addQuantityAssetDetail($data);
+            return response()->json(
+                [
+                    'status' => 200,
+                    'message' => 'Thành công',
+                    'data' => $result
+                ]
+            );
         } catch (\Throwable $th) {
-            toastr('Thêm tài sản thất bại', 'error', 'Thất bại');
-            return redirect()->back();
+            return response()->json(
+                [
+                    'status' => 422,
+                    'message' => 'Thất bại',
+                ]
+            );
         }
     }
 
@@ -67,11 +74,21 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function merge(MergeAssetDetailRequest $request)
+    {
+        $data = $request->all();
+        $result = $this->assetDetailService->mergeAssetDetail($data);
+        return $result;
+    }
+    public function split(AssetDetail $detail, Request $request)
+    {
+        $data = $request->all();
+        $this->assetDetailService->spiltAssetDetail($detail, $data);
+        return redirect()->back();
+    }
     public function show($id)
     {
-        $asset = $this->assetService->showAssetService($id);
-    
-        return view('admin.asset.show',compact('asset'));
+        //
     }
 
     /**
@@ -82,8 +99,7 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        $asset = $this->assetService->findAssetService($id);
-        return view('admin.asset.edit', compact('asset'));
+        //
     }
 
     /**
@@ -93,17 +109,9 @@ class AssetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAssetRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        // try {
-        $data = $request->all();
-        $this->assetService->updateAssetService($data, $id);
-        toastr('Cập nhật tài sản thành công', 'success', 'Thành công');
-        return redirect(route('staff.asset.asset.index'));
-        // } catch (\Throwable $th) {
-        //     toastr('Cập nhật tài sản thất bại', 'error', 'Thất bại');
-        //     return redirect()->back();
-        // }
+        //
     }
 
     /**

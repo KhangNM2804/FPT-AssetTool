@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Asset;
 use App\Repositories\AssetRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -11,9 +12,11 @@ use Intervention\Image\Facades\Image;
 class AssetService
 {
     protected $assetRepository;
-    public function __construct(AssetRepository $assetRepository)
+    protected $assetDetailService;
+    public function __construct(AssetRepository $assetRepository, AssetDetailService $assetDetailService)
     {
         $this->assetRepository = $assetRepository;
+        $this->assetDetailService = $assetDetailService;
     }
     public function datatablesService()
     {
@@ -43,11 +46,17 @@ class AssetService
         $data['user_id'] = Auth::user()->id;
         $data['price'] = intval(str_replace(',', '', $data['price']));
         $data['total_price'] = $data['quantity'] * $data['price'];
-        return $this->assetRepository->create($data);
+        $data['status'] = Asset::STATUS_ACTIVE;
+        $asset = $this->assetRepository->create($data);
+        return $this->assetDetailService->createAssetDetail($asset);
     }
     public function findAssetService($id)
     {
         return $this->assetRepository->find($id);
+    }
+    public function showAssetService($id)
+    {
+        return $this->assetRepository->show($id);
     }
     public function updateAssetService($data, $id)
     {
@@ -70,12 +79,19 @@ class AssetService
         }
 
         $data['user_id'] = Auth::user()->id;
-        
+
         if (array_key_exists('quantity', $data)) {
             unset($data['quantity']);
         }
         $data['price'] = intval(str_replace(',', '', $data['price']));
 
         return $this->assetRepository->update($data, $id);
+    }
+    public function addQuantity($data)
+    {
+        $asset = Asset::findOrFail($data['asset_id']);
+        $asset->quantity += $data['quantity'];
+        $asset->total_price = $asset->quantity * $asset->price;
+        return  $this->assetRepository->addQuantity($asset);
     }
 }

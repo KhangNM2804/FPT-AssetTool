@@ -13,11 +13,11 @@ class CreateAssetsDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('assets_detail', function (Blueprint $table) {
+        Schema::create('asset_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('asset_id');
             $table->foreign('asset_id')->references('id')->on('assets');
-            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('room_id')->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->bigInteger('quantity')->default(1);
             $table->string('receiver_id')->nullable();

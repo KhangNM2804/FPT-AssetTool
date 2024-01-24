@@ -52,5 +52,8 @@ class Asset extends Model
     {
         return $this->denominator . $this->symbol . $this->invoice_number;
     }
-    
+    public function assetDetail()
+    {
+        return $this->hasMany(AssetDetail::class, 'asset_id');
+    }
 }

@@ -22,6 +22,9 @@ class AssetRepository
             ->addColumn('edit_url', function ($asset) {
                 return route('staff.asset.asset.edit', ['asset' => $asset]);
             })
+            ->addColumn('show_url', function ($asset) {
+                return route('staff.asset.asset.show', ['asset' => $asset]);
+            })
             ->addColumn('delete_url', function ($asset) {
                 return route('staff.asset.asset.destroy', ['asset' => $asset]);
             })
@@ -38,10 +41,14 @@ class AssetRepository
     {
         return $this->asset->findOrFail($id);
     }
+    public function show($id)
+    {
+        return $this->asset->with(['category:id,name', 'group:id,name', 'assetDetail.reciver:id,name', 'assetDetail.room:id,name'])->findOrFail($id);
+    }
     public function update($data, $id)
     {
         $asset = $this->asset->findOrFail($id);
-        $data['total_price'] = $asset->quantity *$data['price'] ;
+        $data['total_price'] = $asset->quantity * $data['price'];
         if (isset($data['image'])) { //kiểm tra có cập nhật ảnh mới hay không. Nếu có thì xóa ảnh cũ khỏi web
             Storage::delete('public/uploads/' . $asset->image);
         }
@@ -52,5 +59,9 @@ class AssetRepository
         $asset = $this->asset->findOrFail($id);
         $asset->delete();
         return $asset;
+    }
+    public function addQuantity(Asset $asset)
+    {
+        return $asset->save();
     }
 }

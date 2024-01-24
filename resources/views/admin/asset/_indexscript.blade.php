@@ -64,15 +64,18 @@
                         render: function(data, type, row) {
                             var edit = row.edit_url;
                             var del = row.delete_url;
+                            var show = row.show_url;
                             var buttonEdit = '<a href="' + edit +
                                 '" class="btn btn-primary"><i class="fa fa-edit"></i></a>';
+                                var buttonShow = '<a href="' + show +
+                                '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
                             var buttonDelete = '<form action="' + del +
                                 '" method="POST" style="display:inline;">' +
                                 '@CSRF' +
                                 '@method('DELETE')' +
                                 '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
                                 '<i class="fa fa-trash"></i></button></form>';
-                            return buttonEdit + ' ' + buttonDelete
+                            return buttonEdit+' '+ buttonShow + ' ' + buttonDelete
                         }
                     }
                 ]
