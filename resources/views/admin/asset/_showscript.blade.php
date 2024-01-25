@@ -15,6 +15,41 @@
         const idAsset = @json($asset->id);
         const routeStore = @json(route('staff.asset.asset-detail.store'));
         const routeMerge = @json(route('staff.asset.asset-detail.merge'));
+
+        function handleSplitFormSubmit(form, event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Nhập số lượng cần tách',
+                input: 'text',
+                inputAttributes: {
+                    min: 1,
+                    step: 1
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Tách',
+                cancelButtonText: 'Hủy',
+                showLoaderOnConfirm: true,
+                preConfirm: function(quantity) {
+                    quantity = parseInt(quantity, 10);
+                    if (isNaN(quantity) || quantity <= 0) {
+                        return Swal.showValidationMessage('Data is invalid');
+                    }
+
+                    // Convert form to jQuery object
+                    var $form = j(form);
+
+                    // Use $form to find the element
+                    $form.find('#quantity').val(quantity);
+
+                    form.submit();
+                },
+                allowOutsideClick: function() {
+                    return !Swal.isLoading();
+                }
+            });
+        }
+
         j(document).ready(function() {
             j('#asset').DataTable({
                 dom: 'lifrtp',
@@ -60,7 +95,7 @@
                         location.reload();
                     },
                     error: function(error) {
-                        Swal.fire('Lỗi', 'Đã xảy ra lỗi khi gộp dữ liệu',
+                        Swal.fire('Lỗi', 'Chưa chọn các mục cần gộp',
                             'error');
                     }
                 });
@@ -108,35 +143,10 @@
                     }
                 })
             });
-            j("#splitButton").click(function(event) {
-                // Ngăn chặn hành vi mặc định của nút (tức là ngăn chặn form từ việc tự động submit)
-                event.preventDefault();
 
-                Swal.fire({
-                    title: 'Nhập số lượng cần tách',
-                    input: 'text',
-                    inputAttributes: {
-                        min: 1,
-                        step: 1
-                    },
-                    showCancelButton: true,
-                    confirmButtonText: 'Tách',
-                    cancelButtonText: 'Hủy',
-                    showLoaderOnConfirm: true,
-                    preConfirm: function(quantity) {
-                        quantity = parseInt(quantity, 10);
-                        if (isNaN(quantity) || quantity <= 0) {
-                            return Swal.showValidationMessage('Data is invalid');
-                        }
-                        j('#quantity').val(quantity)
-                        j("#splitForm").submit();
-                    },
-                    allowOutsideClick: function() {
-                        return !Swal.isLoading();
-                    }
-                })
-                
-            });
+
+
+
         })
     </script>
 @endsection

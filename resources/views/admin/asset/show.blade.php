@@ -113,7 +113,7 @@
                             <div class="d-none">
                                 <input type="hidden" id="quantity" name="quantity" required>
                             </div>
-                            <button id="splitButton" class="btn btn-secondary">Tách</button>
+                            <button id="splitButton" onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary">Tách</button>
                         </form>
                     </td>
                 </tr>
