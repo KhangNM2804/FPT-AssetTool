@@ -42,6 +42,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('asset-detail',AssetDetailController::class);
         Route::post('asset-detail/merge',[AssetDetailController::class,'merge'])->name('asset-detail.merge');
         Route::post('asset-detail/{detail}/split',[AssetDetailController::class,'split'])->name('asset-detail.split');
+        Route::post('asset-detail/{detail}/buy',[AssetDetailController::class,'buy'])->name('asset-detail.buy');
 
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {

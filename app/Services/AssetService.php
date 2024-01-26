@@ -94,4 +94,7 @@ class AssetService
         $asset->total_price = $asset->quantity * $asset->price;
         return  $this->assetRepository->addQuantity($asset);
     }
+    public function deleteAsset($id){
+        return $this->assetRepository->delete($id);
+    }
 }

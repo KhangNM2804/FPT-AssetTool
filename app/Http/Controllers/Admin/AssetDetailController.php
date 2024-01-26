@@ -122,6 +122,22 @@ class AssetDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->assetDetailService->deleteAssetDetail($id);
+            toastr('Xóa thành công', 'success', 'Thành công');
+        } catch (\Throwable $th) {
+            toastr('Xóa thất bại', 'error', 'Thất bại');
+        }
+        return redirect()->back();
+    }
+    public function buy($id)
+    {
+        try {
+            $this->assetDetailService->buyAssetDetail($id);
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toastr('Thanh lý thất bại', 'error', 'Thất bại');
+        }
+        return redirect()->back();
     }
 }

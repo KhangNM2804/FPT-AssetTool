@@ -36,6 +36,19 @@ class Asset extends Model
         'created_at',
         'updated_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        static::updating(function ($asset) {
+            $asset->assetDetail()->where('status',AssetDetail::STATUS_ACTIVE)->update(['status' => $asset->status]);
+        });
+    }
+    public function delete()
+    {
+        // Xóa tất cả các AssetDetail liên quan trước khi xóa Asset
+        $this->assetDetail()->delete();
+        return parent::delete();
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

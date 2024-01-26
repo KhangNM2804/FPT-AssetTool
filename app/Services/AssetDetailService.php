@@ -36,4 +36,15 @@ class AssetDetailService
         }
         return toastr('Số lượng tách lớn hơn số lượng tài sản', 'error', 'Thất bại');
     }
+    public function deleteAssetDetail($id)
+    {
+        $assetDetail = AssetDetail::with('asset')->findOrFail($id);
+        $this->assetDetailRepository->delete($assetDetail);
+    }
+    public function buyAssetDetail($id)
+    {
+        $assetDetail = AssetDetail::with('asset')->findOrFail($id);
+        $this->assetDetailRepository->buy($assetDetail);
+        return toastr('Thanh lý tài sản thành công', 'success', 'Thành công');
+    }
 }

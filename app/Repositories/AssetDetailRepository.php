@@ -47,4 +47,27 @@ class AssetDetailRepository
             'receiver_id' => $asset->user_id
         ]);
     }
+    public function delete(AssetDetail $assetDetail)
+    {
+        $asset = $assetDetail->asset;
+        $newQuantity = $asset->quantity - $assetDetail->quantity;
+        if ($newQuantity == 0) {
+            $asset->delete();
+            return redirect(route('staff.asset.asset-detail.index'));
+        } else {
+            $asset->update(['quantity' => $newQuantity, 'total_price' => $newQuantity * $asset->price]);
+            $assetDetail->delete();
+            return redirect()->back();
+        }
+    }
+    public function buy(AssetDetail $assetDetail)
+    {
+        $asset = $assetDetail->asset;
+        $assetDetail->update(['status' => AssetDetail::STATUS_INACTIVE]);
+        $count =  $asset->assetDetail()->where('status', AssetDetail::STATUS_ACTIVE)->count();
+        if ($count == 0) {
+            $asset->update(['status' => Asset::STATUS_INACTIVE]);
+        }
+        
+    }
 }

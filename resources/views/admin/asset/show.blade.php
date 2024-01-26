@@ -109,17 +109,37 @@
                         ? '<span class="badge badge-success">Đang sử dụng</span>'
                         : '<span class="badge badge-danger">Đã thanh lý</span>' !!}</td>
                     <td>
-                        <form id="splitForm" action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
-                            <div class="d-none">
-                                <input type="hidden" id="quantity" name="quantity" required>
-                            </div>
-                            <button id="splitButton" onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary">Tách</button>
-                        </form>
+                        @if ($item->status == 1)
+                            <form style="display: inline;" id="splitForm"
+                                action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
+                                <div class="d-none">
+                                    <input type="hidden" id="quantity" name="quantity" required>
+                                </div>
+                                <button title="Tách tài sản" id="splitButton"
+                                    onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary"><i
+                                        class="fas fa-divide"></i></button>
+                            </form>
+
+                            <form class="d-sm-inline-block"
+                                action="{{ route('staff.asset.asset-detail.buy', ['detail' => $item]) }}" method="post">
+                                <button title="Thanh lý tài sản" class="btn btn-warning text-white"><i
+                                        class="fas fa-shopping-cart"></i></button>
+                            </form>
+                            <form style="display: inline;"
+                                action="{{ route('staff.asset.asset-detail.destroy', ['asset_detail' => $item]) }}"
+                                method="post">
+                                @CSRF
+                                @method('DELETE')
+                                <button title="Xóa tài sản" class="btn btn-danger"
+                                    onclick="return confirm('Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?')"><i
+                                        class="fa fa-trash"></i></button>
+                            </form>
+                        @else
+                        <span class="badge badge-danger">Không được quyền</span>
+                        @endif
                     </td>
                 </tr>
             @endforeach
-
-
         </tbody>
         <tfoot>
             <tr>

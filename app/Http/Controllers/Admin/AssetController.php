@@ -95,15 +95,15 @@ class AssetController extends Controller
      */
     public function update(UpdateAssetRequest $request, $id)
     {
-        // try {
+        try {
         $data = $request->all();
         $this->assetService->updateAssetService($data, $id);
         toastr('Cập nhật tài sản thành công', 'success', 'Thành công');
         return redirect(route('staff.asset.asset.index'));
-        // } catch (\Throwable $th) {
-        //     toastr('Cập nhật tài sản thất bại', 'error', 'Thất bại');
-        //     return redirect()->back();
-        // }
+        } catch (\Throwable $th) {
+            toastr('Cập nhật tài sản thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -114,6 +114,16 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->assetService->deleteAsset($id);
+            toastr('Xóa thành công','success','Thành công');
+        } catch (\Throwable $th) {
+           toastr('Xóa thất bại','error','Thất bại');
+           return redirect()->back();
+        }
+        
+    }
+    public function buy($id){
+        
     }
 }
