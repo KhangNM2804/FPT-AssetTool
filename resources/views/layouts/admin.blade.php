@@ -58,12 +58,15 @@
     <!-- Summernote -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css">
     <!-- SweetAlert2 v9.17.1 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.1/dist/sweetalert2.min.css"></link>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.1/dist/sweetalert2.min.css">
+    </link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed animate__animated animate__fadeIn animate__slow" style="height: auto;">
+<body
+    class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed animate__animated animate__fadeIn animate__slow"
+    style="height: auto;">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -382,9 +385,10 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/charts/uplot.html" class="nav-link">
+                                                <a href="{{ route('staff.asset.handover.index') }}"
+                                                    class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>uPlot</p>
+                                                    <p>Bàn giao</p>
                                                 </a>
                                             </li>
                                         </ul>
@@ -512,7 +516,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                 </ul>
                             </nav>
                             <!-- /.sidebar-menu -->
@@ -600,7 +604,7 @@
     <!-- PAGE PLUGINS -->
 
     @yield('js')
-    
+
 </body>
 
 </html>

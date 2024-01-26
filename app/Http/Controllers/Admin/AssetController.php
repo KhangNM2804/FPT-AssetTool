@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Asset;
+use App\Models\User;
 use App\Services\AssetService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssetController extends Controller
 {
@@ -70,8 +72,10 @@ class AssetController extends Controller
     public function show($id)
     {
         $asset = $this->assetService->showAssetService($id);
-    
-        return view('admin.asset.show',compact('asset'));
+        $user = User::findOrFail(Auth::user()->id);
+        $handovers = $user->handovers()->pluck('asset_details_id')->toArray();
+   
+        return view('admin.asset.show', compact('asset', 'handovers'));
     }
 
     /**
@@ -96,10 +100,10 @@ class AssetController extends Controller
     public function update(UpdateAssetRequest $request, $id)
     {
         try {
-        $data = $request->all();
-        $this->assetService->updateAssetService($data, $id);
-        toastr('Cập nhật tài sản thành công', 'success', 'Thành công');
-        return redirect(route('staff.asset.asset.index'));
+            $data = $request->all();
+            $this->assetService->updateAssetService($data, $id);
+            toastr('Cập nhật tài sản thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.asset.index'));
         } catch (\Throwable $th) {
             toastr('Cập nhật tài sản thất bại', 'error', 'Thất bại');
             return redirect()->back();
@@ -116,14 +120,13 @@ class AssetController extends Controller
     {
         try {
             $this->assetService->deleteAsset($id);
-            toastr('Xóa thành công','success','Thành công');
+            toastr('Xóa thành công', 'success', 'Thành công');
         } catch (\Throwable $th) {
-           toastr('Xóa thất bại','error','Thất bại');
-           return redirect()->back();
+            toastr('Xóa thất bại', 'error', 'Thất bại');
+            return redirect()->back();
         }
-        
     }
-    public function buy($id){
-        
+    public function buy($id)
+    {
     }
 }

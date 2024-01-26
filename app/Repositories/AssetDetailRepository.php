@@ -56,6 +56,7 @@ class AssetDetailRepository
             return redirect(route('staff.asset.asset-detail.index'));
         } else {
             $asset->update(['quantity' => $newQuantity, 'total_price' => $newQuantity * $asset->price]);
+            $assetDetail->handover()->delete();
             $assetDetail->delete();
             return redirect()->back();
         }
@@ -64,7 +65,9 @@ class AssetDetailRepository
     {
         $asset = $assetDetail->asset;
         $assetDetail->update(['status' => AssetDetail::STATUS_INACTIVE]);
+        $assetDetail->handover()->delete();
         $count =  $asset->assetDetail()->where('status', AssetDetail::STATUS_ACTIVE)->count();
+
         if ($count == 0) {
             $asset->update(['status' => Asset::STATUS_INACTIVE]);
         }

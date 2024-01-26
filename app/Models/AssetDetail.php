@@ -24,12 +24,12 @@ class AssetDetail extends Model
         'created_at',
         'updated_at',
     ];
-
+    
     public function asset()
     {
         return $this->belongsTo(Asset::class);
     }
-    
+
     public function room()
     {
         return $this->belongsTo(Room::class);
@@ -38,5 +38,9 @@ class AssetDetail extends Model
     public function reciver()
     {
         return $this->belongsTo(User::class, 'receiver_id');
+    }
+    public function handover()
+    {
+        return $this->hasMany(Handover::class, 'asset_details_id');
     }
 }

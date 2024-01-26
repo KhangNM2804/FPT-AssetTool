@@ -110,6 +110,18 @@
                         : '<span class="badge badge-danger">Đã thanh lý</span>' !!}</td>
                     <td>
                         @if ($item->status == 1)
+                            
+                                <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
+                                    method="post">
+                                    <div class="d-none">
+                                        <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
+                                    </div>
+                                    <button {{in_array($item->id,$handovers)?'disabled':''}} class="btn btn-primary" title="Thêm vào biên bản bàn giao"><i
+                                            class="fa fa-plus"></i></button>
+                                </form>
+                           
+
+
                             <form style="display: inline;" id="splitForm"
                                 action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
                                 <div class="d-none">
@@ -122,7 +134,8 @@
 
                             <form class="d-sm-inline-block"
                                 action="{{ route('staff.asset.asset-detail.buy', ['detail' => $item]) }}" method="post">
-                                <button title="Thanh lý tài sản" class="btn btn-warning text-white"><i
+                                <button title="Thanh lý tài sản" class="btn btn-warning text-white"
+                                    onclick="return confirm('Bạn có chắc chắn thanh lý tài sản này?')"><i
                                         class="fas fa-shopping-cart"></i></button>
                             </form>
                             <form style="display: inline;"
@@ -131,11 +144,11 @@
                                 @CSRF
                                 @method('DELETE')
                                 <button title="Xóa tài sản" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?')"><i
+                                    onclick="return confirm('Bạn có chắc chắn ngừng hoạt động tài sản này?')"><i
                                         class="fa fa-trash"></i></button>
                             </form>
                         @else
-                        <span class="badge badge-danger">Không được quyền</span>
+                            <span class="badge badge-danger">Không được quyền</span>
                         @endif
                     </td>
                 </tr>

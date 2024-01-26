@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AssetDetailController;
 use App\Http\Controllers\Admin\CategoryAssetController;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\GroupAssetController;
+use App\Http\Controllers\Admin\HandoverController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('category-assets', CategoryAssetController::class);
         Route::resource('asset',AssetController::class);
         Route::resource('asset-detail',AssetDetailController::class);
+        Route::resource('handover',HandoverController::class);
         Route::post('asset-detail/merge',[AssetDetailController::class,'merge'])->name('asset-detail.merge');
         Route::post('asset-detail/{detail}/split',[AssetDetailController::class,'split'])->name('asset-detail.split');
         Route::post('asset-detail/{detail}/buy',[AssetDetailController::class,'buy'])->name('asset-detail.buy');
