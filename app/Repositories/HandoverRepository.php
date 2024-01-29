@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Handover;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,13 +11,15 @@ class HandoverRepository
 {
     protected $user;
 
+
     protected function getUser()
     {
         if (!$this->user) {
-            $this->user = User::with('handovers')->findOrFail(Auth::user()->id);
+            $this->user = User::with(['handovers', 'handovers.assetDetail'])->findOrFail(Auth::user()->id);
         }
         return $this->user;
     }
+
 
 
     public function create($data)
@@ -24,10 +27,13 @@ class HandoverRepository
         $user = $this->getUser();
         return $user->handovers()->create($data);
     }
-    public function save($room_id)
+    public function save($data)
     {
         $user = $this->getUser();
-        $user->handovers()->update(['room_id', $room_id]);
+        $room = Room::findOrFail($data['room_id']);
+        $user->handovers->each(function ($handover) use ($data,$room) {
+            $handover->assetDetail->update(['room_id' => $data['room_id'],'receiver_id'=>$room->id]);
+        });
         return $this->deleteAll();
     }
     public function delete($id)

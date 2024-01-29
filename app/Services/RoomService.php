@@ -35,4 +35,8 @@ class RoomService
     {
         return $this->roomRepository->delete($id);
     }
+    public function searchRoomService($data)
+    {
+        return $this->roomRepository->search($data);
+    }
 }

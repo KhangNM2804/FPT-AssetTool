@@ -16,7 +16,13 @@ class RoomRepository
     {
         $this->room = $room;
     }
-
+    public function search($data)
+    {
+        if (isset($data['term'])) {
+            return $this->room->with(['manager:id,name'])->where('name', 'like', '%' . $data['term'] . '%')->where('status', Room::STATUS_ACTIVE)->get(['id','name','manager_id']);
+        }
+        return $this->room->with(['manager:id,name'])->where('status', Room::STATUS_ACTIVE)->limit(3)->get(['id','name','manager_id']);
+    }
     public function getAll()
     {
         $rooms = $this->room->select('rooms.id', 'rooms.name', 'rooms.status', 'rooms.category_room_id', 'rooms.manager_id', 'rooms.index', 'rooms.created_at', 'rooms.updated_at')

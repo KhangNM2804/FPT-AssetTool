@@ -39,26 +39,29 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
         Route::resource('group-assets', GroupAssetController::class);
         Route::resource('category-assets', CategoryAssetController::class);
-        Route::resource('asset',AssetController::class);
-        Route::resource('asset-detail',AssetDetailController::class);
-        Route::resource('handover',HandoverController::class);
-        Route::post('asset-detail/merge',[AssetDetailController::class,'merge'])->name('asset-detail.merge');
-        Route::post('asset-detail/{detail}/split',[AssetDetailController::class,'split'])->name('asset-detail.split');
-        Route::post('asset-detail/{detail}/buy',[AssetDetailController::class,'buy'])->name('asset-detail.buy');
-
+        Route::resource('asset', AssetController::class);
+        Route::resource('asset-detail', AssetDetailController::class);
+        Route::resource('handover', HandoverController::class);
+        Route::post('handover/save', [HandoverController::class, 'save'])->name('handover.save');
+        Route::post('asset-detail/merge', [AssetDetailController::class, 'merge'])->name('asset-detail.merge');
+        Route::post('asset-detail/{detail}/split', [AssetDetailController::class, 'split'])->name('asset-detail.split');
+        Route::post('asset-detail/{detail}/buy', [AssetDetailController::class, 'buy'])->name('asset-detail.buy');
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
         Route::get('group-assets', [GroupAssetController::class, 'datatables'])->name('group-assets');
         Route::get('category-assets', [CategoryAssetController::class, 'datatables'])->name('category-assets');
-        Route::get('asset',[AssetController::class,'datatables'])->name('asset');
+        Route::get('asset', [AssetController::class, 'datatables'])->name('asset');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');
         Route::get('users', [UserController::class, 'search'])->name('users');
-        Route::get('group-assets',[GroupAssetController::class,'search'])->name('group-assets');
-        Route::get('category-assets',[CategoryAssetController::class,'search'])->name('category-assets');
-     
+        Route::get('group-assets', [GroupAssetController::class, 'search'])->name('group-assets');
+        Route::get('category-assets', [CategoryAssetController::class, 'search'])->name('category-assets');
+        Route::get('rooms', [RoomController::class, 'search'])->name('rooms');
+    });
+    Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
+        Route::get('handover', [HandoverController::class, 'export'])->name('export');
     });
 });

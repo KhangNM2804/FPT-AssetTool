@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SaveHandoverRequest;
 use App\Models\Handover;
 use App\Services\HandoverService;
 use Illuminate\Http\Request;
@@ -16,14 +17,15 @@ class HandoverController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $handoverService;
-    public function __construct(HandoverService $handoverService) {
+    public function __construct(HandoverService $handoverService)
+    {
         $this->handoverService = $handoverService;
     }
     public function index()
     {
-        $handovers = Handover::with(['assetDetail.asset','assetDetail.room'])->where('user_id',Auth::user()->id)->get();
-        
-      
+        $handovers = Handover::with(['assetDetail.asset', 'assetDetail.room'])->where('user_id', Auth::user()->id)->get();
+
+
         return view('admin.handover.index', compact('handovers'));
     }
 
@@ -48,11 +50,11 @@ class HandoverController extends Controller
         try {
             $data = $request->all();
             $this->handoverService->createHandover($data);
-            toastr('Thêm vào biên bản bàn giao thành công','success','Thành công');
+            toastr('Thêm vào biên bản bàn giao thành công', 'success', 'Thành công');
         } catch (\Throwable $th) {
-            toastr('Thêm vào biên bản bàn giao thất bại','error','Thất bại');
+            toastr('Thêm vào biên bản bàn giao thất bại', 'error', 'Thất bại');
         }
-        
+
         return redirect()->back();
     }
 
@@ -100,7 +102,18 @@ class HandoverController extends Controller
     {
 
         $this->handoverService->deleteHandover($id);
-        toastr('Xóa khỏi biên bản bàn giao thành công','success','Thành công');
+        toastr('Xóa khỏi biên bản bàn giao thành công', 'success', 'Thành công');
         return redirect()->back();
+    }
+    public function save(SaveHandoverRequest $request)
+    {
+        $data = $request->all();
+        $this->handoverService->saveHandover($data);
+        toastr('Chuyển vị trí thành công', 'success', 'Thành công');
+        return redirect()->back();
+    }
+    public function export()
+    {
+        return view('export.handoverExport');
     }
 }

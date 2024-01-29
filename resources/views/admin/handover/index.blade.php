@@ -1,5 +1,26 @@
 @extends('layouts.admin')
 @section('content')
+    <form class="row" action="{{route('staff.asset.handover.save')}}" method="POST">
+        @CSRF
+        <div class="form-group col-md-6">
+            <label for="select-rooms">Vị trí mới</label>
+            <select id="select-rooms" name="room_id"
+                class="form-control select2 {{ $errors->has('room_id') ? 'is-invalid' : '' }}" style="width: 100%;">
+                <option value="" selected>
+                    Select an option
+                </option>
+            </select>
+            @if ($errors->has('room_id'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('room_id') }}</strong>
+                </div>
+            @endif
+
+        </div>
+        <div class="form-group col-md-6"style="margin-top: 31px"><button type="submit" class="btn btn-success">Lưu</button></div>
+    </form>
+
+
     <table id="handover" class="display" style="width: 100%">
         <thead>
             <tr>

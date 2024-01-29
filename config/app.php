@@ -177,6 +177,7 @@ return [
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+       
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'Toastr' => Yoeunes\Toastr\Facades\Toastr::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        
     ],
 
 ];

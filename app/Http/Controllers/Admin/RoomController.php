@@ -22,6 +22,11 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request)
+    {
+        $data = $request->all();
+        return $this->room_service->searchRoomService($data);
+    }
     public function index()
     {
         return view('admin.rooms.index');
@@ -38,7 +43,7 @@ class RoomController extends Controller
     public function create()
     {
         $room = new Room();
-        
+
         return view('admin.rooms.store', compact('room'));
     }
 
@@ -117,10 +122,10 @@ class RoomController extends Controller
     {
         try {
             $this->room_service->deleteRoomService($id);
-            toastr('Xóa phòng thành công','success','Thành công');
+            toastr('Xóa phòng thành công', 'success', 'Thành công');
             return redirect()->back();
         } catch (\Throwable $th) {
-            toastr('Xóa thất bại','error','Thất bại');
+            toastr('Xóa thất bại', 'error', 'Thất bại');
             return redirect()->back();
         }
     }

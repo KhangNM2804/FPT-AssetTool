@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAssetDetailRequest extends FormRequest
+class SaveHandoverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class StoreAssetDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required,exists:asset_details,id',
-            'quantity' => 'required|numeric|min:1',
+            'room_id' => 'required|exists:rooms,id'
         ];
     }
 }
