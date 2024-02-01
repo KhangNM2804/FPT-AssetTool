@@ -6,10 +6,13 @@
         jQuery(document).ready(function($) {
             const route = @json(route('staff.search.category_rooms'));
             const routeUser = @json(route('staff.search.users'));
-           
+
 
             $('#select2-example').select2({
                 ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
                     url: route,
                     dataType: 'json',
                     delay: 250,
@@ -36,6 +39,9 @@
 
             $('#select2-user').select2({
                 ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
                     url: routeUser,
                     dataType: 'json',
                     delay: 250,

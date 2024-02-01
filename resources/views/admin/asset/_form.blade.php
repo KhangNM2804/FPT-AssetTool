@@ -95,11 +95,20 @@
         @endif
     </div>
 </div>
-<div class="row">
 
-</div>
 <div class="row">
     <div class="form-group col-md-6">
+        <div class="form-group">
+            <label for="unit">Đơn vị tính</label>
+            <input id="unit" class="form-control {{ $errors->has('unit') ? 'is-invalid' : '' }}"
+                type="text" name="unit" value="{{ old('unit', $asset->unit) }}">
+            @if ($errors->has('unit'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('unit') }}</strong>
+                </div>
+            @endif
+        </div>
+
         <div class="form-group">
             <label for="document_number">Số chứng từ</label>
             <input id="document_number" class="form-control {{ $errors->has('document_number') ? 'is-invalid' : '' }}"

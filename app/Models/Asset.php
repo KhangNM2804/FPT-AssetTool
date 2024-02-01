@@ -24,6 +24,7 @@ class Asset extends Model
         'document_number',
         'denominator',
         'symbol',
+        'unit',
         'invoice_number',
         'image',
         'material_code',

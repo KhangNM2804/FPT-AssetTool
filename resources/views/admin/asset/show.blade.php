@@ -35,6 +35,10 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
+                    <label for="quantity">ĐVT:</label>
+                    <span class="badge badge-secondary">{{ $asset->unit }}</span>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="quantity">Số lượng:</label>
                     <span class="badge badge-secondary">{{ $asset->quantity }}</span>
                 </div>
@@ -42,13 +46,14 @@
                     <label for="price">Đơn giá:</label>
                     <span class="badge badge-secondary">{{ number_format($asset->price, 0, ',', ',') }}</span>
                 </div>
+               
+
+            </div>
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label for="date_of_use">Tổng tiền:</label>
                     <span class="badge badge-secondary">{{ number_format($asset->total_price, 0, ',', ',') }}</span>
                 </div>
-
-            </div>
-            <div class="row">
                 <div class="form-group col-md-4">
                     <label for="date_of_use">Ngày bắt đầu sử dụng:</label>
                     <span class="badge badge-secondary">{{ $asset->date_of_use }}</span>
@@ -113,6 +118,7 @@
                             
                                 <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
                                     method="post">
+                                    @csrf
                                     <div class="d-none">
                                         <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
                                     </div>
@@ -124,6 +130,7 @@
 
                             <form style="display: inline;" id="splitForm"
                                 action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
+                                @csrf
                                 <div class="d-none">
                                     <input type="hidden" id="quantity" name="quantity" required>
                                 </div>
@@ -141,7 +148,7 @@
                             <form style="display: inline;"
                                 action="{{ route('staff.asset.asset-detail.destroy', ['asset_detail' => $item]) }}"
                                 method="post">
-                                @CSRF
+                                @csrf
                                 @method('DELETE')
                                 <button title="Xóa tài sản" class="btn btn-danger"
                                     onclick="return confirm('Bạn có chắc chắn ngừng hoạt động tài sản này?')"><i
@@ -154,17 +161,7 @@
                 </tr>
             @endforeach
         </tbody>
-        <tfoot>
-            <tr>
-                <th>#</th>
-                <th>Tên tài sản</th>
-                <th>Số lượng</th>
-                <th>Vị trí đặt</th>
-                <th>Người nhận bàn giao</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-        </tfoot>
+        
     </table>
 @endsection
 @include('admin.asset._showscript')

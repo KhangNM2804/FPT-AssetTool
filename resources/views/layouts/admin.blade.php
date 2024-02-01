@@ -62,7 +62,11 @@
     </link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
-
+<style>
+    .select2-dropdown {
+        z-index: 1061;
+    }
+</style>
 
 <body
     class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed animate__animated animate__fadeIn animate__slow"

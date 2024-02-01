@@ -81,6 +81,9 @@
 
                 // Gửi API với danh sách ID đã chọn
                 j.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
                     url: routeMerge,
                     method: 'POST',
                     data: {
@@ -118,6 +121,9 @@
                             return Swal.showValidationMessage('Data is invalid');
                         }
                         return j.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
                             url: routeStore,
                             method: 'POST',
                             contentType: 'application/json',

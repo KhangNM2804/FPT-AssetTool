@@ -35,7 +35,7 @@
                                 '" class="btn btn-primary"><i class="fa fa-edit"></i></a>';
                             var buttonDelete = '<form action="' + del +
                                 '" method="POST" style="display:inline;">' +
-                                '@CSRF' +
+                                '@csrf' +
                                 '@method('DELETE')' +
                                 '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
                                 '<i class="fa fa-trash"></i></button></form>';

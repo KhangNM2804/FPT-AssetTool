@@ -177,7 +177,7 @@ return [
         Yoeunes\Toastr\ToastrServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-       
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -235,7 +235,7 @@ return [
         'Toastr' => Yoeunes\Toastr\Facades\Toastr::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

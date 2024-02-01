@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\HandoverExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveHandoverRequest;
 use App\Models\Handover;
+use App\Models\User;
 use App\Services\HandoverService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HandoverController extends Controller
 {
@@ -108,12 +111,20 @@ class HandoverController extends Controller
     public function save(SaveHandoverRequest $request)
     {
         $data = $request->all();
-        $this->handoverService->saveHandover($data);
-        toastr('Chuyển vị trí thành công', 'success', 'Thành công');
-        return redirect()->back();
+        $user =  $this->handoverService->saveHandover($data);
+        $filePath = storage_path('app/public/bien_ban_ban_giao.xlsx');
+        Excel::store(new HandoverExport($user), 'public/bien_ban_ban_giao.xlsx');
+
+        // Lưu trữ đường dẫn tới tệp Excel trong session
+        session(['excel_url' => asset('storage/bien_ban_ban_giao.xlsx')]);
+        return response()->json([
+            'status' => 200,
+            'message' => "Thành công",
+            'data' => []
+        ]);
     }
-    public function export()
+    public function export(User $user)
     {
-        return view('export.handoverExport');
+        return Excel::download(new HandoverExport($user), 'Biên bản bàn giao.xlsx');
     }
 }

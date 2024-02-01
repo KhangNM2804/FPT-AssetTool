@@ -26,13 +26,14 @@ class UpdateAssetRequest extends FormRequest
         return [
             'name' => 'required',
             'category_asset_id' => 'exists:category_assets,id',
-            'group_assets_id'=>'exists:group_assets,id',
-            'price'=>'required',
-            'symbol'=>'required',
-            'invoice_number'=>'required',
-            'image'=>'mimes:jpeg,png|max:2048',
-            'date_of_use'=>'date|required',
-            'document_number'=>'required'
+            'group_assets_id' => 'exists:group_assets,id',
+            'price' => 'required',
+            'symbol' => 'required',
+            'invoice_number' => 'required',
+            'date_of_use' => 'date|required',
+            'document_number' => 'required',
+            'unit' => 'required',
+            'image' => 'mimes:jpeg,png|max:2048',
         ];
     }
 }

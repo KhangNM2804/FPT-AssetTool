@@ -1,24 +1,12 @@
 @extends('layouts.admin')
 @section('content')
-    <form class="row" action="{{route('staff.asset.handover.save')}}" method="POST">
-        @CSRF
-        <div class="form-group col-md-6">
-            <label for="select-rooms">Vị trí mới</label>
-            <select id="select-rooms" name="room_id"
-                class="form-control select2 {{ $errors->has('room_id') ? 'is-invalid' : '' }}" style="width: 100%;">
-                <option value="" selected>
-                    Select an option
-                </option>
-            </select>
-            @if ($errors->has('room_id'))
-                <div class="invalid-feedback">
-                    <strong>{{ $errors->first('room_id') }}</strong>
-                </div>
-            @endif
+    <div class="row">
 
-        </div>
-        <div class="form-group col-md-6"style="margin-top: 31px"><button type="submit" class="btn btn-success">Lưu</button></div>
-    </form>
+        
+        <div class="form-group col-md-12 d-flex justify-content-end"style="margin-top: 31px"><button id="submit-button"
+                class="btn btn-success">Bàn
+                giao</button></div>
+    </div>
 
 
     <table id="handover" class="display" style="width: 100%">
@@ -39,7 +27,7 @@
                     <td>
                         <form style="display: inline"
                             action="{{ route('staff.asset.handover.destroy', ['handover' => $item]) }}" method="post">
-                            @CSRF
+                            @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">
                                 <i class="fa fa-trash"></i>

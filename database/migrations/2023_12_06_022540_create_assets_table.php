@@ -29,6 +29,7 @@ class CreateAssetsTable extends Migration
             $table->string('document_number')->nullable();
             $table->string('denominator')->nullable();
             $table->string('symbol')->nullable();
+            $table->string('unit')->nullable();
             $table->string('invoice_number')->nullable();
             $table->string('image')->nullable();
             $table->string('material_code')->nullable();

@@ -20,6 +20,6 @@ class HandoverService
         return $this->handoverRepository->delete($id);
     }
     public function saveHandover($data){
-        $this->handoverRepository->save($data);
+       return $this->handoverRepository->save($data);
     }
 }

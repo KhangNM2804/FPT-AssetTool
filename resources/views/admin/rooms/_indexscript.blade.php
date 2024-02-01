@@ -9,6 +9,7 @@
                 processing: true,
                
                 ajax: {
+                    
                     url: route,
                 },
                 columns: [{

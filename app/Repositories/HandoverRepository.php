@@ -15,12 +15,10 @@ class HandoverRepository
     protected function getUser()
     {
         if (!$this->user) {
-            $this->user = User::with(['handovers', 'handovers.assetDetail'])->findOrFail(Auth::user()->id);
+            $this->user = User::with(['handovers', 'handovers.assetDetail', 'handovers.assetDetail.asset'])->findOrFail(Auth::user()->id);
         }
         return $this->user;
     }
-
-
 
     public function create($data)
     {
@@ -31,10 +29,11 @@ class HandoverRepository
     {
         $user = $this->getUser();
         $room = Room::findOrFail($data['room_id']);
-        $user->handovers->each(function ($handover) use ($data,$room) {
-            $handover->assetDetail->update(['room_id' => $data['room_id'],'receiver_id'=>$room->id]);
+        $user->handovers->each(function ($handover) use ($data, $room) {
+            $handover->assetDetail->update(['room_id' => $data['room_id'], 'receiver_id' => $room->id]);
         });
-        return $this->deleteAll();
+        $this->deleteAll();
+        return $this->user;
     }
     public function delete($id)
     {
