@@ -112,19 +112,16 @@ class HandoverController extends Controller
     {
         $data = $request->all();
         $user =  $this->handoverService->saveHandover($data);
-        $filePath = storage_path('app/public/bien_ban_ban_giao.xlsx');
-        Excel::store(new HandoverExport($user), 'public/bien_ban_ban_giao.xlsx');
+        $filePath = storage_path('app/public/bien_ban_ban_giao_' . Auth::user()->id . '.xlsx');
+        Excel::store(new HandoverExport($user), 'public/bien_ban_ban_giao_' . Auth::user()->id . '.xlsx');
 
         // Lưu trữ đường dẫn tới tệp Excel trong session
-        session(['excel_url' => asset('storage/bien_ban_ban_giao.xlsx')]);
+        session(['excel_url' => asset('storage/bien_ban_ban_giao_' . Auth::user()->id . '.xlsx')]);
         return response()->json([
             'status' => 200,
             'message' => "Thành công",
             'data' => []
         ]);
     }
-    public function export(User $user)
-    {
-        return Excel::download(new HandoverExport($user), 'Biên bản bàn giao.xlsx');
-    }
+    
 }

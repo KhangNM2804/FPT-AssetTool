@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\FormExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
@@ -10,6 +11,7 @@ use App\Models\User;
 use App\Services\AssetService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AssetController extends Controller
 {
@@ -74,7 +76,7 @@ class AssetController extends Controller
         $asset = $this->assetService->showAssetService($id);
         $user = User::findOrFail(Auth::user()->id);
         $handovers = $user->handovers()->pluck('asset_details_id')->toArray();
-   
+
         return view('admin.asset.show', compact('asset', 'handovers'));
     }
 
@@ -128,5 +130,15 @@ class AssetController extends Controller
     }
     public function buy($id)
     {
+        
+    }
+
+    public function exportForm()
+    {
+        return Excel::download(new FormExport, 'form.xlsx');
+    }
+    public function importIndex()
+    {
+        return view('admin.asset.import');
     }
 }

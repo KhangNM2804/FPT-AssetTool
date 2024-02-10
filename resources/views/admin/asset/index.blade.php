@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('content')
     <div class="d-flex justify-content-end">
-<a class="btn btn-primary" href="{{route('staff.asset.asset.create')}}">Thêm tài sản</a>
+        <a class="btn btn-success mr-2" href="{{route('staff.asset.asset.import')}}">Nhập từ file</a>
+        <a class="btn btn-primary" href="{{ route('staff.asset.asset.create') }}">Thêm tài sản</a>
     </div>
     <table id="asset" class="display" style="width: 100%">
         <thead>
