@@ -41,10 +41,10 @@ class AssetDetailService
         $assetDetail = AssetDetail::with('asset')->findOrFail($id);
         $this->assetDetailRepository->delete($assetDetail);
     }
-    public function buyAssetDetail($id)
+    public function sellAssetDetail($id)
     {
         $assetDetail = AssetDetail::with('asset')->findOrFail($id);
-        $this->assetDetailRepository->buy($assetDetail);
+        $this->assetDetailRepository->sell($assetDetail);
         return toastr('Thanh lý tài sản thành công', 'success', 'Thành công');
     }
 }

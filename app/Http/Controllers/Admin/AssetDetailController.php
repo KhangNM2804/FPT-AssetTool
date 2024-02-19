@@ -131,10 +131,10 @@ class AssetDetailController extends Controller
             return redirect()->back();
         }
     }
-    public function buy($id)
+    public function sell($id)
     {
         try {
-            $this->assetDetailService->buyAssetDetail($id);
+            $this->assetDetailService->sellAssetDetail($id);
             return redirect()->back();
         } catch (\Throwable $th) {
             toastr('Thanh lý thất bại', 'error', 'Thất bại');

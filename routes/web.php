@@ -45,8 +45,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::post('handover/save', [HandoverController::class, 'save'])->name('handover.save');
         Route::post('asset-detail/merge', [AssetDetailController::class, 'merge'])->name('asset-detail.merge');
         Route::post('asset-detail/{detail}/split', [AssetDetailController::class, 'split'])->name('asset-detail.split');
-        Route::post('asset-detail/{detail}/buy', [AssetDetailController::class, 'buy'])->name('asset-detail.buy');
+        Route::post('asset-detail/{detail}/sell', [AssetDetailController::class, 'sell'])->name('asset-detail.sell');
         Route::get('importAsset',[AssetController::class,'importIndex'])->name('asset.import');
+        Route::post('importAsset',[AssetController::class,'import'])->name('asset.importFile');
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');

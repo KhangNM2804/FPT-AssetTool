@@ -65,9 +65,40 @@
             });
 
             // Xóa hình ảnh khi nhấn nút xóa
-            $('.remove-image').on('click', function() {
+            $('#remove_file').on('click', function() {
                 removeUpload();
             });
+            $('#import').on('click', function() {
+                const route = @json(route('staff.asset.asset.importFile'));
+                var fileInput = document.getElementById('excelFile');
+                var file = fileInput.files[0]; // Lấy ra tệp tin đã chọn
+                var formData = new FormData(); // Tạo đối tượng FormData
+                formData.append('file', file); // Đính kèm tệp tin vào FormData với key 'excel_file'
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    url: route,
+                    method: 'POST',
+                    contentType: false, // Không đặt contentType
+                    processData: false,
+                    data: formData,
+                    success: function(response) {
+                        Swal.fire({
+                            title: "Thành công!",
+                            text: "Đã nhập dữ liệu từ file thành công",
+                            icon: "success"
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            title: "Thất bại!",
+                            text: "Nhập dữ liệu thất bại",
+                            icon: "error"
+                        });
+                    }
+                });
+            })
             $('.image-upload-wrap').bind('dragover', function() {
                 $('.image-upload-wrap').addClass('image-dropping');
             });

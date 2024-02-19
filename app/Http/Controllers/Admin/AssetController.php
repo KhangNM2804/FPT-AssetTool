@@ -6,6 +6,7 @@ use App\Exports\FormExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
+use App\Imports\AssetImport;
 use App\Models\Asset;
 use App\Models\User;
 use App\Services\AssetService;
@@ -123,14 +124,14 @@ class AssetController extends Controller
         try {
             $this->assetService->deleteAsset($id);
             toastr('Xóa thành công', 'success', 'Thành công');
+            return redirect()->back();
         } catch (\Throwable $th) {
             toastr('Xóa thất bại', 'error', 'Thất bại');
             return redirect()->back();
         }
     }
-    public function buy($id)
+    public function sell($id)
     {
-        
     }
 
     public function exportForm()
@@ -140,5 +141,16 @@ class AssetController extends Controller
     public function importIndex()
     {
         return view('admin.asset.import');
+    }
+    public function import(Request $request)
+    {
+
+        Excel::import(new AssetImport, $request->file('file'));
+        return response()->json(
+            [
+                'data' => [],
+                'status' => 200,
+            ]
+        );
     }
 }

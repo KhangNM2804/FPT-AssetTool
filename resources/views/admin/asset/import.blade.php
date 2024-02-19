@@ -3,21 +3,20 @@
 @section('content')
     <div class="d-flex justify-content-end">
         <a class="btn btn-success mr-2" href="{{ route('staff.export.form') }}">Tải file mẫu</a>
-        <a class="btn btn-primary" href="{{ route('staff.asset.asset.create') }}">Thêm tài sản</a>
     </div>
 
     <div class="file-upload row">
-        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-      
+        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add File Excel</button>
         <div class="image-upload-wrap">
-          <input id="excelFile" class="file-upload-input" type='file'  accept=".xlsx, .xls" />
+          <input id="excelFile" class="file-upload-input" type='file' name="file"  accept=".xlsx, .xls" />
           <div class="drag-text">
             <h3>Drag and drop a file or select add Image</h3>
           </div>
         </div>
-        <div class="file-upload-content">
+        <div class="file-upload-content mt-3">
           <div class="image-title-wrap">
-            <button type="button"  class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+            <button type="button" id="import" class="btn btn-primary">Nhập từ file <span class="image-title">Uploaded File</span></button>
+            <button type="button" class="btn btn-danger" id="remove_file">Remove <span class="image-title">Uploaded File</span></button>
           </div>
         </div>
       </div>

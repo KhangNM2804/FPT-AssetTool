@@ -61,7 +61,7 @@ class AssetDetailRepository
             return redirect()->back();
         }
     }
-    public function buy(AssetDetail $assetDetail)
+    public function sell(AssetDetail $assetDetail)
     {
         $asset = $assetDetail->asset;
         $assetDetail->update(['status' => AssetDetail::STATUS_INACTIVE]);

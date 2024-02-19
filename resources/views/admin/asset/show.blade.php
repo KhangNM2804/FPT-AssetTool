@@ -140,7 +140,8 @@
                             </form>
 
                             <form class="d-sm-inline-block"
-                                action="{{ route('staff.asset.asset-detail.buy', ['detail' => $item]) }}" method="post">
+                                action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}" method="post">
+                                @csrf
                                 <button title="Thanh lý tài sản" class="btn btn-warning text-white"
                                     onclick="return confirm('Bạn có chắc chắn thanh lý tài sản này?')"><i
                                         class="fas fa-shopping-cart"></i></button>
