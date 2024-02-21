@@ -1,11 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Services\AssetBorrowedService;
 use Illuminate\Http\Request;
 
 class AssetBorrowedController extends Controller
 {
+    protected $assetBorrowedService;
+    public function __construct(AssetBorrowedService $assetBorrowedService)
+    {
+        $this->assetBorrowedService = $assetBorrowedService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,11 @@ class AssetBorrowedController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.borrowed-asset.index');
+    }
+    public function datatables()
+    {
+        return $this->assetBorrowedService->datatables();
     }
 
     /**
@@ -34,7 +45,8 @@ class AssetBorrowedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->assetBorrowedService->storeAssetBorrowedService($request->id);
+        return redirect()->back();
     }
 
     /**
@@ -79,6 +91,7 @@ class AssetBorrowedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->assetBorrowedService->deleteAssetBorrowedService($id);
+        return redirect()->back();
     }
 }

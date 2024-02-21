@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssetBorrowedController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AssetDetailController;
 use App\Http\Controllers\Admin\CategoryAssetController;
@@ -8,7 +9,6 @@ use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\HandoverController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UserController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,14 +40,15 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('group-assets', GroupAssetController::class);
         Route::resource('category-assets', CategoryAssetController::class);
         Route::resource('asset', AssetController::class);
+        Route::resource('borrowed-asset', AssetBorrowedController::class);
         Route::resource('asset-detail', AssetDetailController::class);
         Route::resource('handover', HandoverController::class);
         Route::post('handover/save', [HandoverController::class, 'save'])->name('handover.save');
         Route::post('asset-detail/merge', [AssetDetailController::class, 'merge'])->name('asset-detail.merge');
         Route::post('asset-detail/{detail}/split', [AssetDetailController::class, 'split'])->name('asset-detail.split');
         Route::post('asset-detail/{detail}/sell', [AssetDetailController::class, 'sell'])->name('asset-detail.sell');
-        Route::get('importAsset',[AssetController::class,'importIndex'])->name('asset.import');
-        Route::post('importAsset',[AssetController::class,'import'])->name('asset.importFile');
+        Route::get('importAsset', [AssetController::class, 'importIndex'])->name('asset.import');
+        Route::post('importAsset', [AssetController::class, 'import'])->name('asset.importFile');
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('group-assets', [GroupAssetController::class, 'datatables'])->name('group-assets');
         Route::get('category-assets', [CategoryAssetController::class, 'datatables'])->name('category-assets');
         Route::get('asset', [AssetController::class, 'datatables'])->name('asset');
+        Route::get('borrowed-asset', [AssetBorrowedController::class, 'datatables'])->name('borrowed-asset');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');

@@ -46,7 +46,7 @@
                     <label for="price">Đơn giá:</label>
                     <span class="badge badge-secondary">{{ number_format($asset->price, 0, ',', ',') }}</span>
                 </div>
-               
+
 
             </div>
             <div class="row">
@@ -115,17 +115,16 @@
                         : '<span class="badge badge-danger">Đã thanh lý</span>' !!}</td>
                     <td>
                         @if ($item->status == 1)
-                            
-                                <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
-                                    method="post">
-                                    @csrf
-                                    <div class="d-none">
-                                        <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
-                                    </div>
-                                    <button {{in_array($item->id,$handovers)?'disabled':''}} class="btn btn-primary" title="Thêm vào biên bản bàn giao"><i
-                                            class="fa fa-plus"></i></button>
-                                </form>
-                           
+                            <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
+                                method="post">
+                                @csrf
+                                <div class="d-none">
+                                    <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
+                                </div>
+                                <button {{ in_array($item->id, $handovers) ? 'disabled' : '' }} class="btn btn-primary"
+                                    title="Thêm vào biên bản bàn giao"><i class="fa fa-plus"></i></button>
+                            </form>
+
 
 
                             <form style="display: inline;" id="splitForm"
@@ -138,7 +137,16 @@
                                     onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary"><i
                                         class="fas fa-divide"></i></button>
                             </form>
-
+                            <form class="d-sm-inline-block"
+                                action="{{ route('staff.asset.borrowed-asset.store') }}" method="post">
+                                @csrf
+                                <div class="d-none">
+                                    <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                </div>
+                                <button title="Thêm vào danh sách cho mượn" class="btn btn-success text-white"
+                                    onclick="return confirm('Bạn có chắc chắn thêm vào danh sách được phép mượn ?')"><i
+                                        class="fa fa-file"></i></button>
+                            </form>
                             <form class="d-sm-inline-block"
                                 action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}" method="post">
                                 @csrf
@@ -162,7 +170,7 @@
                 </tr>
             @endforeach
         </tbody>
-        
+
     </table>
 @endsection
 @include('admin.asset._showscript')

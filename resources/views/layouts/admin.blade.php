@@ -498,6 +498,13 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
+                                                <a href="{{ route('staff.asset.borrowed-asset.index') }}"
+                                                    class="nav-link {{ request()->is('staff/asset/borrowed-asset*') ? 'active' : '' }}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Tài sản được phép mượn</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a href="{{ route('staff.asset.handover.index') }}"
                                                     class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
