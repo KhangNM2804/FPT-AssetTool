@@ -44,7 +44,7 @@ class AssetBorrowedService
     {
         $setting = Setting::where('key', 'assets_borrowed')->first();
         if ($setting->value == null) {
-            toastr('Không có id này không danh sách tài sản cho mượn1', 'error');
+            toastr('Không có id này không danh sách tài sản cho mượn', 'error');
             return;
         } else {
             $value = json_decode($setting->value, true);

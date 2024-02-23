@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AssetBorrowedController;
 use App\Http\Controllers\Admin\AssetController;
 use App\Http\Controllers\Admin\AssetDetailController;
+use App\Http\Controllers\Admin\BorrowController;
 use App\Http\Controllers\Admin\CategoryAssetController;
 use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\GroupAssetController;
@@ -35,7 +36,6 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
     });
-
     Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
         Route::resource('group-assets', GroupAssetController::class);
         Route::resource('category-assets', CategoryAssetController::class);
@@ -50,6 +50,12 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('importAsset', [AssetController::class, 'importIndex'])->name('asset.import');
         Route::post('importAsset', [AssetController::class, 'import'])->name('asset.importFile');
     });
+    Route::group(['prefix' => 'borrow', 'as' => 'borrow.'], function () {
+        Route::resource('borrows', BorrowController::class)->except(['store']);
+        Route::put('borrows-accept/{id}', [BorrowController::class, 'accept'])->name('accept');
+        Route::put('borrows-return/{id}', [BorrowController::class, 'return'])->name('return');
+        Route::put('borrows-cancel/{id}', [BorrowController::class, 'cancel'])->name('cancel');
+    });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
@@ -57,6 +63,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('category-assets', [CategoryAssetController::class, 'datatables'])->name('category-assets');
         Route::get('asset', [AssetController::class, 'datatables'])->name('asset');
         Route::get('borrowed-asset', [AssetBorrowedController::class, 'datatables'])->name('borrowed-asset');
+        Route::get('borrows', [BorrowController::class, 'datatables'])->name('borrows');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');
@@ -68,5 +75,13 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
         Route::get('handover', [HandoverController::class, 'export'])->name('handover');
         Route::get('form', [AssetController::class, 'exportForm'])->name('form');
+    });
+});
+Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+    Route::group(['prefix' => 'borrow', 'as' => 'borrow.'], function () {
+        Route::resource('borrows', BorrowController::class)->only(['store']);
+        Route::get('borrows-client', [BorrowController::class, 'indexClient'])->name('borrows-client');
+        Route::get('borrows-client-index', [BorrowController::class, 'borrowClient'])->name('borrows-client-index');
+        Route::delete('borrows-client-cancel/{id}', [BorrowController::class, 'cancelClient'])->name('borrows-client-cancel');
     });
 });

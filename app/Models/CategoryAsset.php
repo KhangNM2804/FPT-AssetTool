@@ -22,6 +22,8 @@ class CategoryAsset extends Model
         'created_at',
         'updated_at',
     ];
-
-   
+    public function asset()
+    {
+        return $this->hasMany(Asset::class, 'category_asset_id');
+    }
 }

@@ -37,6 +37,7 @@ class Asset extends Model
         'created_at',
         'updated_at',
     ];
+ 
     public static function boot()
     {
         parent::boot();
@@ -70,4 +71,5 @@ class Asset extends Model
     {
         return $this->hasMany(AssetDetail::class, 'asset_id');
     }
+    
 }
