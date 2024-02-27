@@ -139,4 +139,8 @@ class BorrowController extends Controller
         $this->borrowService->cancelBorrowService($id);
         return redirect()->back();
     }
+    public function countPending()
+    {
+        return $this->borrowService->countBorrowPenddingService();
+    }
 }

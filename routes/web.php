@@ -55,6 +55,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::put('borrows-accept/{id}', [BorrowController::class, 'accept'])->name('accept');
         Route::put('borrows-return/{id}', [BorrowController::class, 'return'])->name('return');
         Route::put('borrows-cancel/{id}', [BorrowController::class, 'cancel'])->name('cancel');
+        Route::get('borrows-count-pending', [BorrowController::class, 'countPending'])->name('countPending');
     });
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');

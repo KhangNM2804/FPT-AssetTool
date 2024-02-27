@@ -432,11 +432,11 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('staff.borrow.borrows.index')}}" class="nav-link">
+                                        <a href="{{ route('staff.borrow.borrows.index') }}" class="nav-link">
                                             <i class="nav-icon fas fa-th"></i>
                                             <p>
                                                 Đăng ký mượn tài sản
-                                                <span class="right badge badge-danger">1</span>
+                                                <span id="countPendding" class="right badge badge-danger"></span>
                                             </p>
                                         </a>
                                     </li>
@@ -723,10 +723,9 @@
 
     <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.3/xlsx.full.min.js"></script>
-
-
+    
     @yield('js')
-
+    
 </body>
 
 </html>

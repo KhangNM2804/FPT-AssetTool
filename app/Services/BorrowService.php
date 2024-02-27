@@ -31,4 +31,7 @@ class BorrowService
     {
         return $this->borrowRepository->updateStatus($id, $status);
     }
+    public function countBorrowPenddingService(){
+        return $this->borrowRepository->countPending();
+    }
 }

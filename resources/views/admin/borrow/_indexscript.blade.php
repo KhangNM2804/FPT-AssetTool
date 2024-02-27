@@ -51,24 +51,42 @@
                     {
 
                         render: function(data, type, row) {
-                            var confirm = row.confirm_url;
-                            var
-                            return = row.return_url;
-                            var del = row.delete_url;
-                            var confirmButton = '<a  href="' + confirm +
-                                '" class="btn btn-primary">Duyệt</a>';
-                            var returnButton = '<a  href="' +
-                                return +
-                                    '" class="btn btn-success">Hoàn</a>';
-                            var deleteButton = '<form action="' + del +
-                                '" method="post" style="display: inline;">' +
-                                '@csrf' +
-                                '@method('DELETE')' +
-                                '<button title="Hủy phiếu" type="submit" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn ngừng hoạt động không?\')">' +
-                                'Hủy</i>' +
-                                '</button>' +
-                                '</form>';
-                            // Combine both buttons in the same row
+                            var confirm = row.accept_url;
+                            var return_route = row.return_url;
+                            var del = row.cancel_url;
+                            var confirmButton = '';
+                            var returnButton = '';
+                            var deleteButton = '';
+                            if (row.status == 1) {
+                                confirmButton = '<form action="' + confirm +
+                                    '" method="post" style="display: inline;">' +
+                                    '@csrf' +
+                                    '@method('PUT')' +
+                                    '<button  type="submit" class="btn btn-primary" onclick="return confirm(\'Bạn có chắc chắn muốn duyệt phiếu không?\')">' +
+                                    'Duyệt</i>' +
+                                    '</button>' +
+                                    '</form>';
+                                deleteButton = '<form action="' + del +
+                                    '" method="post" style="display: inline;">' +
+                                    '@csrf' +
+                                    '@method('PUT')' +
+                                    '<button title="Hủy phiếu" type="submit" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn hủy không?\')">' +
+                                    'Hủy</i>' +
+                                    '</button>' +
+                                    '</form>';
+                            }
+
+                            if (row.status == 2) {
+                                returnButton = '<form action="' + return_route +
+                                    '" method="post" style="display: inline;">' +
+                                    '@csrf' +
+                                    '@method('PUT')' +
+                                    '<button type="submit" class="btn btn-success" onclick="return confirm(\'Bạn có chắc chắn muốn đánh dấu đã trả không?\')">' +
+                                    'Hoàn</i>' +
+                                    '</button>' +
+                                    '</form>';
+                            }
+
                             var buttonsRow = confirmButton + ' ' + returnButton + ' ' +
                                 deleteButton;
 

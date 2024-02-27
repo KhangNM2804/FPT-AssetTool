@@ -20,8 +20,14 @@ class BorrowRepository
     {
         $borrows =  $this->borrow->with(['user', 'details', 'details.category'])->get();
         return DataTables::of($borrows)
-            ->addColumn('delete_url', function ($borrow) {
-                return route('staff.borrow.borrows.destroy', ['borrow' => $borrow]);
+            ->addColumn('accept_url', function ($borrow) {
+                return route('staff.borrow.accept', ['id' => $borrow->id]);
+            })
+            ->addColumn('cancel_url', function ($borrow) {
+                return route('staff.borrow.cancel', ['id' => $borrow->id]);
+            })
+            ->addColumn('return_url', function ($borrow) {
+                return route('staff.borrow.return', ['id' => $borrow->id]);
             })
             ->make(true);
     }
@@ -137,12 +143,21 @@ class BorrowRepository
         $borrow = $this->borrow->findOrFail($id);
         if ($status == 2 && $borrow->status == 1) {
             $borrow->status = $status;
+            $borrow->save();
             return toastr('Duyệt phiếu đăng ký mượn thành công', 'success', 'Thành công');
         } elseif ($status == 4 && $borrow->status == 1) {
-            return toastr('Duyệt phiếu đăng ký mượn thành công', 'success', 'Thành công');
+            $borrow->status = $status;
+            $borrow->save();
+            return toastr('Hủy phiếu đăng ký mượn thành công', 'success', 'Thành công');
         } elseif ($status == 3 && $borrow->status == 2) {
+            $borrow->status = $status;
+            $borrow->save();
             return toastr('Đã đánh dấu trả tài sản thành công', 'success', 'Thành công');
         }
         return toastr('Cập nhật trạng thái phiếu đăng ký thất bại', 'error', 'Thất bại');
+    }
+    public function countPending()
+    {
+        return $this->borrow->where('status', Borrow::STATUS_PENDING)->count();
     }
 }
