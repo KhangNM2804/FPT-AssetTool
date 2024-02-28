@@ -18,7 +18,7 @@ class CategoryRoomRepository
         if (isset($data['term'])) {
             return $this->category_room->where('name', 'like', '%' . $data['term'] . '%')->where('status', CategoryRoom::STATUS_ACTIVE)->get(['id', 'name']);
         }
-        return $this->category_room->where('status', CategoryRoom::STATUS_ACTIVE)->limit(3)->get(['id', 'name']);
+        return $this->category_room->where('status', CategoryRoom::STATUS_ACTIVE)->limit(20)->get(['id', 'name']);
     }
     public function getAll()
     {

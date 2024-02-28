@@ -76,7 +76,9 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        $room = $this->room_service->showRoomService($id);
+     
+        return view('admin.rooms.show', compact('room'));
     }
 
     /**

@@ -2,6 +2,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-9">
+            <div class=" row">
+                <div class="form-group col-md-12">
+                    <label for="name">Tên tài sản:</label>
+                    <span class="badge badge-secondary">{{ $asset->name }}</span>
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="select-category">Danh mục tài sản:</label>
@@ -16,9 +22,9 @@
                     <label for="invoice-number">Số hóa đơn:</label>
                     <span class="badge badge-secondary">{{ $asset->invoice }}</span>
                 </div>
-
             </div>
             <div class="row">
+
                 <div class="form-group col-md-4">
                     <label for="document_number">Số chứng từ:</label>
                     <span class="badge badge-secondary">{{ $asset->document_number }}</span>
@@ -28,10 +34,9 @@
                     <span class="badge badge-secondary">{{ $asset->code }}</span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name">Tên tài sản:</label>
-                    <span class="badge badge-secondary">{{ $asset->name }}</span>
+                    <label for="date_of_use">Ngày bắt đầu sử dụng:</label>
+                    <span class="badge badge-secondary">{{ $asset->date_of_use }}</span>
                 </div>
-
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -54,10 +59,7 @@
                     <label for="date_of_use">Tổng tiền:</label>
                     <span class="badge badge-secondary">{{ number_format($asset->total_price, 0, ',', ',') }}</span>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="date_of_use">Ngày bắt đầu sử dụng:</label>
-                    <span class="badge badge-secondary">{{ $asset->date_of_use }}</span>
-                </div>
+
                 <div class="form-group col-md-4 ">
                     <label for="material_code">Material-Code:</label>
                     <span class="badge badge-secondary">{{ $asset->material_code }}</span>
@@ -113,7 +115,7 @@
                     <td>{!! $item->status == 1
                         ? '<span class="badge badge-success">Đang sử dụng</span>'
                         : '<span class="badge badge-danger">Đã thanh lý</span>' !!}</td>
-                    <td>
+                    <td style="width: 230px">
                         @if ($item->status == 1)
                             <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
                                 method="post">
@@ -137,8 +139,8 @@
                                     onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary"><i
                                         class="fas fa-divide"></i></button>
                             </form>
-                            <form class="d-sm-inline-block"
-                                action="{{ route('staff.asset.borrowed-asset.store') }}" method="post">
+                            <form class="d-sm-inline-block" action="{{ route('staff.asset.borrowed-asset.store') }}"
+                                method="post">
                                 @csrf
                                 <div class="d-none">
                                     <input type="hidden" id="id" name="id" value="{{ $item->id }}">
@@ -148,7 +150,8 @@
                                         class="fa fa-file"></i></button>
                             </form>
                             <form class="d-sm-inline-block"
-                                action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}" method="post">
+                                action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}"
+                                method="post">
                                 @csrf
                                 <button title="Thanh lý tài sản" class="btn btn-warning text-white"
                                     onclick="return confirm('Bạn có chắc chắn thanh lý tài sản này?')"><i

@@ -6,11 +6,15 @@ use App\Http\Controllers\Admin\AssetDetailController;
 use App\Http\Controllers\Admin\BorrowController;
 use App\Http\Controllers\Admin\CategoryAssetController;
 use App\Http\Controllers\Admin\CategoryRoomController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\HandoverController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\SemesterController;
 use App\Http\Controllers\Admin\UserController;
+use App\Models\Semester;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +61,13 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::put('borrows-cancel/{id}', [BorrowController::class, 'cancel'])->name('cancel');
         Route::get('borrows-count-pending', [BorrowController::class, 'countPending'])->name('countPending');
     });
+    Route::group(['prefix' => 'semesters', 'as' => 'semester.'], function () {
+        Route::resource('semesters', SemesterController::class);
+    });
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+        Route::get('dashboard',[ DashboardController::class,'index'])->name('indexExpenseRoom');
+    });
+
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'datatables'])->name('category_rooms');
         Route::get('rooms', [RoomController::class, 'getAllRoom'])->name('rooms');
@@ -65,6 +76,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('asset', [AssetController::class, 'datatables'])->name('asset');
         Route::get('borrowed-asset', [AssetBorrowedController::class, 'datatables'])->name('borrowed-asset');
         Route::get('borrows', [BorrowController::class, 'datatables'])->name('borrows');
+        Route::get('semester', [SemesterController::class, 'datatables'])->name('semester');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');
@@ -72,6 +84,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('group-assets', [GroupAssetController::class, 'search'])->name('group-assets');
         Route::get('category-assets', [CategoryAssetController::class, 'search'])->name('category-assets');
         Route::get('rooms', [RoomController::class, 'search'])->name('rooms');
+        Route::get('semester', [SemesterController::class, 'search'])->name('semester');
     });
     Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
         Route::get('handover', [HandoverController::class, 'export'])->name('handover');

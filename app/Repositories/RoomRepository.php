@@ -43,12 +43,18 @@ class RoomRepository
             ->addColumn('delete_url', function ($room) {
                 return route('staff.locate.rooms.destroy', ['room' => $room]);
             })
+            ->addColumn('show_url', function ($room) {
+                return route('staff.locate.rooms.show', ['room' => $room]);
+            })
             ->make(true);
     }
 
     public function store($data)
     {
         return $this->room->create($data);
+    }
+    public function show($id){
+        return $this->room->with(['manager:id,name', 'category_room:id,name','assetDetails.asset'])->findOrFail($id);
     }
     public function find($id)
     {

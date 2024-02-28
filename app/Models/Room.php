@@ -27,15 +27,20 @@ class Room extends Model
         'created_at',
         'updated_at',
     ];
-    public function category_room(){
-        return $this->belongsTo(CategoryRoom::class,'category_room_id');
+    public function category_room()
+    {
+        return $this->belongsTo(CategoryRoom::class, 'category_room_id');
     }
     public function manager()
     {
-        return $this->belongsTo(User::class, 'manager_id','id');
+        return $this->belongsTo(User::class, 'manager_id', 'id');
     }
     public function createdBy()
     {
-        return $this->belongsTo(User::class,'created_by','id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function assetDetails()
+    {
+        return $this->hasMany(AssetDetail::class, 'room_id');
     }
 }

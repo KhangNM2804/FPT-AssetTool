@@ -35,7 +35,8 @@
                     },
                     {
                         data: 'quantity',
-                        name: 'quantity'
+                        name: 'quantity',
+                        width: '25px'
                     },
                     {
                         data: 'price',
@@ -66,17 +67,18 @@
                             var del = row.delete_url;
                             var show = row.show_url;
                             var buttonEdit = '<a href="' + edit +
-                                '" class="btn btn-primary"><i class="fa fa-edit"></i></a>';
+                                '" class="btn btn-primary"><i class="fa fa-edit "></i></a>';
                                 var buttonShow = '<a href="' + show +
                                 '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
                             var buttonDelete = '<form action="' + del +
-                                '" method="POST" style="display:inline;">' +
+                                '" method="POST" style="display:inline;" class="">' +
                                 '@CSRF' +
                                 '@method('DELETE')' +
-                                '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
+                                '<button class="btn btn-danger " type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
                                 '<i class="fa fa-trash"></i></button></form>';
                             return buttonEdit+' '+ buttonShow + ' ' + buttonDelete
-                        }
+                        },
+                        width: '120px'
                     }
                 ]
             })

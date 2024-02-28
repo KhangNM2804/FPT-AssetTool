@@ -403,6 +403,15 @@
                                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                                     role="menu" data-accordion="false">
                                     <li class="nav-item ">
+                                        <a href="{{ route('staff.dashboard.indexExpenseRoom') }}" class="nav-link {{ request()->is('staff/dashboard*') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                                            <p>
+                                                Dashboard
+                                                <span id="countPendding" class="right badge badge-danger"></span>
+                                            </p>
+                                        </a>
+                                    </li>
+                                    {{-- <li class="nav-item ">
                                         <a href="#" class="nav-link">
                                             <i class="nav-icon fas fa-tachometer-alt"></i>
                                             <p>
@@ -430,13 +439,21 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('staff.borrow.borrows.index') }}" class="nav-link">
+                                    </li> --}}
+                                    <li class="nav-item ">
+                                        <a href="{{ route('staff.borrow.borrows.index') }}" class="nav-link {{ request()->is('staff/borrow*') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-th"></i>
                                             <p>
                                                 Đăng ký mượn tài sản
                                                 <span id="countPendding" class="right badge badge-danger"></span>
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('staff.semester.semesters.index') }}" class="nav-link {{ request()->is('staff/semesters*') ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>
+                                                Học kỳ
                                             </p>
                                         </a>
                                     </li>
@@ -723,9 +740,9 @@
 
     <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.3/xlsx.full.min.js"></script>
-    
+
     @yield('js')
-    
+
 </body>
 
 </html>

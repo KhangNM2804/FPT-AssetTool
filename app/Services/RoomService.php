@@ -26,6 +26,9 @@ class RoomService
     {
         return $this->roomRepository->find($id);
     }
+    public function showRoomService($id){
+        return $this->roomRepository->show($id);
+    }
 
     public function updateRoomService($data, $id)
     {

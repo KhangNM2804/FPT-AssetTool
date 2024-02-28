@@ -18,19 +18,7 @@
                 <th>Hành động</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>Hình</th>
-                <th>Mã tài sản</th>
-                <th>Tên tài sản</th>
-                <th>Số hóa đơn</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-        </tfoot>
+        
     </table>
 @endsection
 @include('admin.asset._indexscript')

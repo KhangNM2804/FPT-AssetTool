@@ -7,9 +7,9 @@
                 dom: 'lifrtp',
                 searching: true,
                 processing: true,
-               
+
                 ajax: {
-                    
+
                     url: route,
                 },
                 columns: [{
@@ -46,8 +46,11 @@
                         render: function(data, type, row) {
                             var edit = row.edit_url;
                             var del = row.delete_url;
+                            var show= row.show_url;
                             var editButton = '<a href="' + edit +
                                 '" class="btn btn-info"><i class="fa fa-edit"></i></a>';
+                            var showButton = '<a href="' + show +
+                                '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
                             var deleteButton = '<form action="' + del +
                                 '" method="post" style="display: inline;">' +
                                 '@csrf' +
@@ -57,7 +60,7 @@
                                 '</button>' +
                                 '</form>';
                             // Combine both buttons in the same row
-                            var buttonsRow = editButton + ' ' + deleteButton;
+                            var buttonsRow = editButton + ' '+showButton+' ' + deleteButton;
 
                             return buttonsRow;
                         }
@@ -65,6 +68,5 @@
                 ]
             })
         })
-        
     </script>
 @endsection
