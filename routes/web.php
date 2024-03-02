@@ -33,9 +33,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+
+Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'role:admin|manager|staff']], function () {
     Route::group(['prefix' => 'locate', 'as' => 'locate.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::resource('semesters', SemesterController::class);
     });
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-        Route::get('dashboard',[ DashboardController::class,'index'])->name('indexExpenseRoom');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('indexExpenseRoom');
     });
 
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
         Route::get('form', [AssetController::class, 'exportForm'])->name('form');
     });
 });
-Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+Route::group(['prefix' => 'client', 'as' => 'client.', 'middleware' => ['auth', 'role:admin|staff|teacher|manager']], function () {
     Route::group(['prefix' => 'borrow', 'as' => 'borrow.'], function () {
         Route::resource('borrows', BorrowController::class)->only(['store']);
         Route::get('borrows-client', [BorrowController::class, 'indexClient'])->name('borrows-client');

@@ -98,7 +98,7 @@
                         location.reload();
                     },
                     error: function(error) {
-                        Swal.fire('Lỗi', 'Chưa chọn các mục cần gộp',
+                        Swal.fire('Lỗi','Lỗi gộp tài sản',
                             'error');
                     }
                 });

@@ -72,23 +72,45 @@
                                     confirmButtonColor: "#3085d6",
                                     cancelButtonColor: "#d33",
                                     confirmButtonText: "Tải xuống"
-                                }).then((result) => {
+                                }).then(async (result) => {
                                     if (result.isConfirmed) {
                                         // Lấy đường dẫn tệp Excel từ session
                                         var excelUrl =
                                             "{{ session('excel_url') }}";
-                                        window.location.href = excelUrl;
+                                        const link = document.createElement(
+                                            "a");
+                                        link.href = excelUrl;
+                                        link.download =
+                                            "bien_ban_ban_giao_2.xlsx";
+                                        // Thêm thẻ <a> vào trang và tự động kích hoạt sự kiện click để tải tệp Excel
+                                        document.body.appendChild(link);
+                                        link.click();
+                                        document.body.removeChild(link);
+
+                                        Swal.fire({
+                                            title: "Đang tải xuống",
+                                            text: "Vui lòng đợi...",
+                                            icon: "info",
+                                            showConfirmButton: false, // Ẩn nút Xác nhận
+                                            allowOutsideClick: false // Không cho phép click bên ngoài hộp thoại
+                                        });
+
+
+                                        // Sau khi tệp Excel đã được tải xuống, hiển thị thông báo thành công và tiếp tục
                                         Swal.fire({
                                             title: "Thành công!",
                                             text: "Đã tải xuống biên bản bàn giao",
                                             icon: "success"
                                         }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                window.location.reload();
-                                            }else{
-                                                window.location.reload();
+                                            if (result
+                                                .isConfirmed) {
+                                                window.location
+                                                    .reload();
+                                            } else {
+                                                window.location
+                                                    .reload();
                                             }
-                                        });;
+                                        });
 
                                     }
                                 });

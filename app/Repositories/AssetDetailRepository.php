@@ -58,6 +58,11 @@ class AssetDetailRepository
             $asset->update(['quantity' => $newQuantity, 'total_price' => $newQuantity * $asset->price]);
             $assetDetail->handover()->delete();
             $assetDetail->delete();
+            $count =  $asset->assetDetail()->where('status', AssetDetail::STATUS_ACTIVE)->count();
+            if ($count == 0) {
+                $asset->update(['status' => Asset::STATUS_INACTIVE]);
+                $asset->save();
+            }
             return redirect()->back();
         }
     }
@@ -71,6 +76,5 @@ class AssetDetailRepository
         if ($count == 0) {
             $asset->update(['status' => Asset::STATUS_INACTIVE]);
         }
-        
     }
 }

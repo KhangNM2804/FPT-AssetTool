@@ -29,10 +29,14 @@ class AssetController extends Controller
 
     public function datatables()
     {
+       
+        $this->authorize('viewAny', Asset::class);
         return $this->assetService->datatablesService();
     }
     public function index()
     {
+        
+        $this->authorize('viewAny', Asset::class);
         return view('admin.asset.index');
     }
 
@@ -43,6 +47,7 @@ class AssetController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Asset::class);
         $asset = new Asset();
         return view('admin.asset.store', compact('asset'));
     }
@@ -55,6 +60,7 @@ class AssetController extends Controller
      */
     public function store(StoreAssetRequest $request)
     {
+        $this->authorize('create',Asset::class);
         try {
             $data = $request->all();
             $this->assetService->createAssetService($data);
@@ -74,6 +80,8 @@ class AssetController extends Controller
      */
     public function show($id)
     {
+        
+        $this->authorize('view', Asset::findOrFail($id));
         $asset = $this->assetService->showAssetService($id);
         $user = User::findOrFail(Auth::user()->id);
         $handovers = $user->handovers()->pluck('asset_details_id')->toArray();
@@ -89,7 +97,10 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
+
+        $this->authorize('update', Asset::findOrFail($id));
         $asset = $this->assetService->findAssetService($id);
+
         return view('admin.asset.edit', compact('asset'));
     }
 
@@ -102,6 +113,7 @@ class AssetController extends Controller
      */
     public function update(UpdateAssetRequest $request, $id)
     {
+        $this->authorize('update', Asset::findOrFail($id));
         try {
             $data = $request->all();
             $this->assetService->updateAssetService($data, $id);
@@ -121,6 +133,7 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Asset::findOrFail($id));
         try {
             $this->assetService->deleteAsset($id);
             toastr('Xóa thành công', 'success', 'Thành công');
@@ -132,6 +145,7 @@ class AssetController extends Controller
     }
     public function sell($id)
     {
+        
     }
 
     public function exportForm()
@@ -140,11 +154,12 @@ class AssetController extends Controller
     }
     public function importIndex()
     {
+        $this->authorize('create',Asset::class);
         return view('admin.asset.import');
     }
     public function import(Request $request)
     {
-
+        $this->authorize('create',Asset::class);
         Excel::import(new AssetImport, $request->file('file'));
         return response()->json(
             [

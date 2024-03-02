@@ -27,7 +27,7 @@
                                                     <div class="d-flex flex-row align-items-center">
                                                         <div>
                                                             <img src="{{ $item->asset[0]->image ? asset('storage/uploads/' . $item->asset[0]->image) : '' }}"
-                                                                class="img-fluid rounded-3" alt="Shopping item"
+                                                                class="img-fluid rounded-3" alt="No image"
                                                                 style="width: 65px;">
                                                         </div>
                                                         <div class="ms-3">

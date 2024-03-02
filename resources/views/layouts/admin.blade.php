@@ -406,7 +406,7 @@
                                         <a href="{{ route('staff.dashboard.indexExpenseRoom') }}" class="nav-link {{ request()->is('staff/dashboard*') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-tachometer-alt"></i>
                                             <p>
-                                                Dashboard
+                                                Báo cáo
                                                 <span id="countPendding" class="right badge badge-danger"></span>
                                             </p>
                                         </a>

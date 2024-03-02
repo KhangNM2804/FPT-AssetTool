@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MergeAssetDetailRequest;
 use App\Http\Requests\StoreAssetDetailRequest;
+use App\Models\Asset;
 use App\Models\AssetDetail;
 use App\Services\AssetDetailService;
 use App\Services\AssetService;
@@ -47,6 +48,7 @@ class AssetDetailController extends Controller
      */
     public function store(StoreAssetDetailRequest $request)
     {
+        $this->authorize('update', Asset::findOrFail($request->asset_id));
         try {
             $data = $request->all();
             $this->assetService->addQuantity($data);
@@ -76,12 +78,14 @@ class AssetDetailController extends Controller
      */
     public function merge(MergeAssetDetailRequest $request)
     {
+        $this->authorize('update', Asset::findOrFail($request->asset_id));
         $data = $request->all();
         $result = $this->assetDetailService->mergeAssetDetail($data);
         return $result;
     }
     public function split(AssetDetail $detail, Request $request)
     {
+        $this->authorize('update', $detail);
         $data = $request->all();
         $this->assetDetailService->spiltAssetDetail($detail, $data);
         return redirect()->back();
@@ -122,7 +126,9 @@ class AssetDetailController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', AssetDetail::with('asset')->findOrFail($id));
         try {
+           
             $this->assetDetailService->deleteAssetDetail($id);
             toastr('Xóa thành công', 'success', 'Thành công');
             return redirect(route('staff.asset.asset.index'));
@@ -133,7 +139,9 @@ class AssetDetailController extends Controller
     }
     public function sell($id)
     {
+        $this->authorize('update', AssetDetail::with('asset')->findOrFail($id));
         try {
+           
             $this->assetDetailService->sellAssetDetail($id);
             return redirect()->back();
         } catch (\Throwable $th) {

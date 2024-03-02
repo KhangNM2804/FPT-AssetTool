@@ -4,7 +4,7 @@
         <a class="btn btn-success mr-2" href="{{route('staff.asset.asset.import')}}">Nhập từ file</a>
         <a class="btn btn-primary" href="{{ route('staff.asset.asset.create') }}">Thêm tài sản</a>
     </div>
-    <table id="asset" class="display" style="width: 100%">
+    <table id="asset" class="display table-responsive" style="width: 100%">
         <thead>
             <tr>
                 <th>Hình</th>

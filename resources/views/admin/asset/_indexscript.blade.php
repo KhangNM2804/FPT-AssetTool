@@ -23,15 +23,20 @@
                         }
                     }, {
                         data: 'code',
-                        name: 'code'
+                        name: 'code',
+                        width: '100px',
+                        render: function(data, type, row) {
+                            return data ? data : '<span class="badge badge-secondary">Không có mã</span>';
+                        }
                     },
                     {
                         data: 'name',
-                        name: 'name'
+                        name: 'name',
+                        width: '400px'
                     },
                     {
                         data: 'invoice',
-                        name: 'invoice'
+                        name: 'invoice',
                     },
                     {
                         data: 'quantity',
@@ -68,7 +73,7 @@
                             var show = row.show_url;
                             var buttonEdit = '<a href="' + edit +
                                 '" class="btn btn-primary"><i class="fa fa-edit "></i></a>';
-                                var buttonShow = '<a href="' + show +
+                            var buttonShow = '<a href="' + show +
                                 '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
                             var buttonDelete = '<form action="' + del +
                                 '" method="POST" style="display:inline;" class="">' +
@@ -76,7 +81,7 @@
                                 '@method('DELETE')' +
                                 '<button class="btn btn-danger " type="submit" onclick="return confirm(\'Bạn có chắc chắn ngừng hoạt động danh mục tài sản này?\')">' +
                                 '<i class="fa fa-trash"></i></button></form>';
-                            return buttonEdit+' '+ buttonShow + ' ' + buttonDelete
+                            return buttonEdit + ' ' + buttonShow + ' ' + buttonDelete
                         },
                         width: '120px'
                     }
