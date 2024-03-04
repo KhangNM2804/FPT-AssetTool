@@ -86,9 +86,11 @@
             </div>
         </div>
     </div>
+    @can('update', $asset->assetDetail[0])
+        <button class="btn btn-success mb-3" id="addDetail">Thêm chi tiết tài sản</button>
+        <button class="btn btn-primary mb-3" id="mergeDetail">Gộp chi tiết tài sản</button>
+    @endcan
 
-    <button class="btn btn-success mb-3" id="addDetail">Thêm chi tiết tài sản</button>
-    <button class="btn btn-primary mb-3" id="mergeDetail">Gộp chi tiết tài sản</button>
 
     <table id="asset" class="display" style="width: 100%">
         <thead>
@@ -117,55 +119,60 @@
                         : '<span class="badge badge-danger">Đã thanh lý</span>' !!}</td>
                     <td style="width: 230px">
                         @if ($item->status == 1)
-                            <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
-                                method="post">
-                                @csrf
-                                <div class="d-none">
-                                    <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
-                                </div>
-                                <button {{ in_array($item->id, $handovers) ? 'disabled' : '' }} class="btn btn-primary"
-                                    title="Thêm vào biên bản bàn giao"><i class="fa fa-plus"></i></button>
-                            </form>
+                            @can('update', $item)
+                                <form style="display: inline" action="{{ route('staff.asset.handover.store') }}"
+                                    method="post">
+                                    @csrf
+                                    <div class="d-none">
+                                        <input type="hidden" name="asset_details_id" value="{{ $item->id }}" required>
+                                    </div>
+                                    <button {{ in_array($item->id, $handovers) ? 'disabled' : '' }} class="btn btn-primary"
+                                        title="Thêm vào biên bản bàn giao"><i class="fa fa-plus"></i></button>
+                                </form>
 
 
 
-                            <form style="display: inline;" id="splitForm"
-                                action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
-                                @csrf
-                                <div class="d-none">
-                                    <input type="hidden" id="quantity" name="quantity" required>
-                                </div>
-                                <button title="Tách tài sản" id="splitButton"
-                                    onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary"><i
-                                        class="fas fa-divide"></i></button>
-                            </form>
-                            <form class="d-sm-inline-block" action="{{ route('staff.asset.borrowed-asset.store') }}"
-                                method="post">
-                                @csrf
-                                <div class="d-none">
-                                    <input type="hidden" id="id" name="id" value="{{ $item->id }}">
-                                </div>
-                                <button title="Thêm vào danh sách cho mượn" class="btn btn-success text-white"
-                                    onclick="return confirm('Bạn có chắc chắn thêm vào danh sách được phép mượn ?')"><i
-                                        class="fa fa-file"></i></button>
-                            </form>
-                            <form class="d-sm-inline-block"
-                                action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}"
-                                method="post">
-                                @csrf
-                                <button title="Thanh lý tài sản" class="btn btn-warning text-white"
-                                    onclick="return confirm('Bạn có chắc chắn thanh lý tài sản này?')"><i
-                                        class="fas fa-shopping-cart"></i></button>
-                            </form>
-                            <form style="display: inline;"
-                                action="{{ route('staff.asset.asset-detail.destroy', ['asset_detail' => $item]) }}"
-                                method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button title="Xóa tài sản" class="btn btn-danger"
-                                    onclick="return confirm('Bạn có chắc chắn ngừng hoạt động tài sản này?')"><i
-                                        class="fa fa-trash"></i></button>
-                            </form>
+                                <form style="display: inline;" id="splitForm"
+                                    action="{{ route('staff.asset.asset-detail.split', ['detail' => $item]) }}" method="post">
+                                    @csrf
+                                    <div class="d-none">
+                                        <input type="hidden" id="quantity" name="quantity" required>
+                                    </div>
+                                    <button title="Tách tài sản" id="splitButton"
+                                        onclick="handleSplitFormSubmit(this.form,event)" class="btn btn-secondary"><i
+                                            class="fas fa-divide"></i></button>
+                                </form>
+                                <form class="d-sm-inline-block" action="{{ route('staff.asset.borrowed-asset.store') }}"
+                                    method="post">
+                                    @csrf
+                                    <div class="d-none">
+                                        <input type="hidden" id="id" name="id" value="{{ $item->id }}">
+                                    </div>
+                                    <button title="Thêm vào danh sách cho mượn" class="btn btn-success text-white"
+                                        onclick="return confirm('Bạn có chắc chắn thêm vào danh sách được phép mượn ?')"><i
+                                            class="fa fa-file"></i></button>
+                                </form>
+                                <form class="d-sm-inline-block"
+                                    action="{{ route('staff.asset.asset-detail.sell', ['detail' => $item]) }}"
+                                    method="post">
+                                    @csrf
+                                    <button title="Thanh lý tài sản" class="btn btn-warning text-white"
+                                        onclick="return confirm('Bạn có chắc chắn thanh lý tài sản này?')"><i
+                                            class="fas fa-shopping-cart"></i></button>
+                                </form>
+                                <form style="display: inline;"
+                                    action="{{ route('staff.asset.asset-detail.destroy', ['asset_detail' => $item]) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button title="Xóa tài sản" class="btn btn-danger"
+                                        onclick="return confirm('Bạn có chắc chắn ngừng hoạt động tài sản này?')"><i
+                                            class="fa fa-trash"></i></button>
+                                </form>
+                            @endcan
+                            @cannot('update', $item)
+                                <span class="badge badge-danger">Không được quyền</span>
+                            @endcannot
                         @else
                             <span class="badge badge-danger">Không được quyền</span>
                         @endif

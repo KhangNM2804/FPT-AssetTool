@@ -23,16 +23,19 @@ class CategoryRoomController extends Controller
     }
     public function search(Request $request)
     {
+        $this->authorize('viewAny', CategoryRoom::class);
         $data = $request->all();
         return $this->category_room_service->searchCategoryRoom($data);
     }
     public function index()
     {
+        $this->authorize('viewAny', CategoryRoom::class);
         return view('admin.category_rooms.index');
     }
 
     public function datatables()
     {
+        $this->authorize('viewAny', CategoryRoom::class);
         return $this->category_room_service->getAllRoomCategoryService();
     }
 
@@ -43,6 +46,7 @@ class CategoryRoomController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', CategoryRoom::class);
         $category_rooms = new CategoryRoom();
         $category_rooms->status = 1;
         return view('admin.category_rooms.store', compact('category_rooms'));
@@ -56,6 +60,7 @@ class CategoryRoomController extends Controller
      */
     public function store(StoreCategoryRoomRequest $request)
     {
+        $this->authorize('create', CategoryRoom::class);
         $data = $request->all();
         try {
             $this->category_room_service->createCategoryRoom($data);
@@ -86,6 +91,7 @@ class CategoryRoomController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('view', CategoryRoom::findOrFail($id));
         $category_rooms = $this->category_room_service->findCategoryRoom($id);
         return view('admin.category_rooms.edit', compact('category_rooms'));
     }
@@ -99,6 +105,7 @@ class CategoryRoomController extends Controller
      */
     public function update(StoreCategoryRoomRequest $request, $id)
     {
+        $this->authorize('update', CategoryRoom::findOrFail($id));
         try {
             $data = $request->all();
             $this->category_room_service->updateCategoryRoom($data, $id);
@@ -118,6 +125,7 @@ class CategoryRoomController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', CategoryRoom::findOrFail($id));
         try {
             $this->category_room_service->deleteCategoryCategoryRoom($id);
             toastr('Danh mục phòng đã ngừng hoạt động', 'success', 'Thành công');

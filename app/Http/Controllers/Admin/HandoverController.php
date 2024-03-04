@@ -26,9 +26,8 @@ class HandoverController extends Controller
     }
     public function index()
     {
+        $this->authorize('viewAny',Handover::class);
         $handovers = Handover::with(['assetDetail.asset', 'assetDetail.room'])->where('user_id', Auth::user()->id)->get();
-
-
         return view('admin.handover.index', compact('handovers'));
     }
 
@@ -50,6 +49,7 @@ class HandoverController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',Handover::class);
         try {
             $data = $request->all();
             $this->handoverService->createHandover($data);
@@ -103,7 +103,7 @@ class HandoverController extends Controller
      */
     public function destroy($id)
     {
-
+        $this->authorize('delete',Handover::findOrFail($id));
         $this->handoverService->deleteHandover($id);
         toastr('Xóa khỏi biên bản bàn giao thành công', 'success', 'Thành công');
         return redirect()->back();

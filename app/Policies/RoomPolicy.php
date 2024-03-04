@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\AssetDetail;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AssetDetailPolicy
+class RoomPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class AssetDetailPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.index');
+        return $user->getPermissionsViaRoles()->contains('name', 'room.index');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Room  $room
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, AssetDetail $assetDetail)
+    public function view(User $user, Room $room)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.show');
+        return $user->getPermissionsViaRoles()->contains('name', 'room.show');
     }
 
     /**
@@ -41,41 +41,41 @@ class AssetDetailPolicy
      */
     public function create(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.store');
+        return $user->getPermissionsViaRoles()->contains('name', 'room.store');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Room  $room
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, AssetDetail $assetDetail)
+    public function update(User $user, Room $room)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.update') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'room.update');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Room  $room
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, AssetDetail $assetDetail)
+    public function delete(User $user, Room $room)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.delete') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'room.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Room  $room
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, AssetDetail $assetDetail)
+    public function restore(User $user, Room $room)
     {
         //
     }
@@ -84,10 +84,10 @@ class AssetDetailPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Room  $room
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, AssetDetail $assetDetail)
+    public function forceDelete(User $user, Room $room)
     {
         //
     }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\AssetDetail;
+use App\Models\Borrow;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AssetDetailPolicy
+class BorrowPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class AssetDetailPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.index');
+        return $user->getPermissionsViaRoles()->contains('name', 'borrows.index');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Borrow  $borrow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, AssetDetail $assetDetail)
+    public function view(User $user, Borrow $borrow)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.show');
+        return $user->getPermissionsViaRoles()->contains('name', 'borrows.show');
     }
 
     /**
@@ -41,41 +41,46 @@ class AssetDetailPolicy
      */
     public function create(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.store');
+        $user->getPermissionsViaRoles()->contains('name', 'borrows.store');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Borrow  $borrow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, AssetDetail $assetDetail)
+    public function update(User $user, Borrow $borrow)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.update') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'borrows.update');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Borrow  $borrow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, AssetDetail $assetDetail)
+    public function delete(User $user, Borrow $borrow)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.delete') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'borrows.delete');
+    }
+
+    public function deleteClient(User $user, Borrow $borrow)
+    {
+        return $user->id == $borrow->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Borrow  $borrow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, AssetDetail $assetDetail)
+    public function restore(User $user, Borrow $borrow)
     {
         //
     }
@@ -84,10 +89,10 @@ class AssetDetailPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\Borrow  $borrow
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, AssetDetail $assetDetail)
+    public function forceDelete(User $user, Borrow $borrow)
     {
         //
     }

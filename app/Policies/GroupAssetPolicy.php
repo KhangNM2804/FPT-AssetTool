@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\AssetDetail;
+use App\Models\GroupAsset;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AssetDetailPolicy
+class GroupAssetPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class AssetDetailPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.index');
+        return $user->getPermissionsViaRoles()->contains('name', 'groupasset.index');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\GroupAsset  $groupAsset
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, AssetDetail $assetDetail)
+    public function view(User $user, GroupAsset $groupAsset)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.show');
+        return $user->getPermissionsViaRoles()->contains('name', 'groupasset.show');
     }
 
     /**
@@ -41,41 +41,41 @@ class AssetDetailPolicy
      */
     public function create(User $user)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.store');
+        return $user->getPermissionsViaRoles()->contains('name', 'groupasset.store');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\GroupAsset  $groupAsset
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, AssetDetail $assetDetail)
+    public function update(User $user, GroupAsset $groupAsset)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.update') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'groupasset.update');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\GroupAsset  $groupAsset
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, AssetDetail $assetDetail)
+    public function delete(User $user, GroupAsset $groupAsset)
     {
-        return $user->getPermissionsViaRoles()->contains('name', 'assetdetails.delete') || $assetDetail->asset->user_id == $user->id;
+        return $user->getPermissionsViaRoles()->contains('name', 'groupasset.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\GroupAsset  $groupAsset
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, AssetDetail $assetDetail)
+    public function restore(User $user, GroupAsset $groupAsset)
     {
         //
     }
@@ -84,10 +84,10 @@ class AssetDetailPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\AssetDetail  $assetDetail
+     * @param  \App\Models\GroupAsset  $groupAsset
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, AssetDetail $assetDetail)
+    public function forceDelete(User $user, GroupAsset $groupAsset)
     {
         //
     }

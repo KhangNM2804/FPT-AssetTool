@@ -2,7 +2,9 @@
 @section('content')
     <div class="d-flex justify-content-end">
         <div class="form-group">
+            @can('create',App\Models\Semester::class)
             <a href="{{route('staff.semester.semesters.create')}}" class="btn btn-primary">Thêm kỳ</a>
+            @endcan
         </div>
     </div>
     <table id="semester" class="display" style="width: 100%">

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\HandoverController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SemesterController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use App\Models\Semester;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -30,7 +31,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/home',[HomeController::class, 'index']);
 Auth::routes();
 
 

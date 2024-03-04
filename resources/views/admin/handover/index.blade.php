@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
     <div class="row">
-
-        
-        <div class="form-group col-md-12 d-flex justify-content-end"style="margin-top: 31px"><button id="submit-button"
-                class="btn btn-success">Bàn
-                giao</button></div>
+        @can('create', App\Models\Handover::class)
+            <div class="form-group col-md-12 d-flex justify-content-end"style="margin-top: 31px"><button id="submit-button"
+                    class="btn btn-success">Bàn
+                    giao</button></div>
+        @endcan
     </div>
 
 

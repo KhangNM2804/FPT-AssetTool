@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 <div class="d-flex justify-content-end">
+    @can('create',App\Models\CategoryAsset::class)
     <a class="btn btn-primary" href="{{route('staff.asset.category-assets.create')}}">Thêm danh mục</a>
+    @endcan
 </div>
     <table id="category_asset" class="display" style="width: 100%">
         <thead>

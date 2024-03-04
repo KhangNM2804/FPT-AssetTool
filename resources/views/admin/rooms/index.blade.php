@@ -2,7 +2,9 @@
 @section('content')
     <div class="d-flex justify-content-end">
         <div class="form-group">
+            @can('create',App\Models\Room::class)
             <a class="btn btn-primary" href="{{ route('staff.locate.rooms.create') }}">Thêm phòng</a>
+            @endcan
         </div>
     </div>
     <table id="rooms" class="display" style="width:100%">

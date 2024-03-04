@@ -42,25 +42,40 @@
                         }
                     },
                     {
-
                         render: function(data, type, row) {
+
                             var edit = row.edit_url;
                             var del = row.delete_url;
-                            var show= row.show_url;
-                            var editButton = '<a href="' + edit +
-                                '" class="btn btn-info"><i class="fa fa-edit"></i></a>';
-                            var showButton = '<a href="' + show +
-                                '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
-                            var deleteButton = '<form action="' + del +
-                                '" method="post" style="display: inline;">' +
-                                '@csrf' +
-                                '@method('DELETE')' +
-                                '<button type="submit" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn ngừng hoạt động không?\')">' +
-                                '<i class="fa fa-trash"></i>' +
-                                '</button>' +
-                                '</form>';
+                            var show = row.show_url;
+                            var editButton = '';
+                            var showButton = '';
+                            var deleteButton = '';
+
+                            if (edit != null) {
+                                editButton = '<a href="' + edit +
+                                    '" class="btn btn-info"><i class="fa fa-edit"></i></a>';
+                            }
+                            if (show != null) {
+                                showButton = '<a href="' + show +
+                                    '" class="btn btn-info"><i class="fa fa-eye"></i></a>';
+                            }
+                            if (del != null) {
+                                deleteButton = '<form action="' + del +
+                                    '" method="post" style="display: inline;">' +
+                                    '@csrf' +
+                                    '@method('DELETE')' +
+                                    '<button type="submit" class="btn btn-danger" onclick="return confirm(\'Bạn có chắc chắn muốn ngừng hoạt động không?\')">' +
+                                    '<i class="fa fa-trash"></i>' +
+                                    '</button>' +
+                                    '</form>';
+                            }
+
+
+
+
+
                             // Combine both buttons in the same row
-                            var buttonsRow = editButton + ' '+showButton+' ' + deleteButton;
+                            var buttonsRow = editButton + ' ' + showButton + ' ' + deleteButton;
 
                             return buttonsRow;
                         }

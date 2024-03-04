@@ -23,16 +23,19 @@ class GroupAssetController extends Controller
 
     public function search(Request $request)
     {
+        $this->authorize('viewAny', GroupAsset::class);
         $data = $request->all();
         return $this->groupAssetService->search($data);
     }
 
     public function index()
     {
+        $this->authorize('viewAny', GroupAsset::class);
         return view('admin.group-asset.index');
     }
     public function datatables()
     {
+        $this->authorize('viewAny', GroupAsset::class);
         return $this->groupAssetService->datatables();
     }
     /**
@@ -42,6 +45,7 @@ class GroupAssetController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', GroupAsset::class);
         $group = new GroupAsset();
         $group->status = 1;
         return view('admin.group-asset.store', compact('group'));
@@ -55,6 +59,7 @@ class GroupAssetController extends Controller
      */
     public function store(StoreGroupAssetsRequest $request)
     {
+        $this->authorize('create', GroupAsset::class);
         $data = $request->all();
         try {
             $this->groupAssetService->storeGroupAsset($data);
@@ -85,6 +90,7 @@ class GroupAssetController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('view', GroupAsset::findOrFail($id));
         $group = $this->groupAssetService->findGroupAsset($id);
         return view('admin.group-asset.edit', compact('group'));
     }
@@ -98,6 +104,7 @@ class GroupAssetController extends Controller
      */
     public function update(StoreGroupAssetsRequest $request, $id)
     {
+        $this->authorize('update', GroupAsset::findOrFail($id));
         $data = $request->all();
         try {
             $this->groupAssetService->updateGroupAsset($data, $id);
@@ -117,6 +124,7 @@ class GroupAssetController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', GroupAsset::findOrFail($id));
         try {
             $this->groupAssetService->deleteGroupAsset($id);
             toastr('Xóa nhóm tài sản thành công', 'success', 'Thành công');

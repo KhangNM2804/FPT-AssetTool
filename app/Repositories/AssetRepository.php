@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Asset;
-
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
@@ -11,22 +11,36 @@ use Yajra\DataTables\DataTables;
 class AssetRepository
 {
     protected $asset;
-    public function __construct(Asset $asset)
+    protected $gate;
+    public function __construct(Asset $asset, GateContract $gate)
     {
         $this->asset = $asset;
+        $this->gate = $gate;
     }
     public function datatables()
     {
         $asset = $this->asset->query();
         return DataTables::of($asset)
             ->addColumn('edit_url', function ($asset) {
-                return route('staff.asset.asset.edit', ['asset' => $asset]);
+                if ($this->gate->allows('update', $asset)) {
+                    return route('staff.asset.asset.edit', ['asset' => $asset]);
+                } else {
+                    return null;
+                }
             })
             ->addColumn('show_url', function ($asset) {
-                return route('staff.asset.asset.show', ['asset' => $asset]);
+                if ($this->gate->allows('view', $asset)) {
+                    return route('staff.asset.asset.show', ['asset' => $asset]);
+                } else {
+                    return null;
+                }
             })
             ->addColumn('delete_url', function ($asset) {
-                return route('staff.asset.asset.destroy', ['asset' => $asset]);
+                if ($this->gate->allows('delete', $asset)) {
+                    return route('staff.asset.asset.destroy', ['asset' => $asset]);
+                } else {
+                    return null;
+                }
             })
             ->addColumn('invoice', function ($asset) {
                 return $asset->invoice;
@@ -57,7 +71,13 @@ class AssetRepository
     public function delete($id)
     {
         $asset = $this->asset->findOrFail($id);
-        $asset->delete();
+        if ($asset->status == Asset::STATUS_ACTIVE) {
+            $asset->delete();
+            toastr('Xóa thành công', 'success', 'Thành công');
+        } else {
+            toastr('Xóa thất bại', 'error', 'Thất bại');
+        }
+
         return $asset;
     }
     public function addQuantity(Asset $asset)

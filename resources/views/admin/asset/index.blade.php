@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="d-flex justify-content-end">
-        <a class="btn btn-success mr-2" href="{{route('staff.asset.asset.import')}}">Nhập từ file</a>
-        <a class="btn btn-primary" href="{{ route('staff.asset.asset.create') }}">Thêm tài sản</a>
+        @can('create',App\Models\Asset::class)
+            <a class="btn btn-success mr-2" href="{{ route('staff.asset.asset.import') }}">Nhập từ file</a>
+            <a class="btn btn-primary" href="{{ route('staff.asset.asset.create') }}">Thêm tài sản</a>
+        @endcan
     </div>
     <table id="asset" class="display table-responsive" style="width: 100%">
         <thead>
@@ -18,7 +20,7 @@
                 <th>Hành động</th>
             </tr>
         </thead>
-        
+
     </table>
 @endsection
 @include('admin.asset._indexscript')

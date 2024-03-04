@@ -2,7 +2,9 @@
 @section('content')
     <div class="d-flex justify-content-end">
         <div class="form-group">
-            <a href="{{route('staff.asset.group-assets.create')}}" class="btn btn-primary">Thêm nhóm</a>
+            @can('create', App\Models\GroupAsset::class)
+                <a href="{{ route('staff.asset.group-assets.create') }}" class="btn btn-primary">Thêm nhóm</a>
+            @endcan
         </div>
     </div>
     <table id="group-asset" class="display" style="width: 100%">

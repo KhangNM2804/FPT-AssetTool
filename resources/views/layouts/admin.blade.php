@@ -184,12 +184,13 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
-            <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60"
+            <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="FPTLogo" height="60"
                 width="60" style="display: none;">
         </div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-dark">
+
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -203,120 +204,8 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i
-                                                class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar"
-                                    class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
+                    <a class="nav-link" title="Trang đăng ký mượn tài sản"  href="{{route('client.borrow.borrows-client')}}" >
+                        <i class="fas fa-user"></i>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -344,10 +233,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <a href="{{route('staff.dashboard.indexExpenseRoom')}}" class="brand-link">
+                <img src="{{asset('storage/uploads/FPT.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">FPT Asset</span>
             </a>
 
             <!-- Sidebar -->
@@ -403,7 +292,8 @@
                                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                                     role="menu" data-accordion="false">
                                     <li class="nav-item ">
-                                        <a href="{{ route('staff.dashboard.indexExpenseRoom') }}" class="nav-link {{ request()->is('staff/dashboard*') ? 'active' : '' }}">
+                                        <a href="{{ route('staff.dashboard.indexExpenseRoom') }}"
+                                            class="nav-link {{ request()->is('staff/dashboard*') ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-tachometer-alt"></i>
                                             <p>
                                                 Báo cáo
@@ -440,49 +330,62 @@
                                             </li>
                                         </ul>
                                     </li> --}}
-                                    <li class="nav-item ">
-                                        <a href="{{ route('staff.borrow.borrows.index') }}" class="nav-link {{ request()->is('staff/borrow*') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-th"></i>
-                                            <p>
-                                                Đăng ký mượn tài sản
-                                                <span id="countPendding" class="right badge badge-danger"></span>
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('staff.semester.semesters.index') }}" class="nav-link {{ request()->is('staff/semesters*') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-th"></i>
-                                            <p>
-                                                Học kỳ
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item menu-{{ request()->is('staff/locate*') ? 'open' : '' }}">
-                                        <a href="#"
-                                            class="nav-link {{ request()->is('staff/locate*') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-copy"></i>
-                                            <p>
-                                                Vị trí
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.locate.categoryrooms.index') }}"
-                                                    class="nav-link {{ request()->is('staff/locate/categoryrooms*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Danh mục phòng</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.locate.rooms.index') }}"
-                                                    class="nav-link {{ request()->is('staff/locate/rooms*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Phòng</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    @can('viewAny', App\Models\Borrow::class)
+                                        <li class="nav-item ">
+                                            <a href="{{ route('staff.borrow.borrows.index') }}"
+                                                class="nav-link {{ request()->is('staff/borrow*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-th"></i>
+                                                <p>
+                                                    Đăng ký mượn tài sản
+                                                    <span id="countPendding" class="right badge badge-danger"></span>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('viewAny', App\Models\Semester::class)
+                                        <li class="nav-item">
+                                            <a href="{{ route('staff.semester.semesters.index') }}"
+                                                class="nav-link {{ request()->is('staff/semesters*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-th"></i>
+                                                <p>
+                                                    Học kỳ
+                                                </p>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @if (Gate::check('viewAny', App\Models\CategoryAsset::class) || Gate::check('viewAny', App\Models\Room::class))
+                                        <li class="nav-item menu-{{ request()->is('staff/locate*') ? 'open' : '' }}">
+                                            <a href="#"
+                                                class="nav-link {{ request()->is('staff/locate*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-copy"></i>
+                                                <p>
+                                                    Vị trí
+                                                    <i class="fas fa-angle-left right"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                @can('viewAny', App\Models\CategoryAsset::class)
+                                                    <li class="nav-item">
+                                                        <a href="{{ route('staff.locate.categoryrooms.index') }}"
+                                                            class="nav-link {{ request()->is('staff/locate/categoryrooms*') ? 'active' : '' }}">
+                                                            <i class="far fa-circle nav-icon"></i>
+                                                            <p>Danh mục phòng</p>
+                                                        </a>
+                                                    </li>
+                                                @endcan
+                                                @can('viewAny', App\Models\Room::class)
+                                                    <li class="nav-item">
+                                                        <a href="{{ route('staff.locate.rooms.index') }}"
+                                                            class="nav-link {{ request()->is('staff/locate/rooms*') ? 'active' : '' }}">
+                                                            <i class="far fa-circle nav-icon"></i>
+                                                            <p>Phòng</p>
+                                                        </a>
+                                                    </li>
+                                                @endcan
+                                            </ul>
+                                        </li>
+                                    @endif
+
                                     <li class="nav-item menu-{{ request()->is('staff/asset/*') ? 'open' : 'close' }}">
                                         <a href="#"
                                             class="nav-link {{ request()->is('staff/asset/*') ? 'active' : '' }}">
@@ -493,41 +396,52 @@
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                            <li class="nav-item ">
-                                                <a href="{{ route('staff.asset.group-assets.index') }}"
-                                                    class="nav-link {{ request()->is('staff/asset/group-assets*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Nhóm tài sản</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.asset.category-assets.index') }}"
-                                                    class="nav-link {{ request()->is('staff/asset/category-assets*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Danh mục tài sản</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.asset.asset.index') }}"
-                                                    class="nav-link {{ request()->is('staff/asset/asset*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Tài sản</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.asset.borrowed-asset.index') }}"
-                                                    class="nav-link {{ request()->is('staff/asset/borrowed-asset*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Tài sản được phép mượn</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('staff.asset.handover.index') }}"
-                                                    class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Bàn giao</p>
-                                                </a>
-                                            </li>
+                                            @can('viewAny', App\Models\GroupAsset::class)
+                                                <li class="nav-item ">
+                                                    <a href="{{ route('staff.asset.group-assets.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/group-assets*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Nhóm tài sản</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('viewAny', App\Models\CategoryAsset::class)
+                                                <li class="nav-item">
+                                                    <a href="{{ route('staff.asset.category-assets.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/category-assets*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Danh mục tài sản</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('viewAny', App\Models\Asset::class)
+                                                <li class="nav-item">
+                                                    <a href="{{ route('staff.asset.asset.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/asset*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Tài sản</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('viewAny', App\Models\Borrow::class)
+                                                <li class="nav-item">
+                                                    <a href="{{ route('staff.asset.borrowed-asset.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/borrowed-asset*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Tài sản được phép mượn</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('viewAny', App\Models\Handover::class)
+                                                <li class="nav-item">
+                                                    <a href="{{ route('staff.asset.handover.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Bàn giao</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+
                                         </ul>
                                     </li>
                                     <li class="nav-item">
@@ -589,70 +503,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fas fa-edit"></i>
-                                            <p>
-                                                Forms
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/forms/general.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>General Elements</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/advanced.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Advanced Elements</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/editors.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Editors</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/forms/validation.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Validation</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fas fa-table"></i>
-                                            <p>
-                                                Tables
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/tables/simple.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Simple Tables</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/tables/data.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>DataTables</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/tables/jsgrid.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>jsGrid</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
+
 
                                 </ul>
                             </nav>
@@ -740,7 +592,7 @@
 
     <!-- SheetJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.3/xlsx.full.min.js"></script>
-
+    @include('layouts._adminscript')
     @yield('js')
 
 </body>

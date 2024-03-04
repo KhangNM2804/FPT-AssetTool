@@ -24,15 +24,18 @@ class CategoryAssetController extends Controller
      */
     public function search(Request $request)
     {
+        $this->authorize('viewAny',CategoryAsset::class);
         $data = $request->all();
         return $this->categoryAssetService->search($data);
     }
     public function datatables()
     {
+        $this->authorize('viewAny',CategoryAsset::class);
         return $this->categoryAssetService->datatables();
     }
     public function index()
     {
+        $this->authorize('viewAny',CategoryAsset::class);
         return view('admin.category_assets.index');
     }
 
@@ -43,6 +46,7 @@ class CategoryAssetController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',CategoryAsset::class);
         $category_asset = new CategoryAsset();
         $category_asset->status = 1;
         return view('admin.category_assets.store', compact('category_asset'));
@@ -56,6 +60,7 @@ class CategoryAssetController extends Controller
      */
     public function store(StoreCategoryAssetRequest $request)
     {
+        $this->authorize('create',CategoryAsset::class);
         $data = $request->all();
         try {
             $this->categoryAssetService->storeCategoryAsset($data);
@@ -86,6 +91,7 @@ class CategoryAssetController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('view',CategoryAsset::findOrFail($id));
         $category_asset =  $this->categoryAssetService->findCategoryAsset($id);
         return view('admin.category_assets.edit', compact('category_asset'));
     }
@@ -99,6 +105,7 @@ class CategoryAssetController extends Controller
      */
     public function update(StoreGroupAssetsRequest $request, $id)
     {
+        $this->authorize('update',CategoryAsset::findOrFail($id));
         $data = $request->all();
         try {
             $this->categoryAssetService->updateCategoryAsset($data, $id);
@@ -118,6 +125,7 @@ class CategoryAssetController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',CategoryAsset::findOrFail($id));
         try {
             $this->categoryAssetService->deleteCategoryAsset($id);
             toastr('Ngừng hoạt động danh mục tài sản thành công', 'success', 'Thành công');

@@ -25,6 +25,7 @@ class BorrowController extends Controller
      */
     public function datatables()
     {
+        $this->authorize('viewAny', Borrow::class);
         return $this->borrowService->datatables();
     }
     public function indexClient()
@@ -48,6 +49,7 @@ class BorrowController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Borrow::class);
         return view('admin.borrow.index');
     }
 
@@ -115,16 +117,19 @@ class BorrowController extends Controller
      */
     public function accept($id)
     {
+        $this->authorize('update', Borrow::findOrFail($id));
         $this->borrowService->updateStatus($id, Borrow::STATUS_BORROWED);
         return redirect()->back();
     }
     public function return($id)
     {
+        $this->authorize('update', Borrow::findOrFail($id));
         $this->borrowService->updateStatus($id, Borrow::STATUS_PAID);
         return redirect()->back();
     }
     public function cancel($id)
     {
+        $this->authorize('delete', Borrow::findOrFail($id));
         $this->borrowService->updateStatus($id, Borrow::STATUS_CANCELED);
         return redirect()->back();
     }
@@ -136,6 +141,7 @@ class BorrowController extends Controller
 
     public function cancelClient($id)
     {
+        $this->authorize('deleteClient', Borrow::findOrFail($id));
         $this->borrowService->cancelBorrowService($id);
         return redirect()->back();
     }

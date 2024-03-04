@@ -23,15 +23,18 @@ class SemesterController extends Controller
      */
     public function datatables()
     {
+        $this->authorize('viewAny', Semester::class);
         return $this->semesterService->datatables();
     }
     public function search(Request $request)
     {
+        $this->authorize('viewAny', Semester::class);
         $data = $request->all();
         return $this->semesterService->searchSemester($data);
     }
     public function index()
     {
+        $this->authorize('viewAny', Semester::class);
         return view('admin.semester.index');
     }
 
@@ -42,6 +45,7 @@ class SemesterController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Semester::class);
         $semester = new Semester();
         return view('admin.semester.store', compact('semester'));
     }
@@ -54,6 +58,7 @@ class SemesterController extends Controller
      */
     public function store(StoreSemesterRequest $request)
     {
+        $this->authorize('create', Semester::class);
         try {
             $data = $request->all();
             $this->semesterService->storeSemesterService($data);
@@ -85,6 +90,7 @@ class SemesterController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('view', Semester::findOrFail($id));
         $semester =  $this->semesterService->findSemesterService($id);
         return view('admin.semester.edit', compact('semester'));
     }
@@ -98,6 +104,7 @@ class SemesterController extends Controller
      */
     public function update(UpdateSemesterRequest $request, $id)
     {
+        $this->authorize('update', Semester::findOrFail($id));
         try {
             $data = $request->all();
             $this->semesterService->updateSemesterService($data, $id);
@@ -117,6 +124,7 @@ class SemesterController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Semester::findOrFail($id));
         try {
             $this->semesterService->deleteSemesterService($id);
             toastr('Xóa kỳ thành công', 'success', 'Thành công');

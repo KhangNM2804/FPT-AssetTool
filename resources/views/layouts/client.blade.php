@@ -69,8 +69,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container ">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a href="{{route('client.borrow.borrows-client')}}" class="brand-link" style="color: white;text-decoration: none">
+                    <img src="{{asset('storage/uploads/FPT.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
+                        style="opacity: .8">
+                    <span class="brand-text font-weight-light">FPT Asset</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

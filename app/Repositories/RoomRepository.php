@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Location;
 use App\Models\Room;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
@@ -11,25 +12,25 @@ use Yajra\DataTables\DataTables;
 class RoomRepository
 {
     protected $room;
+    protected $gate;
 
-    public function __construct(Room $room)
+    public function __construct(Room $room, GateContract $gate)
     {
         $this->room = $room;
+        $this->gate = $gate;
     }
     public function search($data)
     {
         if (isset($data['term'])) {
-            return $this->room->with(['manager:id,name'])->where('name', 'like', '%' . $data['term'] . '%')->where('status', Room::STATUS_ACTIVE)->get(['id','name','manager_id']);
+            return $this->room->with(['manager:id,name'])->where('name', 'like', '%' . $data['term'] . '%')->where('status', Room::STATUS_ACTIVE)->get(['id', 'name', 'manager_id']);
         }
-        return $this->room->with(['manager:id,name'])->where('status', Room::STATUS_ACTIVE)->limit(3)->get(['id','name','manager_id']);
+        return $this->room->with(['manager:id,name'])->where('status', Room::STATUS_ACTIVE)->limit(3)->get(['id', 'name', 'manager_id']);
     }
     public function getAll()
     {
         $rooms = $this->room->select('rooms.id', 'rooms.name', 'rooms.status', 'rooms.category_room_id', 'rooms.manager_id', 'rooms.index', 'rooms.created_at', 'rooms.updated_at')
             ->with(['manager:id,name', 'category_room:id,name'])
-            // ->where('rooms.status', Room::STATUS_ACTIVE)
             ->orderBy('rooms.index', 'asc');
-
         return DataTables::of($rooms)
             ->addColumn('created_at', function ($room) {
                 return $room->created_at->format('Y-m-d H:i:s');
@@ -38,10 +39,18 @@ class RoomRepository
                 return $room->updated_at->format('Y-m-d H:i:s');
             })
             ->addColumn('edit_url', function ($room) {
-                return route('staff.locate.rooms.edit', ['room' => $room]);
+                if ($this->gate->allows('update', $room)) {
+                    return route('staff.locate.rooms.edit', ['room' => $room]);
+                } else {
+                    return null;
+                }
             })
             ->addColumn('delete_url', function ($room) {
-                return route('staff.locate.rooms.destroy', ['room' => $room]);
+                if ($this->gate->allows('delete', $room)) {
+                    return route('staff.locate.rooms.destroy', ['room' => $room]);
+                } else {
+                    return null;
+                }
             })
             ->addColumn('show_url', function ($room) {
                 return route('staff.locate.rooms.show', ['room' => $room]);
@@ -53,8 +62,9 @@ class RoomRepository
     {
         return $this->room->create($data);
     }
-    public function show($id){
-        return $this->room->with(['manager:id,name', 'category_room:id,name','assetDetails.asset'])->findOrFail($id);
+    public function show($id)
+    {
+        return $this->room->with(['manager:id,name', 'category_room:id,name', 'assetDetails.asset'])->findOrFail($id);
     }
     public function find($id)
     {
