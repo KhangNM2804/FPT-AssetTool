@@ -184,8 +184,8 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
-            <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="FPTLogo" height="60"
-                width="60" style="display: none;">
+            <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="FPTLogo" height="60" width="60"
+                style="display: none;">
         </div>
 
         <!-- Navbar -->
@@ -204,7 +204,8 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <li class="nav-item">
-                    <a class="nav-link" title="Trang đăng ký mượn tài sản"  href="{{route('client.borrow.borrows-client')}}" >
+                    <a class="nav-link" title="Trang đăng ký mượn tài sản"
+                        href="{{ route('client.borrow.borrows-client') }}">
                         <i class="fas fa-user"></i>
                     </a>
                 </li>
@@ -233,9 +234,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{route('staff.dashboard.indexExpenseRoom')}}" class="brand-link">
-                <img src="{{asset('storage/uploads/FPT.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-2"
-                    style="opacity: .8">
+            <a href="{{ route('staff.dashboard.indexExpenseRoom') }}" class="brand-link">
+                <img src="{{ asset('storage/uploads/FPT.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-2" style="opacity: .8">
                 <span class="brand-text font-weight-light">FPT Asset</span>
             </a>
 
@@ -334,7 +335,7 @@
                                         <li class="nav-item ">
                                             <a href="{{ route('staff.borrow.borrows.index') }}"
                                                 class="nav-link {{ request()->is('staff/borrow*') ? 'active' : '' }}">
-                                                <i class="nav-icon fas fa-th"></i>
+                                                <i class="nav-icon fab fa-wpforms"></i>
                                                 <p>
                                                     Đăng ký mượn tài sản
                                                     <span id="countPendding" class="right badge badge-danger"></span>
@@ -346,7 +347,7 @@
                                         <li class="nav-item">
                                             <a href="{{ route('staff.semester.semesters.index') }}"
                                                 class="nav-link {{ request()->is('staff/semesters*') ? 'active' : '' }}">
-                                                <i class="nav-icon fas fa-th"></i>
+                                                <i class="nav-icon fas fa-university"></i>
                                                 <p>
                                                     Học kỳ
                                                 </p>
@@ -357,7 +358,7 @@
                                         <li class="nav-item menu-{{ request()->is('staff/locate*') ? 'open' : '' }}">
                                             <a href="#"
                                                 class="nav-link {{ request()->is('staff/locate*') ? 'active' : '' }}">
-                                                <i class="nav-icon fas fa-copy"></i>
+                                                <i class="nav-icon fas fa-map-marker-alt"></i>
                                                 <p>
                                                     Vị trí
                                                     <i class="fas fa-angle-left right"></i>
@@ -385,11 +386,10 @@
                                             </ul>
                                         </li>
                                     @endif
-
                                     <li class="nav-item menu-{{ request()->is('staff/asset/*') ? 'open' : 'close' }}">
                                         <a href="#"
                                             class="nav-link {{ request()->is('staff/asset/*') ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-chart-pie"></i>
+                                            <i class="nav-icon fas fa-coins"></i>
                                             <p>
                                                 Tài sản
                                                 <i class="right fas fa-angle-left"></i>
@@ -444,65 +444,33 @@
 
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fas fa-tree"></i>
-                                            <p>
-                                                UI Elements
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="pages/UI/general.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>General</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
+                                    @can('viewAny', App\Models\User::class)
+                                        <li class="nav-item menu-{{ request()->is('staff/users/*') ? 'open' : 'close' }}">
+                                            <a href="#" class="nav-link">
+                                                <i class="nav-icon fas fa-user-edit"></i>
+                                                <p>
+                                                    Người dùng
+                                                    <i class="fas fa-angle-left right"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="{{ route('staff.users.users.index') }}"
+                                                        class="nav-link {{ request()->is('staff/users/users*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Quản lý</p>
+                                                    </a>
+                                                </li>
+                                                {{-- <li class="nav-item">
                                                 <a href="pages/UI/icons.html" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Icons</p>
                                                 </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/buttons.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Buttons</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/sliders.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Sliders</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/modals.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Modals &amp; Alerts</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/navbar.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Navbar &amp; Tabs</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/timeline.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Timeline</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="pages/UI/ribbons.html" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Ribbons</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                            </li> --}}
+
+                                            </ul>
+                                        </li>
+                                    @endcan
 
 
 
@@ -530,21 +498,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="min-height: 272.2px;">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard v2</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v2</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
+            
             <!-- /.content-header -->
 
             <!-- Main content -->

@@ -33,7 +33,7 @@
                     {
                         data: 'name',
                         name: 'name',
-                        width: '400px'
+                        width: '500px'
                     },
                     {
                         data: 'invoice',
@@ -58,6 +58,7 @@
                         }
                     },
 
+
                     {
                         render: function(data, type, row) {
                             if (row.status == 1) {
@@ -66,6 +67,18 @@
                                 return '<span class="badge badge-danger">Đã thanh lý</span>'
                             }
                         }
+                    },
+                    {
+                        render: function(data, type, row) {
+                            var location = '';
+                            row.asset_detail.forEach(function(element) {
+                                var roomName = element.room ? element.room.name :
+                                    'Chưa xác định';
+                                location += roomName + ': ' + element.quantity + '<br>';
+                            });
+                            return location;
+                        },
+                        width: '220px'
                     },
                     {
                         render: function(data, type, row) {
@@ -95,9 +108,14 @@
                             }
                             return buttonEdit + ' ' + buttonShow + ' ' + buttonDelete
                         },
-                        width: '120px'
+                        width: '220px'
                     }
-                ]
+                ],
+                initComplete: function() {
+                    // Thêm thanh cuộn ngang
+                    j('#asset').wrap('<div class="table-responsive"></div>');
+                }
+
             })
         })
     </script>

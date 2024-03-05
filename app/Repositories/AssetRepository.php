@@ -19,7 +19,7 @@ class AssetRepository
     }
     public function datatables()
     {
-        $asset = $this->asset->query();
+        $asset = $this->asset->with(['assetDetail.room']);
         return DataTables::of($asset)
             ->addColumn('edit_url', function ($asset) {
                 if ($this->gate->allows('update', $asset)) {

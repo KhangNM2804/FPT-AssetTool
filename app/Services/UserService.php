@@ -17,4 +17,16 @@ class UserService
     {
         return $this->userRepository->search($data);
     }
+    public function datatables()
+    {
+        return $this->userRepository->datatables();
+    }
+    public function editService($id)
+    {
+        return $this->userRepository->find($id);
+    }
+    public function updateRoleService($id, $data)
+    {
+        return $this->userRepository->updateRole($id, $data);
+    }
 }

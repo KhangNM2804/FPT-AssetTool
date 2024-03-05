@@ -28,10 +28,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home',[HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/home', [HomeController::class, 'index']);
 Auth::routes();
 
 
@@ -65,6 +64,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
     Route::group(['prefix' => 'semesters', 'as' => 'semester.'], function () {
         Route::resource('semesters', SemesterController::class);
     });
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::resource('users', UserController::class);
+    });
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('indexExpenseRoom');
     });
@@ -78,6 +80,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::get('borrowed-asset', [AssetBorrowedController::class, 'datatables'])->name('borrowed-asset');
         Route::get('borrows', [BorrowController::class, 'datatables'])->name('borrows');
         Route::get('semester', [SemesterController::class, 'datatables'])->name('semester');
+        Route::get('users', [UserController::class, 'datatables'])->name('users');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');

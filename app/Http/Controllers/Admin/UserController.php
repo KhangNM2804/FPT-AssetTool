@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateRoleRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -23,9 +26,15 @@ class UserController extends Controller
         $data = $request->all();
         return $this->userService->search($data);
     }
+    public function datatables()
+    {
+        $this->authorize('viewAny', User::class);
+        return $this->userService->datatables();
+    }
     public function index()
     {
-        //
+        $this->authorize('viewAny', User::class);
+        return view('admin.user.index');
     }
 
     /**
@@ -57,7 +66,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -68,7 +76,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('view', User::findOrFail($id));
+        $roles = Role::all();
+        $user = $this->userService->editService($id);
+        return view('admin.user.edit', compact('roles', 'user'));
     }
 
     /**
@@ -78,9 +89,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
-        //
+        $this->authorize('update', User::findOrFail($id));
+        try {
+            $data = $request->all();
+            $this->userService->updateRoleService($id, $data);
+
+            return redirect(route('staff.users.users.index'));
+        } catch (\Throwable $th) {
+            toastr('Cập nhật thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
