@@ -19,7 +19,12 @@ class HandoverService
     {
         return $this->handoverRepository->delete($id);
     }
-    public function saveHandover($data){
-       return $this->handoverRepository->save($data);
+    public function saveHandover($data)
+    {
+        return $this->handoverRepository->save($data);
+    }
+    public function countHandover()
+    {
+        return $this->handoverRepository->countHandover();
     }
 }

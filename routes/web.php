@@ -9,9 +9,11 @@ use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\HandoverController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SemesterController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\MicrosoftLoginController;
 use App\Http\Controllers\HomeController;
 use App\Models\Semester;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +35,13 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Auth::routes();
 
+Route::get('/login/microsoft', [MicrosoftLoginController::class, 'redirectToAzure'])->name('loginMicrosoft');
+Route::get('/login/microsoft/callback', [MicrosoftLoginController::class, 'handleAzureCallback']);
+
 
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'role:admin|manager|staff']], function () {
+    Route::get('count', [PageController::class, 'count'])->name('count');
     Route::group(['prefix' => 'locate', 'as' => 'locate.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
@@ -59,7 +65,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::put('borrows-accept/{id}', [BorrowController::class, 'accept'])->name('accept');
         Route::put('borrows-return/{id}', [BorrowController::class, 'return'])->name('return');
         Route::put('borrows-cancel/{id}', [BorrowController::class, 'cancel'])->name('cancel');
-        Route::get('borrows-count-pending', [BorrowController::class, 'countPending'])->name('countPending');
+       
     });
     Route::group(['prefix' => 'semesters', 'as' => 'semester.'], function () {
         Route::resource('semesters', SemesterController::class);

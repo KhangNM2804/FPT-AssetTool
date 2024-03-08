@@ -128,7 +128,7 @@ class AssetDetailController extends Controller
     {
         $this->authorize('delete', AssetDetail::with('asset')->findOrFail($id));
         try {
-           
+
             $this->assetDetailService->deleteAssetDetail($id);
             toastr('Xóa thành công', 'success', 'Thành công');
             return redirect(route('staff.asset.asset.index'));
@@ -141,7 +141,6 @@ class AssetDetailController extends Controller
     {
         $this->authorize('update', AssetDetail::with('asset')->findOrFail($id));
         try {
-           
             $this->assetDetailService->sellAssetDetail($id);
             return redirect()->back();
         } catch (\Throwable $th) {

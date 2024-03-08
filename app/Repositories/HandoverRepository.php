@@ -35,14 +35,22 @@ class HandoverRepository
         $this->deleteAll();
         return $this->user;
     }
+    
     public function delete($id)
     {
         $user = $this->getUser();
         return $user->handovers()->where('id', $id)->delete();
     }
+
     public function deleteAll()
     {
         $user = $this->getUser();
         return $user->handovers()->delete();
+    }
+
+    public function countHandover()
+    {
+        $user = $this->getUser();
+        return $user->handovers()->count();
     }
 }

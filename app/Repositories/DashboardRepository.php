@@ -14,7 +14,7 @@ class DashboardRepository
     }
     public function expenseAllDashboard()
     {
-        $rooms = Room::with(['assetDetails.asset'])->get();
+        $rooms = Room::with(['assetDetails.asset'])->orderBy('index','asc')->get();
 
         // Duyệt qua từng phòng
         $rooms->transform(function ($room) {
@@ -35,7 +35,7 @@ class DashboardRepository
         $semester = Semester::findOrFail($data['semester_id']);
         $rooms = Room::with(['assetDetails.asset' => function ($query) use ($semester) {
             $query->whereBetween('date_of_use', [$semester->start_at, $semester->end_at]);
-        }])->get();
+        }])->orderBy('index','asc')->get();
 
         // Duyệt qua từng phòng
         $rooms->transform(function ($room) {

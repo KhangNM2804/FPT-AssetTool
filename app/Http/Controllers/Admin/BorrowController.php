@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\AssetDetail;
 use App\Models\Borrow;
 use App\Models\CategoryAsset;
 use App\Models\Setting;
@@ -145,8 +146,5 @@ class BorrowController extends Controller
         $this->borrowService->cancelBorrowService($id);
         return redirect()->back();
     }
-    public function countPending()
-    {
-        return $this->borrowService->countBorrowPenddingService();
-    }
+    
 }

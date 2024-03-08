@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Asset;
 use App\Models\AssetDetail;
+use App\Models\Setting;
+use Illuminate\Support\Collection;
 
 class AssetDetailRepository
 {
@@ -72,7 +74,27 @@ class AssetDetailRepository
         $assetDetail->update(['status' => AssetDetail::STATUS_INACTIVE]);
         $assetDetail->handover()->delete();
         $count =  $asset->assetDetail()->where('status', AssetDetail::STATUS_ACTIVE)->count();
+        $setting = Setting::where('key', 'assets_borrowed')->first();
 
+        // Kiểm tra nếu thuộc tính 'value' không phải là một Collection
+
+        // Chuyển đổi giá trị sang một Collection
+        $value = json_decode($setting->value, true);
+
+
+        $key = array_search($assetDetail->id, $value);
+
+        // Kiểm tra xem phần tử có tồn tại trong mảng không
+        if ($key !== false) {
+            // Xóa phần tử khỏi mảng
+            unset($value[$key]);
+        }
+
+        // Lưu lại giá trị mới cho thuộc tính 'value'
+        $setting->value = $value;
+
+        // Lưu lại đối tượng Setting
+        $setting->save();
         if ($count == 0) {
             $asset->update(['status' => Asset::STATUS_INACTIVE]);
         }

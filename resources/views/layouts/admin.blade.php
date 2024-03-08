@@ -298,7 +298,7 @@
                                             <i class="nav-icon fas fa-tachometer-alt"></i>
                                             <p>
                                                 Báo cáo
-                                                <span id="countPendding" class="right badge badge-danger"></span>
+                                                
                                             </p>
                                         </a>
                                     </li>
@@ -437,7 +437,7 @@
                                                     <a href="{{ route('staff.asset.handover.index') }}"
                                                         class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
                                                         <i class="far fa-circle nav-icon"></i>
-                                                        <p>Bàn giao</p>
+                                                        <p>Bàn giao <span id="countHandover" class="right badge badge-danger"></span></p>
                                                     </a>
                                                 </li>
                                             @endcan
@@ -458,7 +458,7 @@
                                                     <a href="{{ route('staff.users.users.index') }}"
                                                         class="nav-link {{ request()->is('staff/users/users*') ? 'active' : '' }}">
                                                         <i class="far fa-circle nav-icon"></i>
-                                                        <p>Quản lý</p>
+                                                        <p>Phân quyền</p>
                                                     </a>
                                                 </li>
                                                 {{-- <li class="nav-item">
@@ -513,10 +513,10 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright © KhangNM6 .</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> 1.0.0
             </div>
         </footer>
         <div id="sidebar-overlay"></div>
