@@ -41,6 +41,27 @@ class FormExport implements WithHeadings, WithEvents
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
+                $headings = $this->headings();
+                $sheet->fromArray([
+                    $headings,
+                    [
+                        '',
+                        '',
+                        'Có thể bỏ trống',
+                        '1C27TCD',
+                        '599',
+                        '957125',
+                        'Ổ điện quang 3 Chấu',
+                        '9',
+                        '100000',
+                        'Cái',
+                        '2052461',
+                        '14/03/2024',
+                        'Có thể bỏ trống',
+                        'Có thế bỏ trống'
+                    ]
+                ]);
+    
                 $lastRow = $sheet->getHighestRow();
                 $groupAssets = GroupAsset::all()->pluck('id', 'name')->toArray();
                 $categoryAssets = CategoryAsset::all()->pluck('id', 'name')->toArray();

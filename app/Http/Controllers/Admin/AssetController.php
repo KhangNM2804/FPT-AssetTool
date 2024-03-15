@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AssetExport;
 use App\Exports\FormExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssetRequest;
@@ -27,12 +28,12 @@ class AssetController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function datatables()
+    public function datatables(Request $request)
     {
 
         $this->authorize('viewAny', Asset::class);
-
-        return $this->assetService->datatablesService();
+        $data = $request->all();
+        return $this->assetService->datatablesService($data);
     }
     public function index()
     {
@@ -151,6 +152,11 @@ class AssetController extends Controller
     public function exportForm()
     {
         return Excel::download(new FormExport, 'form.xlsx');
+    }
+    public function export(Request $request)
+    {
+        $data = $request->all();
+        return Excel::download(new AssetExport($data,$this->assetService), 'asset.xlsx');
     }
     public function importIndex()
     {

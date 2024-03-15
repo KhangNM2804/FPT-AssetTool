@@ -18,9 +18,12 @@ class AssetService
         $this->assetRepository = $assetRepository;
         $this->assetDetailService = $assetDetailService;
     }
-    public function datatablesService()
+    public function datatablesService($data)
     {
-        return $this->assetRepository->datatables();
+        return $this->assetRepository->datatables($data);
+    }
+    public function export($data){
+        return $this->assetRepository->export($data);
     }
     public function createAssetService($data)
     {

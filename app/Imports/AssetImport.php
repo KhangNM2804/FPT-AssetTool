@@ -25,12 +25,14 @@ class AssetImport implements ToModel, WithStartRow
      */
     public function model(array $row)
     {
-        
+
         try {
-            
+
             DB::beginTransaction();
             $group = GroupAsset::where('name', '=', $row[0])->first();
             $category = CategoryAsset::where('name', '=', $row[1])->first();
+            $dateString = $row[11];
+            $formattedDate = date('d/m/Y', strtotime($dateString));
             $asset = new Asset([
                 'code' => $row[5],
                 'name' => $row[6],
@@ -46,7 +48,7 @@ class AssetImport implements ToModel, WithStartRow
                 'unit' => $row[9],
                 'invoice_number' => $row[4],
                 'material_code' => $row[12],
-                'date_of_use' => Carbon::createFromFormat('d/m/Y', $row[11]),
+                'date_of_use' => Carbon::createFromFormat('d/m/Y', $formattedDate),
                 'note' => $row[13],
                 'status' => Asset::STATUS_ACTIVE
             ]);

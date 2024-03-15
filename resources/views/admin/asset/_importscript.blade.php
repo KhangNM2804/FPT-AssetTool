@@ -1,13 +1,14 @@
 @section('js')
     <script>
+        var j = jQuery.noConflict(true);
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('.image-upload-wrap').hide();
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
+                    j('.image-upload-wrap').hide();
+                    j('.file-upload-image').attr('src', e.target.result);
+                    j('.file-upload-content').show();
+                    j('.image-title').html(input.files[0].name);
                 };
                 reader.readAsDataURL(input.files[0]);
             } else {
@@ -16,12 +17,12 @@
         }
 
         function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-            $('#asset').DataTable().clear().destroy();
+            j('.file-upload-input').replaceWith(j('.file-upload-input').clone());
+            j('.file-upload-content').hide();
+            j('.image-upload-wrap').show();
+            j('#asset').DataTable().clear().destroy();
             // Tái khởi tạo sự kiện change
-            $('#excelFile').off('change').on('change', function(e) {
+            j('#excelFile').off('change').on('change', function(e) {
                 readURL(this);
                 var file = e.target.files[0];
                 if (file) {
@@ -40,10 +41,10 @@
                         var data = jsonData.slice(1);
 
                         // Clear DataTable before adding new data
-                        $('#asset').DataTable().clear().destroy();
+                        j('#asset').DataTable().clear().destroy();
 
                         // Populate DataTable with new data
-                        $('#asset').DataTable({
+                        j('#asset').DataTable({
                             data: data,
                             columns: headers.map(function(header) {
                                 return {
@@ -58,23 +59,23 @@
         }
 
 
-        $(document).ready(function() {
+        j(document).ready(function() {
             //Trigger khi thay đổi file input
-            $('.file-upload-input').on('change', function() {
+            j('.file-upload-input').on('change', function() {
                 readURL(this);
             });
 
             // Xóa hình ảnh khi nhấn nút xóa
-            $('#remove_file').on('click', function() {
+            j('#remove_file').on('click', function() {
                 removeUpload();
             });
-            $('#import').on('click', function() {
+            j('#import').on('click', function() {
                 const route = @json(route('staff.asset.asset.importFile'));
                 var fileInput = document.getElementById('excelFile');
                 var file = fileInput.files[0]; // Lấy ra tệp tin đã chọn
                 var formData = new FormData(); // Tạo đối tượng FormData
                 formData.append('file', file); // Đính kèm tệp tin vào FormData với key 'excel_file'
-                $.ajax({
+                j.ajax({
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
@@ -99,13 +100,13 @@
                     }
                 });
             })
-            $('.image-upload-wrap').bind('dragover', function() {
-                $('.image-upload-wrap').addClass('image-dropping');
+            j('.image-upload-wrap').bind('dragover', function() {
+                j('.image-upload-wrap').addClass('image-dropping');
             });
-            $('.image-upload-wrap').bind('dragleave', function() {
-                $('.image-upload-wrap').removeClass('image-dropping');
+            j('.image-upload-wrap').bind('dragleave', function() {
+                j('.image-upload-wrap').removeClass('image-dropping');
             });
-            $('#excelFile').on('change', function(e) {
+            j('#excelFile').on('change', function(e) {
                 var file = e.target.files[0];
                 if (file) {
                     var reader = new FileReader();
@@ -123,10 +124,10 @@
                         var data = jsonData.slice(1);
 
                         // Clear DataTable before adding new data
-                        $('#asset').DataTable().clear().destroy();
+                        j('#asset').DataTable().clear().destroy();
 
                         // Populate DataTable with new data
-                        $('#asset').DataTable({
+                        j('#asset').DataTable({
                             data: data,
                             columns: headers.map(function(header) {
                                 return {

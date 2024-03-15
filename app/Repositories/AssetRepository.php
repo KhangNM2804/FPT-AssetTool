@@ -17,9 +17,15 @@ class AssetRepository
         $this->asset = $asset;
         $this->gate = $gate;
     }
-    public function datatables()
+    public function datatables($data)
     {
         $asset = $this->asset->with(['assetDetail.room']);
+        if (isset($data['category_id'])) {
+            $asset->where('category_asset_id', $data['category_id']);
+        }
+        if (isset($data['group_id'])) {
+            $asset->where('group_assets_id', $data['group_id']);
+        }
         return DataTables::of($asset)
             ->addColumn('edit_url', function ($asset) {
                 if ($this->gate->allows('update', $asset)) {
@@ -46,6 +52,17 @@ class AssetRepository
                 return $asset->invoice;
             })
             ->make(true);
+    }
+    public function export($data)
+    {
+        $asset = $this->asset->with(['category','group','assetDetail.room']);
+        if (isset($data['category_id'])) {
+            $asset->where('category_asset_id', $data['category_id']);
+        }
+        if (isset($data['group_id'])) {
+            $asset->where('group_assets_id', $data['group_id']);
+        }
+        return $asset->get();
     }
     public function create($data)
     {

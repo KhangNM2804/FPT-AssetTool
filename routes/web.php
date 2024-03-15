@@ -99,6 +99,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
     Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
         Route::get('handover', [HandoverController::class, 'export'])->name('handover');
         Route::get('form', [AssetController::class, 'exportForm'])->name('form');
+        Route::get('asset', [AssetController::class, 'export'])->name('asset');
     });
 });
 Route::group(['prefix' => 'client', 'as' => 'client.', 'middleware' => ['auth', 'role:admin|staff|teacher|manager']], function () {

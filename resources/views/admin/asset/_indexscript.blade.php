@@ -2,13 +2,85 @@
     <script>
         const route = @json(route('staff.datatables.asset'));
         var j = jQuery.noConflict(true);
+
         j(document).ready(function() {
-            j('#asset').DataTable({
+
+            const category = @json(route('staff.search.category-assets'));
+            const group = @json(route('staff.search.group-assets'));
+            j('#select-category').select2({
+                ajax: {
+                    url: category,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                        }
+                    },
+                    processResults: function(data) {
+                        data.unshift({
+                            id: '',
+                            name: 'Tất cả',
+                        });
+                        return {
+                            results: j.map(data, function(item) {
+                                return {
+                                    text: item.name,
+                                    id: item.id,
+                                }
+                            })
+                        }
+                    },
+                    cache: true,
+                    minimumInputLength: 0,
+                    maximumInputLength: 20,
+                },
+
+            });
+            j('#select-group').select2({
+                ajax: {
+                    url: group,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            term: params.term,
+                        }
+                    },
+                    processResults: function(data) {
+                        data.unshift({
+                            id: '',
+                            name: 'Tất cả',
+                        });
+                        return {
+                            results: j.map(data, function(item) {
+                                return {
+                                    text: item.name,
+                                    id: item.id,
+                                }
+                            })
+                        }
+                    },
+                    cache: true,
+                    minimumInputLength: 0,
+                    maximumInputLength: 20,
+
+                }
+            });
+
+
+            var dataTable = j('#asset').DataTable({
+                fixedColumns: true,
                 dom: 'lifrtp',
                 processing: true,
                 search: true,
+                scrollX: true,
                 ajax: {
                     url: route,
+                    data: function(d) {
+                        d.category_id = category_id;
+                        d.group_id = group_id;
+                    }
                 },
                 columns: [{
                         data: 'image', // Đặt tên cột chứa đường dẫn ảnh
@@ -24,7 +96,7 @@
                     }, {
                         data: 'code',
                         name: 'code',
-                        width: '100px',
+
                         render: function(data, type, row) {
                             return data ? data :
                                 '<span class="badge badge-secondary">Không có mã</span>';
@@ -33,7 +105,12 @@
                     {
                         data: 'name',
                         name: 'name',
-                        width: '500px'
+
+                    },
+                    {
+                        data: 'document_number',
+                        name: 'document_number',
+
                     },
                     {
                         data: 'invoice',
@@ -42,7 +119,7 @@
                     {
                         data: 'quantity',
                         name: 'quantity',
-                        width: '25px'
+
                     },
                     {
                         data: 'price',
@@ -50,7 +127,8 @@
                         render: function(data, type, row) {
                             return numeral(data).format('0,0');
                         }
-                    }, {
+                    },
+                    {
                         data: 'total_price',
                         name: 'total_price',
                         render: function(data, type, row) {
@@ -78,7 +156,7 @@
                             });
                             return location;
                         },
-                        width: '220px'
+
                     },
                     {
                         render: function(data, type, row) {
@@ -108,15 +186,24 @@
                             }
                             return buttonEdit + ' ' + buttonShow + ' ' + buttonDelete
                         },
-                        width: '220px'
+
                     }
-                ],
-                initComplete: function() {
-                    // Thêm thanh cuộn ngang
-                    j('#asset').wrap('<div class="table-responsive"></div>');
-                }
+                ]
 
             })
+            var category_id = j('#select-category').val();
+            var group_id = j('#select-group').val();
+            j('#select-group').change(function() {
+                category_id = j('#select-category').val();
+                group_id = j('#select-group').val();
+                dataTable.ajax.reload();
+            });
+            j('#select-category').change(function() {
+                category_id = j('#select-category').val();
+                group_id = j('#select-group').val();
+                dataTable.ajax.reload();
+            });
+            
         })
     </script>
 @endsection
