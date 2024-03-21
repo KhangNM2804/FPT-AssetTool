@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SemesterController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\MicrosoftLoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Models\Semester;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -33,6 +34,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index']);
+Route::get('/send-reminder', [MailController::class, 'sendReminderEmail']);
 Auth::routes();
 
 Route::get('/login/microsoft', [MicrosoftLoginController::class, 'redirectToAzure'])->name('loginMicrosoft');

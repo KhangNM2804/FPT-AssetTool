@@ -48,10 +48,10 @@
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-danger">Hủy phiếu</button>
+                                                        <button class="btn btn-warning">Hủy phiếu</button>
                                                     </form>
                                                 @else
-                                                    <span class="badge badge-danger">Không thể thao tác</span>
+                                                    <span class="badge badge-secondary">Không thể thao tác</span>
                                                 @endif
 
                                             </td>

@@ -15,9 +15,10 @@ class MicrosoftLoginController extends Controller
         return Socialite::driver('azure')->redirect();
     }
 
-    public function handleAzureCallback()
+    public function handleAzureCallback(Request $request)
     {
         $user = Socialite::driver('azure')->user();
+        
         $existingUser = User::where('email', $user->getEmail())->first();
 
         if ($existingUser) {

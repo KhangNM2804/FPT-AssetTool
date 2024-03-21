@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendNotificationEmail;
+use App\Jobs\SendRemindEmail;
 use App\Models\Asset;
 use App\Models\AssetDetail;
 use App\Models\Borrow;
@@ -120,6 +122,9 @@ class BorrowController extends Controller
     {
         $this->authorize('update', Borrow::findOrFail($id));
         $this->borrowService->updateStatus($id, Borrow::STATUS_BORROWED);
+        $borrow = Borrow::with(['user', 'details.category'])->findOrFail($id);
+        $data = ['name' => $borrow->user->name, 'details' => $borrow->details];
+        SendNotificationEmail::dispatch($borrow->user->email, $borrow->user->name, "Xác nhận mượn tài sản thành công", ['khangdeptrai2804@gmail.com', 'khangnm2804@gmail.com'], $data);
         return redirect()->back();
     }
     public function return($id)
@@ -146,5 +151,4 @@ class BorrowController extends Controller
         $this->borrowService->cancelBorrowService($id);
         return redirect()->back();
     }
-    
 }

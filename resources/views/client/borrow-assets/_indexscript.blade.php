@@ -71,14 +71,19 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Thành công',
-                                text: 'Đã đăng ký mượn tài sản! Vui lòng liên hệ Phòng Hành Chính.'
+                                text: 'Đã đăng ký mượn tài sản! Vui lòng liên hệ Phòng Hành Chính.',
+                                onClose: () => {
+                                    var route = @json(route('client.borrow.borrows-client-index'));
+                                    window.location.href = route;
+                                }
                             });
-                        }else if(response.status==422){
+
+                        } else if (response.status == 422) {
                             Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi',
-                            text: response.message
-                        });
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: response.message
+                            });
                         }
                     },
                     error: function(xhr, status, error) {
