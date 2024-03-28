@@ -18,7 +18,7 @@
         @foreach ($asset as $item)
             <tr>
                 <td >{{ $item->category->name }}</td>
-                <td>{{ $item->group->name }}</td>
+                <td>{{ $item->group?$item->group->name :'Chưa xác định' }}</td>
                 <td>{{ $item->code }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->document_number }}</td>
@@ -26,10 +26,10 @@
                 <td>{{ $item->quantity }}</td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->price * $item->quantity }}</td>
-                <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $item->date_of_use)->format('d/m/y') }}
+                <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $item->date_of_use)->format('d/m/Y') }}
 
                 </td>
-                <td style="width: 100%;">
+                <td style="width: 200px;">
                     @foreach ($item->assetDetail as $key => $detail)
                         {{ $detail->room ? $detail->room->name : 'Chưa xác định' }}: {{ $detail->quantity }}
                         @if (!$loop->last)

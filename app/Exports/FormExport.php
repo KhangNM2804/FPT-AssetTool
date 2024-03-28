@@ -63,8 +63,8 @@ class FormExport implements WithHeadings, WithEvents
                 ]);
     
                 $lastRow = $sheet->getHighestRow();
-                $groupAssets = GroupAsset::all()->pluck('id', 'name')->toArray();
-                $categoryAssets = CategoryAsset::all()->pluck('id', 'name')->toArray();
+                $groupAssets = GroupAsset::orderBy('name','asc')->pluck('id', 'name')->toArray();
+                $categoryAssets = CategoryAsset::orderBy('name','asc')->pluck('id', 'name')->toArray();
                 $nameGroup = array_keys($groupAssets);
                 $nameCategory = array_keys($categoryAssets);
                 for ($row = 2; $row <= 101; $row++) {

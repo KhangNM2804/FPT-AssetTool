@@ -131,7 +131,7 @@ class AssetDetailController extends Controller
 
             $this->assetDetailService->deleteAssetDetail($id);
             toastr('Xóa thành công', 'success', 'Thành công');
-            return redirect(route('staff.asset.asset.index'));
+            return redirect()->back();
         } catch (\Throwable $th) {
             toastr('Xóa thất bại', 'error', 'Thất bại');
             return redirect()->back();

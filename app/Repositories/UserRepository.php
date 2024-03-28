@@ -16,9 +16,9 @@ class UserRepository
     public function search($data)
     {
         if (isset($data['term'])) {
-            return $this->user->where('name', 'like', '%' . $data['term'] . '%')->get(['id', 'name']);
+            return $this->user->where('name', 'like', '%' . $data['term'] . '%')->get(['id', 'name','email']);
         }
-        return $this->user->limit(20)->get(['id', 'name']);
+        return $this->user->limit(20)->get(['id', 'name','email']);
     }
     public function datatables()
     {

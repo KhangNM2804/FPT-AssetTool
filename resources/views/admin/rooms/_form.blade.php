@@ -21,11 +21,11 @@
             class="form-control select2 {{ $errors->has('manager_id') ? 'is-invalid' : '' }}" style="width: 100%;">
             <!-- Option mặc định (nếu cần) -->
             <option value="{{ $room ? $room->manager_id : '' }}" selected>
-                {{ $room->manager? $room->manager->name : 'Select an option' }}</option>
+                {{ $room['manager'] ? $room['manager']->name : 'Select an option' }}</option>
         </select>
-        @if ($errors->has('category_room_id'))
+        @if ($errors->has('manager_id'))
             <div class="invalid-feedback">
-                <strong>{{ $errors->first('category_room_id') }}</strong>
+                <strong>{{ $errors->first('manager_id') }}</strong>
             </div>
         @endif
     </div>

@@ -1,6 +1,7 @@
 @section('js')
     <script>
         var j = jQuery.noConflict(true);
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -88,8 +89,19 @@
                         Swal.fire({
                             title: "Thành công!",
                             text: "Đã nhập dữ liệu từ file thành công",
-                            icon: "success"
+                            icon: "success",
+                            
+                            confirmButtonText: "Xác nhận",
+                           
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Nếu người dùng xác nhận, chuyển hướng đến route
+                                window.location.href = @json(route('staff.asset.asset.index'));
+                            } else {
+                                window.location.href = @json(route('staff.asset.asset.index'));
+                            }
                         });
+
                     },
                     error: function(xhr, status, error) {
                         Swal.fire({

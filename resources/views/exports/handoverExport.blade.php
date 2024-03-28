@@ -47,7 +47,7 @@
                 <td style="font-weight: bold" colspan="1"> <span style="font-size: 30"> Ông/Bà: </span></td>
                 <td colspan="3"> <span>{{ $user->handovers[0]->assetDetail->reciver->name }}</span></td>
                 <td style="font-weight: bold" colspan="1"> <span style="font-size: 30"> Bộ phận: </span></td>
-                <td colspan="3"> <span>Phòng hành chính</span></td>
+                <td colspan="3"> <span>{{ $user->room }}</span></td>
             </tr>
             <tr>
                 <td colspan="8"><b>3 - Nội dung bàn giao: </b></td>

@@ -70,6 +70,7 @@
 
 
             var dataTable = j('#asset').DataTable({
+
                 fixedColumns: true,
                 dom: 'lifrtp',
                 processing: true,
@@ -82,6 +83,9 @@
                         d.group_id = group_id;
                     }
                 },
+                order: [
+                    [10, 'desc']
+                ],
                 columns: [{
                         data: 'image', // Đặt tên cột chứa đường dẫn ảnh
                         render: function(data, type, row) {
@@ -159,6 +163,27 @@
 
                     },
                     {
+                        data: 'created_at',
+                        name: 'created_at',
+                        render: function(data, type, row) {
+                            var date = new Date(data);
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1; // Tháng bắt đầu từ 0
+                            var year = date.getFullYear();
+
+                            // Đảm bảo ngày và tháng luôn hiển thị 2 chữ số
+                            if (day < 10) {
+                                day = '0' + day;
+                            }
+                            if (month < 10) {
+                                month = '0' + month;
+                            }
+
+                            return day + '-' + month + '-' + year;
+                        }
+                    },
+
+                    {
                         render: function(data, type, row) {
                             var edit = row.edit_url;
                             var del = row.delete_url;
@@ -203,7 +228,7 @@
                 group_id = j('#select-group').val();
                 dataTable.ajax.reload();
             });
-            
+
         })
     </script>
 @endsection

@@ -24,7 +24,7 @@ class RoomRepository
         if (isset($data['term'])) {
             return $this->room->with(['manager:id,name'])->where('name', 'like', '%' . $data['term'] . '%')->where('status', Room::STATUS_ACTIVE)->get(['id', 'name', 'manager_id']);
         }
-        return $this->room->with(['manager:id,name'])->where('status', Room::STATUS_ACTIVE)->limit(3)->get(['id', 'name', 'manager_id']);
+        return $this->room->with(['manager:id,name'])->where('status', Room::STATUS_ACTIVE)->limit(10)->get(['id', 'name', 'manager_id']);
     }
     public function getAll()
     {
@@ -47,7 +47,11 @@ class RoomRepository
             })
             ->addColumn('delete_url', function ($room) {
                 if ($this->gate->allows('delete', $room)) {
-                    return route('staff.locate.rooms.destroy', ['room' => $room]);
+                    if($room->status == Room::STATUS_ACTIVE){
+                        return route('staff.locate.rooms.destroy', ['room' => $room]);
+                    }
+                    return null;
+                    
                 } else {
                     return null;
                 }
@@ -78,6 +82,7 @@ class RoomRepository
     public function delete($id)
     {
         $room = $this->room->findOrFail($id);
+        toastr('Xóa phòng thành công', 'success', 'Thành công');
         return $room->update(['status' => Room::STATUS_INACTIVE]);
     }
 }

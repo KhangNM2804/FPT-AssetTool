@@ -33,6 +33,7 @@ class HandoverRepository
             $handover->assetDetail->update(['room_id' => $data['room_id'], 'receiver_id' => $room->id]);
         });
         $this->deleteAll();
+        $this->user->room = $room->name;
         return $this->user;
     }
     

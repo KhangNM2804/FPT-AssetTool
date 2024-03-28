@@ -54,7 +54,7 @@
                         return {
                             results: $.map(data, function(item) {
                                 return {
-                                    text: item.name,
+                                    text: item.name+'-'+item.email,
                                     id: item.id
                                 }
                             })

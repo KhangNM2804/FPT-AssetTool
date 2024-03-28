@@ -25,8 +25,8 @@ class UpdateAssetRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'category_asset_id' => 'exists:category_assets,id',
-            'group_assets_id' => 'exists:group_assets,id',
+            'category_asset_id' => 'required|exists:category_assets,id',
+            'group_assets_id' => 'nullable|exists:group_assets,id',
             'price' => 'required',
             'symbol' => 'required',
             'invoice_number' => 'required',

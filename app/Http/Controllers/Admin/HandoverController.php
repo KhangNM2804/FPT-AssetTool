@@ -112,6 +112,7 @@ class HandoverController extends Controller
     {
         $data = $request->all();
         $user =  $this->handoverService->saveHandover($data);
+       
         $filePath = storage_path('app/public/bien_ban_ban_giao_' . Auth::user()->id . '.xlsx');
         Excel::store(new HandoverExport($user), 'public/bien_ban_ban_giao_' . Auth::user()->id . '.xlsx');
 

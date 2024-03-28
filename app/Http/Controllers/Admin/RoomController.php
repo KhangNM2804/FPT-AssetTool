@@ -129,7 +129,7 @@ class RoomController extends Controller
         $this->authorize('delete',Room::findOrFail($id));
         try {
             $this->room_service->deleteRoomService($id);
-            toastr('Xóa phòng thành công', 'success', 'Thành công');
+          
             return redirect()->back();
         } catch (\Throwable $th) {
             toastr('Xóa thất bại', 'error', 'Thất bại');

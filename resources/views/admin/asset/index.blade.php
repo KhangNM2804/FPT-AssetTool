@@ -52,6 +52,7 @@
                         <th>Tổng tiền</th>
                         <th>Trạng thái</th>
                         <th>Vị trí</th>
+                        <th>Tạo lúc</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>

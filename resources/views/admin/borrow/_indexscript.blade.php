@@ -12,6 +12,9 @@
 
                     url: route,
                 },
+                order: [
+                    [4, 'asc']
+                ],
                 columns: [{
                         data: 'start_at',
                         name: 'start_at',

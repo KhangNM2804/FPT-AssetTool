@@ -32,7 +32,11 @@ class AssetImport implements ToModel, WithStartRow
             $group = GroupAsset::where('name', '=', $row[0])->first();
             $category = CategoryAsset::where('name', '=', $row[1])->first();
             $dateString = $row[11];
-            $formattedDate = date('d/m/Y', strtotime($dateString));
+
+            $dateArray = explode('/', $dateString);
+            $formattedDateString = $dateArray[2] . '-' . $dateArray[1] . '-' . $dateArray[0];
+            $formattedDate = date('d/m/Y', strtotime($formattedDateString));
+           
             $asset = new Asset([
                 'code' => $row[5],
                 'name' => $row[6],
