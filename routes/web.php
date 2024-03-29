@@ -76,7 +76,8 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::resource('users', UserController::class);
     });
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('indexExpenseRoom');
+        Route::get('dashboardExpenseRoom', [DashboardController::class, 'index'])->name('indexExpenseRoom');
+        Route::get('dashboardSellAsset', [DashboardController::class, 'dashboardSell'])->name('indexSellAsset');
     });
 
     Route::group(['prefix' => 'datatables', 'as' => 'datatables.'], function () {
@@ -85,6 +86,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::get('group-assets', [GroupAssetController::class, 'datatables'])->name('group-assets');
         Route::get('category-assets', [CategoryAssetController::class, 'datatables'])->name('category-assets');
         Route::get('asset', [AssetController::class, 'datatables'])->name('asset');
+        Route::get('asset_selled', [DashboardController::class, 'datatables_selled'])->name('asset_selled');
         Route::get('borrowed-asset', [AssetBorrowedController::class, 'datatables'])->name('borrowed-asset');
         Route::get('borrows', [BorrowController::class, 'datatables'])->name('borrows');
         Route::get('semester', [SemesterController::class, 'datatables'])->name('semester');

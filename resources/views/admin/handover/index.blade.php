@@ -24,15 +24,19 @@
             <table id="handover" class="display" style="width: 100%">
                 <thead>
                     <tr>
-                        <td>Tên tài sản</td>
-                        <td>Số lượng</td>
-                        <td>Vị trí hiện tại</td>
-                        <td>Hành động</td>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th class="d-none">Tên tài sản</th>
+                        <th>Tên tài sản</th>
+                        <th>Số lượng</th>
+                        <th>Vị trí hiện tại</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($handovers as $item)
                         <tr>
+                            <td><input type="checkbox" name="checkBox" class="selectCheckbox"></td>
+                            <td class="d-none">{{ $item->id }}</td>
                             <td>{{ $item->assetDetail->asset->name }}</td>
                             <td>{{ $item->assetDetail->quantity }}</td>
                             <td>{{ $item->assetDetail->room ? $item->assetDetail->room->name : 'Chưa xác định' }}</td>

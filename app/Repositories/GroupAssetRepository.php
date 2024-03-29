@@ -15,7 +15,7 @@ class GroupAssetRepository
     public function search($data)
     {
         if (isset($data['term'])) {
-            return $this->groupAsset->where('name', 'like', '%' . $data['term'] . '%')->where('status', GroupAsset::STATUS_ACTIVE)->get('name', 'id');
+            return $this->groupAsset->where('name', 'like', '%' . $data['term'] . '%')->where('status', GroupAsset::STATUS_ACTIVE)->get(['name', 'id']);
         }
         return $this->groupAsset->where('status', GroupAsset::STATUS_ACTIVE)->get(['name', 'id']);
     }

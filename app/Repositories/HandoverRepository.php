@@ -29,10 +29,10 @@ class HandoverRepository
     {
         $user = $this->getUser();
         $room = Room::findOrFail($data['room_id']);
-        $user->handovers->each(function ($handover) use ($data, $room) {
+        $user->handovers->whereIn('id',$data['details'])->each(function ($handover) use ($data, $room) {
             $handover->assetDetail->update(['room_id' => $data['room_id'], 'receiver_id' => $room->id]);
         });
-        $this->deleteAll();
+        $this->deleteAll($data);
         $this->user->room = $room->name;
         return $this->user;
     }
@@ -43,10 +43,10 @@ class HandoverRepository
         return $user->handovers()->where('id', $id)->delete();
     }
 
-    public function deleteAll()
+    public function deleteAll($data)
     {
         $user = $this->getUser();
-        return $user->handovers()->delete();
+        return $user->handovers()->whereIn('id',$data['details'])->delete();
     }
 
     public function countHandover()

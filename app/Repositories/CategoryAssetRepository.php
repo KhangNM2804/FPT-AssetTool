@@ -19,7 +19,7 @@ class CategoryAssetRepository
     public function search($data)
     {
         if (isset($data['term'])) {
-            return $this->categoryAsset->where('name', 'like', '%' . $data['term'] . '%')->where('status', CategoryAsset::STATUS_ACTIVE)->get('name', 'id');
+            return $this->categoryAsset->where('name', 'like', '%' . $data['term'] . '%')->where('status', CategoryAsset::STATUS_ACTIVE)->get(['name', 'id']);
         }
         return $this->categoryAsset->where('status', CategoryAsset::STATUS_ACTIVE)->limit(10)->get(['name', 'id']);
     }

@@ -36,6 +36,13 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function datatables_selled(){
+        return $this->dashboardService->datatables_selled();
+    }
+    public function dashboardSell()
+    {
+       return view('admin.dashboard.indexSell');
+    }
     public function create()
     {
         //

@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\AssetDetail;
 use App\Models\Room;
 use App\Models\Semester;
+use Yajra\DataTables\DataTables;
 
 class DashboardRepository
 {
@@ -14,7 +16,7 @@ class DashboardRepository
     }
     public function expenseAllDashboard()
     {
-        $rooms = Room::with(['assetDetails.asset'])->orderBy('index','asc')->get();
+        $rooms = Room::with(['assetDetails.asset'])->orderBy('index', 'asc')->get();
 
         // Duyệt qua từng phòng
         $rooms->transform(function ($room) {
@@ -35,7 +37,7 @@ class DashboardRepository
         $semester = Semester::findOrFail($data['semester_id']);
         $rooms = Room::with(['assetDetails.asset' => function ($query) use ($semester) {
             $query->whereBetween('date_of_use', [$semester->start_at, $semester->end_at]);
-        }])->orderBy('index','asc')->get();
+        }])->orderBy('index', 'asc')->get();
 
         // Duyệt qua từng phòng
         $rooms->transform(function ($room) {
@@ -53,5 +55,11 @@ class DashboardRepository
             return $room;
         });
         return ['room' => $rooms, 'semester' => $semester];
+    }
+    public function datatables_selled()
+    {
+        $assetDetail = AssetDetail::with(['asset.category','room'])->where('status', AssetDetail::STATUS_INACTIVE)->get();
+        return DataTables::of($assetDetail)
+            ->make(true);
     }
 }

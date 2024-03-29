@@ -9,7 +9,27 @@
                 processing: true,
                 search: true,
             });
+            j('#selectAll').change(function() {
+                j('.selectCheckbox').prop('checked', this.checked);
+            });
+
+            // Xử lý sự kiện khi checkbox hàng được chọn hoặc bỏ chọn
+            j('.selectCheckbox').change(function() {
+                if (j('.selectCheckbox:checked').length == j('.selectCheckbox').length) {
+                    j('#selectAll').prop('checked', true);
+                } else {
+                    j('#selectAll').prop('checked', false);
+                }
+            });
             j('#submit-button').on('click', function() {
+                var selectedCheckboxes = j('.selectCheckbox:checked');
+
+                // Lưu trữ các giá trị ID của các hàng đã chọn
+                var selectedIds = [];
+                selectedCheckboxes.each(function() {
+                    var rowId = j(this).closest('tr').find('td:eq(1)').text();
+                    selectedIds.push(rowId);
+                });
                 Swal.fire({
                     title: 'Select an option',
                     html: '<select id="select-rooms" class="swal2-select" style="width:350px">' +
@@ -61,7 +81,8 @@
                             method: 'POST',
                             contentType: 'application/json',
                             data: JSON.stringify({
-                                room_id: selectedValue
+                                room_id: selectedValue,
+                                details: selectedIds
                             }),
                             success: function(data) {
                                 Swal.fire({

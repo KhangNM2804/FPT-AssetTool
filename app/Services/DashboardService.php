@@ -19,4 +19,7 @@ class DashboardService
     {
         return $this->dashboardRepository->expenseHaveFilterDashboard($data);
     }
+    public function datatables_selled(){
+        return $this->dashboardRepository->datatables_selled();
+    }
 }

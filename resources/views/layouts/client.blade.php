@@ -85,16 +85,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('client.borrow.borrows-client') }}">Đăng ký mượn</a>
+                            <a class="nav-link" href="{{ route('client.borrow.borrows-client') }}">Lập phiếu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('client.borrow.borrows-client-index') }}">Tài sản đã
-                                mượn</a>
+                            <a class="nav-link" href="{{ route('client.borrow.borrows-client-index') }}">Phiếu mượn</a>
                         </li>
                         @hasanyrole('staff|manager|admin')
                            
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('staff.dashboard.indexExpenseRoom')}}">Trang Admin</a>
+                            <a class="nav-link" href="{{route('staff.dashboard.indexExpenseRoom')}}">Admin</a>
                         </li>
                            
                         @endhasanyrole
