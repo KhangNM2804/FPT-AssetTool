@@ -184,7 +184,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
-            <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="FPTLogo" height="60" width="60"
+            <img class="animation__wobble" src="{{ asset('storage/uploads/FPT.png') }}" alt="FPTLogo" height="60" width="60"
                 style="display: none;">
         </div>
 
@@ -292,7 +292,7 @@
                             <nav class="mt-2">
                                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                                     role="menu" data-accordion="false">
-                                    
+
                                     <li class="nav-item menu-{{ request()->is('staff/dashboard*') ? 'open' : '' }}">
                                         <a href="#"
                                             class="nav-link {{ request()->is('staff/dashboard*') ? 'active' : '' }}">
@@ -303,22 +303,22 @@
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
-                                                <li class="nav-item">
-                                                    <a href="{{ route('staff.dashboard.indexExpenseRoom') }}"
-                                                        class="nav-link {{ request()->is('staff/dashboard/dashboardExpenseRoom*') ? 'active' : '' }}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>Báo cáo chi tiêu</p>
-                                                    </a>
-                                                </li>
-                                           
-                                          
-                                                <li class="nav-item">
-                                                    <a href="{{ route('staff.dashboard.indexSellAsset') }}"
-                                                        class="nav-link {{ request()->is('staff/dashboard/dashboardSellAsset*') ? 'active' : '' }}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>Báo cáo thanh lý</p>
-                                                    </a>
-                                                </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('staff.dashboard.indexExpenseRoom') }}"
+                                                    class="nav-link {{ request()->is('staff/dashboard/dashboardExpenseRoom*') ? 'active' : '' }}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Báo cáo chi tiêu</p>
+                                                </a>
+                                            </li>
+
+
+                                            <li class="nav-item">
+                                                <a href="{{ route('staff.dashboard.indexSellAsset') }}"
+                                                    class="nav-link {{ request()->is('staff/dashboard/dashboardSellAsset*') ? 'active' : '' }}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Báo cáo thanh lý</p>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     {{-- <li class="nav-item ">
@@ -435,6 +435,15 @@
                                             @endcan
                                             @can('viewAny', App\Models\Asset::class)
                                                 <li class="nav-item">
+                                                    <a href="{{ route('staff.asset.invoices.index') }}"
+                                                        class="nav-link {{ request()->is('staff/asset/invoices*') ? 'active' : '' }}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Hóa đơn</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('viewAny', App\Models\Asset::class)
+                                                <li class="nav-item">
                                                     <a href="{{ route('staff.asset.asset.index') }}"
                                                         class="nav-link {{ request()->is('staff/asset/asset*') ? 'active' : '' }}">
                                                         <i class="far fa-circle nav-icon"></i>
@@ -456,7 +465,8 @@
                                                     <a href="{{ route('staff.asset.handover.index') }}"
                                                         class="nav-link {{ request()->is('staff/asset/handover*') ? 'active' : '' }}">
                                                         <i class="far fa-circle nav-icon"></i>
-                                                        <p>Bàn giao <span id="countHandover" class="right badge badge-danger"></span></p>
+                                                        <p>Bàn giao <span id="countHandover"
+                                                                class="right badge badge-danger"></span></p>
                                                     </a>
                                                 </li>
                                             @endcan
@@ -517,7 +527,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="min-height: 272.2px;">
             <!-- Content Header (Page header) -->
-            
+
             <!-- /.content-header -->
 
             <!-- Main content -->

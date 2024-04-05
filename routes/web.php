@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryRoomController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GroupAssetController;
 use App\Http\Controllers\Admin\HandoverController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\SemesterController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\MicrosoftLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
-use App\Models\Semester;
+
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -41,14 +42,15 @@ Route::get('/login/microsoft', [MicrosoftLoginController::class, 'redirectToAzur
 Route::get('/login/microsoft/callback', [MicrosoftLoginController::class, 'handleAzureCallback']);
 
 
-
 Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'role:admin|manager|staff']], function () {
     Route::get('count', [PageController::class, 'count'])->name('count');
+    
     Route::group(['prefix' => 'locate', 'as' => 'locate.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
     });
     Route::group(['prefix' => 'asset', 'as' => 'asset.'], function () {
+        Route::resource('invoices', InvoiceController::class);
         Route::resource('group-assets', GroupAssetController::class);
         Route::resource('category-assets', CategoryAssetController::class);
         Route::resource('asset', AssetController::class);
@@ -91,6 +93,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::get('borrows', [BorrowController::class, 'datatables'])->name('borrows');
         Route::get('semester', [SemesterController::class, 'datatables'])->name('semester');
         Route::get('users', [UserController::class, 'datatables'])->name('users');
+        Route::get('invoices', [InvoiceController::class, 'datatables'])->name('invoices');
     });
     Route::group(['prefix' => 'search', 'as' => 'search.'], function () {
         Route::get('categoryrooms', [CategoryRoomController::class, 'search'])->name('category_rooms');

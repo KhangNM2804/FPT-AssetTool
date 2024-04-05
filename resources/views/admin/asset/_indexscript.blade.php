@@ -119,6 +119,11 @@
                     {
                         data: 'invoice',
                         name: 'invoice',
+                        render: function(data, type, row) {
+                            const show =
+                                ` <a href="{{ asset('storage/pdf') }}/${data}.pdf" target="_blank">${data}</i></a>`;
+                            return show;
+                        }
                     },
                     {
                         data: 'quantity',

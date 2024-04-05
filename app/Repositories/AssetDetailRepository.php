@@ -76,22 +76,23 @@ class AssetDetailRepository
         $count =  $asset->assetDetail()->where('status', AssetDetail::STATUS_ACTIVE)->count();
         $setting = Setting::where('key', 'assets_borrowed')->first();
 
-        // Kiểm tra nếu thuộc tính 'value' không phải là một Collection
 
-        // Chuyển đổi giá trị sang một Collection
         $value = json_decode($setting->value, true);
+        if (!is_array($value)) {
+            $value = [];
+        }
 
-
+        // Tìm kiếm và xóa phần tử khỏi mảng
         $key = array_search($assetDetail->id, $value);
-
-        // Kiểm tra xem phần tử có tồn tại trong mảng không
         if ($key !== false) {
-            // Xóa phần tử khỏi mảng
             unset($value[$key]);
         }
 
+        // Chuyển đổi mảng kết hợp thành mảng chỉ số
+        $value = array_values($value);
+
         // Lưu lại giá trị mới cho thuộc tính 'value'
-        $setting->value = $value;
+        $setting->value = json_encode($value);
 
         // Lưu lại đối tượng Setting
         $setting->save();

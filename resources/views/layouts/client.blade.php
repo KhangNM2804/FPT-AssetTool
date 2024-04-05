@@ -84,10 +84,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->is('client/borrow/borrows-client') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('client.borrow.borrows-client') }}">Lập phiếu</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->is('client/borrow/borrows-client-index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('client.borrow.borrows-client-index') }}">Phiếu mượn</a>
                         </li>
                         @hasanyrole('staff|manager|admin')

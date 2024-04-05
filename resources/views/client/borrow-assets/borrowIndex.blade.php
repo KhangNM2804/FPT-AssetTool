@@ -23,14 +23,14 @@
                                 <tbody>
                                     @foreach ($borrows as $item)
                                         <tr>
-                                            <td class="text-center">{{ $item->start_at }}</td>
-                                            <td class="text-center">{{ $item->end_at }}</td>
+                                            <td >{{ $item->start_at }}</td>
+                                            <td >{{ $item->end_at }}</td>
                                             <td>
                                                 @foreach ($item->details as $detail)
                                                     <span>{{ $detail->category->name }} :{{ $detail->quantity }}</span> <br>
                                                 @endforeach
                                             </td>
-                                            <td class="text-center">
+                                            <td >
                                                 @if ($item->status == 1)
                                                     <span class="badge badge-info">Đang chờ duyệt</span>
                                                 @elseif ($item->status == 2)
@@ -41,7 +41,7 @@
                                                     <span class="badge badge-danger">Đã hủy</span>
                                                 @endif
                                             </td>
-                                            <td class="text-center">
+                                            <td >
                                                 @if ($item->status == 1)
                                                     <form
                                                         action="{{ route('client.borrow.borrows-client-cancel', ['id' => $item->id]) }}"

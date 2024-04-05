@@ -79,7 +79,9 @@
                     </td>
                     <td style="text-align: center; border: 1px solid black;">
                         {{ $item->assetDetail->status == 1 ? 'Mới' : '' }}</td>
-                    <td style="text-align: center; border: 1px solid black;"></td>
+                    <td style="text-align: center; border: 1px solid black;">
+
+                    </td>
                 </tr>
             @endforeach
 

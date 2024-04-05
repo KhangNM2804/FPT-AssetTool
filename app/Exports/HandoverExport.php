@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
-
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class HandoverExport implements FromView, WithEvents
 {
     /**
@@ -45,6 +45,23 @@ class HandoverExport implements FromView, WithEvents
             
                 // Thiết lập footer cho tệp Excel
                 $event->sheet->getDelegate()->getHeaderFooter()->setOddFooter($footer);
+
+                //thiết lập ảnh
+                $user = $this->user;
+                $row = 13; // Start row for inserting images
+                foreach ($user->handovers as $item) {
+                    $imagePath = public_path('storage/uploads/' . $item->assetDetail->asset->image); // Assuming your image field is 'image'
+                    if (file_exists($imagePath)) {
+                        $drawing = new Drawing();
+                        $drawing->setName('Product Image');
+                        $drawing->setDescription('Product Image');
+                        $drawing->setPath($imagePath);
+                        $drawing->setCoordinates('H' . $row);
+                        $drawing->setWorksheet($event->sheet->getDelegate());
+                        $drawing->setWidthAndHeight(30, 30); // Set width and height to 30px
+                        $row++;
+                    }
+                }
             },
         ];
     }
