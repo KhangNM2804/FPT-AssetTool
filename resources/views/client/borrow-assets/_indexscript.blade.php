@@ -2,7 +2,12 @@
     <script>
         var items = [];
         $(document).ready(function() {
-
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myList #item").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
             // Xử lý sự kiện click vào nút "Thêm"
             $('#borrow-form').submit(function(event) {
                 // Ngăn chặn hành vi mặc định của form (không gửi dữ liệu)

@@ -25,14 +25,18 @@
                         render: function(data, type, row) {
                             const show =
                                 ` <a class="btn btn-primary" href="{{ asset('storage/dpf') }}/${row.path}" target="_blank"><i class="fa fa-eye"></i></a>`;
-                            const deletebtn = '<form action="' + row.delete_url +
-                                '" method="post" style="display: inline;">' + '@csrf' +
-                                '@method('DELETE')' +
-                                '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn muốn xóa hóa đơn ?\')">' +
-                                '<i class="fa fa-trash"></i>' +
-                                '</button>' +
-                                '</form>'
-                            return show+' '+deletebtn;
+                            var deletebtn = '';
+                            if (row.delete_url != null) {
+                                deletebtn = '<form action="' + row.delete_url +
+                                    '" method="post" style="display: inline;">' + '@csrf' +
+                                    '@method('DELETE')' +
+                                    '<button class="btn btn-danger" type="submit" onclick="return confirm(\'Bạn có chắc chắn muốn xóa hóa đơn ?\')">' +
+                                    '<i class="fa fa-trash"></i>' +
+                                    '</button>' +
+                                    '</form>'
+                            }
+
+                            return show + ' ' + deletebtn;
                         }
                     },
                 ]

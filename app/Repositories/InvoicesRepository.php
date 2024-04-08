@@ -10,14 +10,17 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class InvoicesRepository
 {
     protected $invoice;
+    protected $gate;
 
-    public function __construct(Invoice $invoice)
+    public function __construct(Invoice $invoice, GateContract $gate)
     {
         $this->invoice = $invoice;
+        $this->gate = $gate;
     }
     public function datatables()
     {
@@ -30,7 +33,12 @@ class InvoicesRepository
                 return $invoice->created_at->format('d-m-Y');
             })
             ->addColumn('delete_url', function ($invoice) {
-                return route('staff.asset.invoices.destroy', ['invoice' => $invoice]);
+
+                if ($this->gate->allows('delete', $invoice)) {
+                    return route('staff.asset.invoices.destroy', ['invoice' => $invoice]);
+                } else {
+                    return null;
+                }
             })
             ->make(true);
     }
@@ -44,9 +52,8 @@ class InvoicesRepository
         $filePath = storage_path('app/public/pdf/' . $invoice->path);
         if (File::exists($filePath)) {
             File::delete($filePath);
-            
         }
-      
-       return $invoice->delete();
+
+        return $invoice->delete();
     }
 }

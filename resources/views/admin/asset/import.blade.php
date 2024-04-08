@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <table id="asset" class="display" style="width: 100%">
+            <table id="asset" class="display nowrap" style="width: 100%">
                 <thead>
                     <tr>
                         <th></th>

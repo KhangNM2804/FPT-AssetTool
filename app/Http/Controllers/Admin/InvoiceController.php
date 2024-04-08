@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvoiceRequest;
+use App\Models\Invoice;
 use App\Services\InvoicesService;
 use Illuminate\Http\Request;
 
@@ -46,10 +47,15 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        $data = $request->all();
-        $this->invoicesService->createInvoiceService($data);
-        toastr('Thêm hóa đơn thành công', 'success', 'Thành công');
-        return redirect()->back();
+        try {
+            $data = $request->all();
+            $this->invoicesService->createInvoiceService($data);
+            toastr('Thêm hóa đơn thành công', 'success', 'Thành công');
+            return redirect(route('staff.asset.invoices.index'));
+        } catch (\Throwable $th) {
+            toastr('Thêm hóa đơn thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -94,8 +100,15 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
-        $this->invoicesService->deleteInvoiceService($id);
-        toastr('Xóa hóa đơn thành công', 'success', 'Thành công');
-        return redirect()->back();
+        $this->authorize('delete', Invoice::findOrFail($id));
+        try {
+
+            $this->invoicesService->deleteInvoiceService($id);
+            toastr('Xóa hóa đơn thành công', 'success', 'Thành công');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            toastr('Thêm hóa đơn thất bại', 'error', 'Thất bại');
+            return redirect()->back();
+        }
     }
 }

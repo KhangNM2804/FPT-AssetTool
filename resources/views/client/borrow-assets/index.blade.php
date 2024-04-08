@@ -6,12 +6,12 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body p-4">
-
+                            <h5 class="mb-3"><span href="#!" class="text-body">DANH SÁCH TÀI SẢN</span></h5>
+                            <hr>
                             <div class="row">
 
                                 <div class="col-lg-7">
-                                    <h5 class="mb-3"><span href="#!" class="text-body">DANH SÁCH TÀI SẢN</span></h5>
-                                    <hr>
+
 
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div>
@@ -20,39 +20,46 @@
                                         </div>
 
                                     </div>
-                                    @foreach ($categoryAsset as $item)
-                                        <div class="card mb-3">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <div>
-                                                            <img src="{{ $item->asset[0]->image ? asset('storage/uploads/' . $item->asset[0]->image) : '' }}"
-                                                                class="img-fluid rounded-3" alt="No image"
-                                                                style="width: 65px;">
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <h5>{{ $item->name }}</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <div style="width: 50px;">
-                                                            <h5 class="fw-normal mb-0">{{ $item->sum_quantity }}</h5>
-                                                        </div>
-                                                        <button class="btn btn-primary text-white btn-add"
-                                                            data-item-id="{{ $item->id }}"
-                                                            data-item-name="{{ $item->name }}"
-                                                            data-item-quantity="{{ $item->sum_quantity }}">
 
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
+                                    <input class="form-control form-control-sm w-3" type="text" id="myInput"
+                                        placeholder="Search...">
+                                    <br>
+                                    <div id="myList" style="height: 500px; overflow-y: auto;">
+                                        @foreach ($categoryAsset as $item)
+                                            <div id="item" class="card mb-3" style="min-height: 97px;">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <div>
+                                                                <img src="{{ $item->asset[0]->image ? asset('storage/uploads/' . $item->asset[0]->image) : '' }}"
+                                                                    class="img-fluid rounded-3" alt="No image"
+                                                                    style="width: 65px;">
+                                                            </div>
+                                                            <div class="ms-3">
+                                                                <h5>{{ $item->name }}</h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <div style="width: 50px;">
+                                                                <h5 class="fw-normal mb-0">{{ $item->sum_quantity }}</h5>
+                                                            </div>
+                                                            <button class="btn btn-primary text-white btn-add"
+                                                                data-item-id="{{ $item->id }}"
+                                                                data-item-name="{{ $item->name }}"
+                                                                data-item-quantity="{{ $item->sum_quantity }}">
+
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
+
 
                                 </div>
-                                <div class="col-lg-5">
+                                <div class="col-lg-5 mt-5">
                                     <div class="card bg-dark text-white rounded-3">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-center align-items-center mb-4">

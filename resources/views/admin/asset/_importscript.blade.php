@@ -90,9 +90,9 @@
                             title: "Thành công!",
                             text: "Đã nhập dữ liệu từ file thành công",
                             icon: "success",
-                            
+
                             confirmButtonText: "Xác nhận",
-                           
+
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 // Nếu người dùng xác nhận, chuyển hướng đến route
@@ -140,6 +140,7 @@
 
                         // Populate DataTable with new data
                         j('#asset').DataTable({
+                            scrollX: true,
                             data: data,
                             columns: headers.map(function(header) {
                                 return {
