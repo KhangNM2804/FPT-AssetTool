@@ -126,8 +126,8 @@ class BorrowController extends Controller
         $this->borrowService->updateStatus($id, Borrow::STATUS_BORROWED);
         $borrow = Borrow::with(['user', 'details.category'])->findOrFail($id);
         $data = ['name' => $borrow->user->name, 'details' => $borrow->details];
-        // Mail::to($borrow->user->email, $borrow->user->name)->cc(['khangdeptrai2804@gmail.com'])->send(new NotificationSuccessEmail( "Xác nhận mượn tài sản thành công",$data));
-        SendNotificationEmail::dispatch($borrow->user->email, $borrow->user->name, "Xác nhận mượn tài sản thành công", ['khangdeptrai2804@gmail.com', 'khangnm2804@gmail.com'], $data);
+        $setting = Setting::where('key', 'cc_mails')->first();
+        SendNotificationEmail::dispatch($borrow->user->email, $borrow->user->name, "Xác nhận mượn tài sản thành công", json_decode($setting->value), $data);
         return redirect()->back();
     }
     public function return($id)
