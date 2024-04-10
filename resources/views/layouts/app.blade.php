@@ -25,7 +25,7 @@
     <!-- iCheck -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <style>
     body {
@@ -222,9 +222,8 @@
         text-align: center;
     }
 
-    .card {
-        width: 500px;
-        left: 100px;
+    .card-login {
+        width: 540px;
     }
 
     ::placeholder {
@@ -288,7 +287,7 @@
             </div>
         </nav> --}}
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
     </div>

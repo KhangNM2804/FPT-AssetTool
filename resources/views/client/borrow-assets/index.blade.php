@@ -1,7 +1,7 @@
 @extends('layouts.client')
 @section('content')
     <section class="h-100 h-custom">
-        <div class="container py-5 h-100">
+        <div class="container-fluid p-1 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
                     <div class="card">
@@ -11,7 +11,6 @@
                             <div class="row">
 
                                 <div class="col-lg-7">
-
 
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div>
@@ -41,7 +40,7 @@
                                                         </div>
                                                         <div class="d-flex flex-row align-items-center">
                                                             <div style="width: 50px;">
-                                                                <h5 class="fw-normal mb-0">{{ $item->sum_quantity }}</h5>
+                                                                <h5 class="fw-normal mb-2">{{ $item->sum_quantity }}</h5>
                                                             </div>
                                                             <button class="btn btn-primary text-white btn-add"
                                                                 data-item-id="{{ $item->id }}"

@@ -69,18 +69,18 @@
         </div>
     </div>
 </div> --}}
-    <div class="container-fluid">
-        <div class ="row">
-            <div class="col-md-6 mx-auto p-0">
-                <div class="card">
+    <div class="container-fluid d-flex justify-content-center">
+        <div class ="">
+            <div class="">
+                <div class="card-login">
                     <div class="login-box">
                         <div class="login-snip">
                             <input id="tab-1" type="radio" name="tab" class="sign-in"><label for="tab-1"
                                 class="tab"></label>
-                            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2"
-                                class="tab">Sign Up</label>
+                            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label
+                                for="tab-2" class="tab">Sign Up</label>
                             <div class="login-space">
-                                
+
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
                                     <div class="sign-up-form">
@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="hr"></div>
                                         <div class="foot">
-                                            <label for="tab-1">Already Member?</label>
+                                            <a href="{{ route('login') }}" for="tab-1">Already Member?</a>
                                         </div>
                                     </div>
                                 </form>

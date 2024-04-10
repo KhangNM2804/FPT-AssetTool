@@ -102,11 +102,17 @@ class BorrowRepository
             if (array_key_exists($asset->id, $totalQuantities)) {
                 // Trừ sum_quantity của categoryAsset cho quantity trong $totalQuantities
                 $asset->sum_quantity -= $totalQuantities[$asset->id];
-                if ($asset->sum_quantity <= 0) {
-                    return response()->json([
-                        'status' => 422,
-                        'message' => 'Tài sản ' . $asset->name . ' không đủ số lượng để mượn!'
-                    ]);
+                foreach ($data['items'] as $item) {
+                    $itemArray = json_decode($item, true);
+                    if ($itemArray['id'] === $asset->id) {
+                        $check = $asset->sum_quantity - $itemArray['quantity'];
+                        if ($check < 0) {
+                            return response()->json([
+                                'status' => 422,
+                                'message' => 'Tài sản ' . $asset->name  . ' còn ' . $asset->sum_quantity . ', không đủ số lượng để mượn!'
+                            ]);
+                        }
+                    }
                 }
             }
         }

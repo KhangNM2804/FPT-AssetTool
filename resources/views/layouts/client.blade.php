@@ -91,11 +91,9 @@
                             <a class="nav-link" href="{{ route('client.borrow.borrows-client-index') }}">Phiếu mượn</a>
                         </li>
                         @hasanyrole('staff|manager|admin')
-                           
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('staff.dashboard.indexExpenseRoom')}}">Admin</a>
-                        </li>
-                           
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('staff.dashboard.indexExpenseRoom') }}">Admin</a>
+                            </li>
                         @endhasanyrole
                     </ul>
 
@@ -139,7 +137,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="p-1">
             @yield('content')
         </main>
     </div>
