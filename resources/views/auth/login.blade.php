@@ -43,6 +43,13 @@
                                             {{ old('remember') ? 'checked' : '' }}>
                                         <label for="check"><span class="icon"></span> Keep me Signed in</label>
                                     </div>
+                                    <div class="group d-flex justify-content-center ">
+                                        <div class="g-recaptcha" id="feedback-recaptcha"
+                                            data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                                    </div>
+                                    <div class="group d-flex justify-content-center ">
+                                        <strong style="color: red">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </div>
                                     <div class="group">
                                         <input type="submit" class="button" value="Sign In">
                                     </div>
@@ -52,11 +59,12 @@
                                                 class="fab fa-microsoft"></i><span> Continue with
                                                 Microsoft</span></a>
                                     </div>
-                                    <div class="hr"></div>
                                     <div class="foot">
                                         <a href="{{ route('register') }}">Create an Account?</a> <br>
                                         <a href="{{ route('password.request') }}">Forgot Password?</a>
                                     </div>
+
+
                                 </div>
                             </form>
                         </div>

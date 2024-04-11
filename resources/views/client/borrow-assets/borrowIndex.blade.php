@@ -1,16 +1,15 @@
 @extends('layouts.client')
 @section('content')
     <section class="h-100 h-custom">
-        <div class="container-fluid p-1 h-100">
+        <div class="container-fluid h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
                     <div class="card">
                         <div class="card-body p-4">
                             <h5 class="mb-3"><span href="#!" class="text-body">DANH SÁCH PHIẾU MƯỢN</span></h5>
                             <hr>
-                            <div class="row">
-
-                                <table id="borrow" class="table display nowrap" style="width: 100%">
+                            <div class="row ">
+                                <table id="borrow" class="table display nowrap" style="width: 100%;">
                                     <thead>
                                         <tr class="text-center">
                                             <th>Ngày mượn</th>
@@ -49,7 +48,9 @@
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-warning">Hủy phiếu</button>
+                                                            <button class="btn btn-warning" type="submit"
+                                                                onclick="return confirm('Bạn có chắc chắn hủy phiếu mượn này?')">Hủy
+                                                                phiếu</button>
                                                         </form>
                                                     @else
                                                         <span class="badge badge-secondary">Không thể thao tác</span>

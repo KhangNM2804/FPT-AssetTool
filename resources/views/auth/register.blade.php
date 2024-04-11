@@ -127,13 +127,21 @@
                                                 placeholder="Repeat your password">
                                         </div>
 
+                                        <div class="group d-flex justify-content-center">
+                                            <div class="g-recaptcha" id="feedback-recaptcha"
+                                                data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                                        </div>
+                                        <div class="group d-flex justify-content-center ">
+                                            <strong style="color: red">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        </div>
                                         <div class="group">
                                             <input type="submit" class="button" value="Sign Up">
                                         </div>
-                                        <div class="hr"></div>
                                         <div class="foot">
                                             <a href="{{ route('login') }}" for="tab-1">Already Member?</a>
                                         </div>
+                                        <div class="hr"></div>
+
                                     </div>
                                 </form>
                             </div>

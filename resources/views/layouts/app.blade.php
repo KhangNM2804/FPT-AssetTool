@@ -26,6 +26,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <style>
     body {
@@ -34,6 +35,8 @@
         background: #c8c8c8;
         font: 600 16px/18px 'Open Sans', sans-serif;
     }
+
+
 
     .login-box {
         width: 100%;
@@ -287,7 +290,7 @@
             </div>
         </nav> --}}
 
-        <main class="">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>

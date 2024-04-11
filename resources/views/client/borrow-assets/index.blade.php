@@ -1,7 +1,7 @@
 @extends('layouts.client')
 @section('content')
     <section class="h-100 h-custom">
-        <div class="container-fluid p-1 h-100">
+        <div class="container-fluid h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
                     <div class="card">
