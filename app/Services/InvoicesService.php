@@ -29,7 +29,7 @@ class InvoicesService
         $file = $data['file'];
         $extension = $file->getClientOriginalExtension();
         $hashedFilename =  $data['denominator'] . $data['symbol'] . $data['invoice_number'] . '.' . $extension;
-        $file->move(storage_path('app/public/pdf'), $hashedFilename);
+        $file->move(storage_path('app/private/pdf'), $hashedFilename);
         $data['path'] = $hashedFilename;
         $data['user_id'] = Auth::user()->id;
 

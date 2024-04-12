@@ -24,7 +24,7 @@
                     {
                         render: function(data, type, row) {
                             const show =
-                                ` <a class="btn btn-primary" href="{{ asset('storage/dpf') }}/${row.path}" target="_blank"><i class="fa fa-eye"></i></a>`;
+                                ` <a class="btn btn-primary" href="{{ asset('storage/pdf') }}/${row.path}" target="_blank"><i class="fa fa-eye"></i></a>`;
                             var deletebtn = '';
                             if (row.delete_url != null) {
                                 deletebtn = '<form action="' + row.delete_url +

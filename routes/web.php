@@ -40,11 +40,23 @@ Auth::routes();
 
 Route::get('/login/microsoft', [MicrosoftLoginController::class, 'redirectToAzure'])->name('loginMicrosoft');
 Route::get('/login/microsoft/callback', [MicrosoftLoginController::class, 'handleAzureCallback']);
+Route::get('/storage/pdf/{filename}', function ($filename) {
+    // Check if the user is authenticated and has access to the file
+    if (auth()->check()) {
+        // Get the file's storage path
+        $path = storage_path('app/private/pdf/' . $filename);
 
+        // Return the file response
+        return response()->file($path);
+    } else {
+        // If the user doesn't have access, return a 403 Forbidden response
+        return abort(403, 'Access denied.');
+    }
+});
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'role:admin|manager|staff']], function () {
     Route::get('count', [PageController::class, 'count'])->name('count');
-    
+
     Route::group(['prefix' => 'locate', 'as' => 'locate.'], function () {
         Route::resource('categoryrooms', CategoryRoomController::class);
         Route::resource('rooms', RoomController::class);
@@ -69,7 +81,6 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'r
         Route::put('borrows-accept/{id}', [BorrowController::class, 'accept'])->name('accept');
         Route::put('borrows-return/{id}', [BorrowController::class, 'return'])->name('return');
         Route::put('borrows-cancel/{id}', [BorrowController::class, 'cancel'])->name('cancel');
-       
     });
     Route::group(['prefix' => 'semesters', 'as' => 'semester.'], function () {
         Route::resource('semesters', SemesterController::class);

@@ -49,7 +49,7 @@ class InvoicesRepository
     public function delete($id)
     {
         $invoice = $this->invoice->findOrFail($id);
-        $filePath = storage_path('app/public/pdf/' . $invoice->path);
+        $filePath = storage_path('app/private/pdf/' . $invoice->path);
         if (File::exists($filePath)) {
             File::delete($filePath);
         }
