@@ -42,17 +42,19 @@ Route::get('/login/microsoft', [MicrosoftLoginController::class, 'redirectToAzur
 Route::get('/login/microsoft/callback', [MicrosoftLoginController::class, 'handleAzureCallback']);
 Route::get('/storage/pdf/{filename}', function ($filename) {
     // Check if the user is authenticated and has access to the file
-    if (auth()->check()) {
-        // Get the file's storage path
-        $path = storage_path('app/private/pdf/' . $filename);
+    // Get the file's storage path
+    $path = storage_path('app/private/pdf/' . $filename);
+    // Return the file response
+    return response()->file($path);
+})->middleware('auth', 'role:admin|manager|staff');
 
-        // Return the file response
-        return response()->file($path);
-    } else {
-        // If the user doesn't have access, return a 403 Forbidden response
-        return abort(403, 'Access denied.');
-    }
-});
+Route::get('/storage/uploads/{filename}', function ($filename) {
+    // Check if the user is authenticated and has access to the file
+    // Get the file's storage path
+    $path = storage_path('app/public/uploads/' . $filename);
+    // Return the file response
+    return response()->file($path);
+})->middleware('auth', 'role:admin|manager|staff');
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => ['auth', 'role:admin|manager|staff']], function () {
     Route::get('count', [PageController::class, 'count'])->name('count');

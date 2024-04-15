@@ -36,8 +36,6 @@
         font: 600 16px/18px 'Open Sans', sans-serif;
     }
 
-
-
     .login-box {
         width: 100%;
         margin: auto;
